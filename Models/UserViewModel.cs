@@ -18,7 +18,8 @@ namespace Match.Models
 
         [Display(Name = "Password")]
         public string password { get; set; }
-        // public Image picture { get; set; }
+
+        [Display(Name = "Age")]
         public int age { get; set; }
 
         [Display(Name = "I am a")]
@@ -28,8 +29,6 @@ namespace Match.Models
         [Display(Name = "Zip / Postal code")]
         public int zipcode { get; set; }
         public List<string> interests { get; set; }
-        public List<int> conversationsId{ get; set; }
-        public List<Conversation> conversations { get; set; }
         public List<int> likesId { get; set; }
         public List<User> likes { get; set; }
         public List<int> likersId { get; set; }
@@ -65,8 +64,6 @@ namespace Match.Models
             netflix = new List<string>();
             messages = new List<Message>();
             messagesId = new List<int>();
-            conversations = new List<Conversation>();
-            // conversationsId = new List<Conversation>();
             likes = new List<User>();
             likesId = new List<int>();
             likers = new List<User>();

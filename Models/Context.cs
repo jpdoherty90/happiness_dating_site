@@ -9,8 +9,6 @@ namespace Match.Models
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Conversation> Conversations { get; set; }
-
         public DbSet<Like> Likes { get; set; }
 
         public DbSet<Match> Matches { get; set; }

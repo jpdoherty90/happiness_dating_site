@@ -8,10 +8,6 @@ namespace Match.Models
     {
         public int MatchId { get; set; }
 
-        public int ConversationId { get; set; }
-
-        public Conversation Conversation { get; set; }
-
         public int UserOneId { get; set; }
 
         public User UserOne { get; set; }

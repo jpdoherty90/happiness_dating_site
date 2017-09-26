@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Match.Models;
+using System.Linq;
 
 namespace Match.Controllers
 {
@@ -32,15 +33,47 @@ namespace Match.Controllers
 
         [HttpPost]
         [Route("addUser")]
-        public IActionResult addUser(UserViewModel newUser)
+        public IActionResult addUser(UserViewModel model)
         {   
-            Console.WriteLine(newUser.gender);
-            Console.WriteLine(newUser.zipcode);
-            Console.WriteLine(newUser.name);
-            Console.WriteLine(newUser.username);
-            Console.WriteLine(newUser.email);
-            Console.WriteLine(newUser.password);
-            Console.WriteLine(newUser.age);
+            Console.WriteLine(model.gender);
+            Console.WriteLine(model.zipcode);
+            Console.WriteLine(model.name);
+            Console.WriteLine(model.username);
+            Console.WriteLine(model.email);
+            Console.WriteLine(model.password);
+            Console.WriteLine(model.age);
+            string Gender = "";
+            string Seeking = "";
+            if(model.gender == "1"){
+                Gender = "Male";
+                Seeking = "Female";
+            }
+            else if(model.gender == "2"){
+                Gender = "Male";
+                Seeking = "Male";
+            }
+            else if(model.gender == "3"){
+                Gender = "Female";
+                Seeking = "Male";
+            }
+            else if(model.gender == "4"){
+                Gender = "Female";
+                Seeking = "Female";
+            }
+            User newUser = new User{
+                gender = Gender,
+                seeking = Seeking,
+                zipcode = model.zipcode,
+                name = model.name,
+                username = model.username,
+                email = model.email,
+                password = model.password,
+                age = model.age
+            };
+            _context.Users.Add(newUser);
+            _context.SaveChanges();
+            User currentUser = _context.Users.SingleOrDefault(user => user.email == model.email);
+            HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
             return Redirect("/");
         }
     }

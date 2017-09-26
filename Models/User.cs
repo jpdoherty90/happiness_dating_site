@@ -5,24 +5,22 @@ using System.Collections.Generic;
 namespace Match.Models
 {
         public class User : BaseEntity{
-        public int Userid { get; set; }
+        public int UserId { get; set; }
         public string name { get; set; }
         public string username { get; set; }
+        public string email { get; set; }
         public string password { get; set; }
         public byte picture { get; set; }
         public int age { get; set; }
         public string gender { get; set; }
         public string seeking { get; set; }
-        public Preference preferences {get; set;}
         public int preferencesId {get; set;}
+        public Preference preferences {get; set;}
         public List<string> interests { get; set; }
-        public List<int> conversationsId{ get; set; }
-        public List<Conversation> conversations { get; set; }
         public List<int> likesId { get; set; }
         public List<Like> likes { get; set; }
         public List<int> likersId { get; set; }
         public List<Like> likers { get; set; }
-
         public List<int> MatchesId { get; set; }
         public List<Match> Matches { get; set; }
         public List<int> messagesId { get; set; }
@@ -57,8 +55,6 @@ namespace Match.Models
             netflix = new List<string>();
             messages = new List<Message>();
             messagesId = new List<int>();
-            conversations = new List<Conversation>();
-            conversationsId = new List<int>();
             likes = new List<Like>();
             likesId = new List<int>();
             likers = new List<Like>();
