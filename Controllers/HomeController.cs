@@ -72,8 +72,8 @@ namespace Match.Controllers
             };
             _context.Users.Add(newUser);
             _context.SaveChanges();
-            User currentUser = _context.Users.SingleOrDefault(user => user.email == model.email);
-            HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
+            // User currentUser = _context.Users.SingleOrDefault(user => user.email == model.email);
+            // HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
             return Redirect("/");
         }
     }
