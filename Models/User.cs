@@ -69,6 +69,7 @@ namespace Match.Models
             likers = new List<Like>();
             MatchIds = new List<int>();
             MatchPercentages = new List<int>();
+            Preference = new Preference();
             salary = 0;
             height = 0;
             build = "";
