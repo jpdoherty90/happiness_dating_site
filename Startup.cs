@@ -16,8 +16,10 @@ namespace Match
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDbContext<Context>(options => options.UseNpgsql(Configuration["DBInfo:ConnectionString"]));
             services.AddMvc();
             services.AddSession();
+            services.AddOptions();
         }
 
         public IConfiguration Configuration { get; private set; }
