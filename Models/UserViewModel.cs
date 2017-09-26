@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace Match.Models
 {
-        public class User : BaseEntity
-    {
-        public int Userid { get; set; }
+        public class UserViewModel : BaseEntity{
+        public int id { get; set; }
+        [Display(Name = "Name: ")]
         public string name { get; set; }
         public string username { get; set; }
         public string password { get; set; }
@@ -48,8 +48,7 @@ namespace Match.Models
         public string kids { get; set; }
         public List<string> netflix {get; set;}
        
-        public User()
-        {
+        public UserViewModel(){
             interests = new List<string>();
             netflix = new List<string>();
             // messages = new List<Message>();

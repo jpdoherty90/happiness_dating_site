@@ -1,1 +1,37 @@
-/*Write all of your CSS here*/
+.body-content{
+    margin-top: 0px;
+}
+#sexPreferenceContainer{
+    width: 100%;
+    height:100vh;
+    background-image: url("https://previews.123rf.com/images/kurhan/kurhan1602/kurhan160200753/52885295-Business-people-workers-faces-collage-background-Teamwork-concept--Stock-Photo.jpg");
+}
+.sexPerference{
+    margin-top: 100px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 5px rgba(0,0,0,0.5);
+}
+.infoPerference{
+    margin-top: 100px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    display: none;
+    box-shadow: 0 0 5px 5px rgba(0,0,0,0.5);
+}
+#rootHeader{
+    text-align: center;
+    background-color: #1574BB;
+    color: white;
+    padding: 10px;
+}
+.caret{
+    display: none;
+}
+.logRegRedirects{
+    font-size: 15px;
+    margin-top: 20px;
+    text-align: center;
+}
