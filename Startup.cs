@@ -12,14 +12,6 @@ namespace Match
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            // Add framework services.
-            services.AddMvc();
-            services.AddSession();
-        }
-
         public IConfiguration Configuration { get; private set; }
         public Startup(IHostingEnvironment env)
         {
@@ -28,6 +20,15 @@ namespace Match
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables();
             Configuration = builder.Build();
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // Add framework services.
+            services.AddMvc();
+            services.AddSession();
+            services.AddDbContext<Context>(options => options.UseNpgsql(Configuration["DBInfo:ConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
