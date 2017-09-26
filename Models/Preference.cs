@@ -35,6 +35,11 @@ namespace Match.Models
        
         public Preference()
         {
+            min_age = 0;
+            max_age = 0;
+            memes = 0;
+            tattoos = false;
+            chipotle = true;
             interests = new List<string>();
             build = new List<string>();
             netflix = new List<string>();
