@@ -8,5 +8,15 @@ namespace Match.Models
         public Context(DbContextOptions<Context> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Conversation> Conversations { get; set; }
+
+        public DbSet<Like> Likes { get; set; }
+
+        public DbSet<Match> Match { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
+
+        public DbSet<Preference> Preferences { get; set; }
     }
 }

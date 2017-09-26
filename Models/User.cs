@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 namespace Match.Models
 {
-        public class User : BaseEntity
-    {
+        public class User : BaseEntity{
         public int Userid { get; set; }
         public string name { get; set; }
         public string username { get; set; }
@@ -18,13 +17,13 @@ namespace Match.Models
         public int preferencesId {get; set;}
         public List<string> interests { get; set; }
         public List<int> conversationsId{ get; set; }
-        // public List<Conversation> conversations { get; set; }
+        public List<Conversation> conversations { get; set; }
         public List<int> likesId { get; set; }
         public List<User> likes { get; set; }
         public List<int> likersId { get; set; }
         public List<User> likers { get; set; }
         public List<int> messagesId { get; set; }
-        // public List<Message> messages { get; set; }
+        public List<Message> messages { get; set; }
         public int salary { get; set; }
         public int height { get; set; }
         public string build { get; set; }

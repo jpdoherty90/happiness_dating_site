@@ -9,6 +9,13 @@ namespace Match.Controllers
 {
     public class HomeController : Controller
     {
+        private Context _context;
+
+        public HomeController(Context context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         [Route("")]
         public IActionResult Index()
@@ -25,9 +32,15 @@ namespace Match.Controllers
 
         [HttpPost]
         [Route("addUser")]
-        public IActionResult addUser(User newUser)
+        public IActionResult addUser(UserViewModel newUser)
         {   
+            Console.WriteLine(newUser.gender);
+            Console.WriteLine(newUser.zipcode);
             Console.WriteLine(newUser.name);
+            Console.WriteLine(newUser.username);
+            Console.WriteLine(newUser.email);
+            Console.WriteLine(newUser.password);
+            Console.WriteLine(newUser.age);
             return Redirect("/");
         }
     }
