@@ -9,8 +9,6 @@ namespace Match.Models
         public int id { get; set; }
         public int min_age { get; set; }
         public int max_age { get; set; }
-        public User user {get; set;}
-        public int userId {get; set;}
         public List<string> interests { get; set; }
         public List<int> salary { get; set; }
         public List<int> height { get; set; }

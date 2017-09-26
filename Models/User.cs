@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Match.Models
 {
@@ -13,20 +14,26 @@ namespace Match.Models
         public int age { get; set; }
         public string gender { get; set; }
         public string seeking { get; set; }
-        public Preference preferences {get; set;}
-        public int preferencesId {get; set;}
+
+        public int PreferenceId { get; set; }
+        public Preference Preference {get; set;}
+        
         public List<string> interests { get; set; }
-        public List<int> conversationsId{ get; set; }
-        public List<Conversation> conversations { get; set; }
-        public List<int> likesId { get; set; }
+
+        [InverseProperty("PersonLiking")]
         public List<Like> likes { get; set; }
-        public List<int> likersId { get; set; }
+
+        [InverseProperty("PersonLiked")]
         public List<Like> likers { get; set; }
 
-        public List<int> MatchesId { get; set; }
-        public List<Match> Matches { get; set; }
-        public List<int> messagesId { get; set; }
-        public List<Message> messages { get; set; }
+        public List<int> MatchIds { get; set; }
+        public List<int> MatchPercentages { get; set; }
+
+        [InverseProperty("Sender")]
+        public List<Message> messagesSent { get; set; }
+
+        [InverseProperty("Reciever")]
+        public List<Message> messagesRecieved { get; set; }
         public int salary { get; set; }
         public int height { get; set; }
         public string build { get; set; }
@@ -55,16 +62,12 @@ namespace Match.Models
         {
             interests = new List<string>();
             netflix = new List<string>();
-            messages = new List<Message>();
-            messagesId = new List<int>();
-            conversations = new List<Conversation>();
-            conversationsId = new List<int>();
+            messagesRecieved = new List<Message>();
+            messagesSent = new List<Message>();
             likes = new List<Like>();
-            likesId = new List<int>();
             likers = new List<Like>();
-            likersId = new List<int>();
-            Matches = new List<Match>();
-            MatchesId = new List<int>();
+            MatchIds = new List<int>();
+            MatchPercentages = new List<int>();
             salary = 0;
             height = 0;
             build = "";
