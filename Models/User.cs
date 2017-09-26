@@ -10,10 +10,12 @@ namespace Match.Models
         public string name { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        // public Image picture { get; set; }
+        //public Image picture { get; set; }
         public int age { get; set; }
         public string gender { get; set; }
         public string seeking { get; set; }
+        public Preference preferences {get; set;}
+        public int preferencesId {get; set;}
         public List<string> interests { get; set; }
         public List<int> conversationsId{ get; set; }
         // public List<Conversation> conversations { get; set; }
@@ -45,17 +47,16 @@ namespace Match.Models
         public string cigarettes { get; set; }
         public bool chipotle { get; set; }
         public string pets { get; set; }
-        public string kids { get; set; }
         public List<string> netflix {get; set;}
        
         public User()
         {
             interests = new List<string>();
             netflix = new List<string>();
-            // messages = new List<Message>();
-            // messagesId = new List<int>();
-            // conversations = new List<Conversation>();
-            // conversationsId = new List<Conversation>();
+            messages = new List<Message>();
+            messagesId = new List<int>();
+            conversations = new List<Conversation>();
+            conversationsId = new List<int>();
             likes = new List<User>();
             likesId = new List<int>();
             likers = new List<User>();
