@@ -8,13 +8,13 @@ namespace Match.Models
     {
         public int LikeId { get; set; }
 
-        public int LikerId { get; set; }
+        public int PersonLikingId { get; set; }
 
-        public User Liker { get; set; }
+        public User PersonLiking { get; set; }
 
-        public int LikeeId { get; set; }
+        public int PersonLikedId { get; set; }
 
-        public User Likee { get; set; }
+        public User PersonLiked { get; set; }
 
     }
     

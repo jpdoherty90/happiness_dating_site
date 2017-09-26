@@ -10,7 +10,7 @@ namespace Match.Models
         public string name { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        //public Image picture { get; set; }
+        public byte picture { get; set; }
         public int age { get; set; }
         public string gender { get; set; }
         public string seeking { get; set; }
@@ -18,13 +18,13 @@ namespace Match.Models
         public int preferencesId {get; set;}
         public List<string> interests { get; set; }
         public List<int> conversationsId{ get; set; }
-        // public List<Conversation> conversations { get; set; }
+        public List<Conversation> conversations { get; set; }
         public List<int> likesId { get; set; }
-        public List<User> likes { get; set; }
+        public List<Like> likes { get; set; }
         public List<int> likersId { get; set; }
-        public List<User> likers { get; set; }
+        public List<Like> likers { get; set; }
         public List<int> messagesId { get; set; }
-        // public List<Message> messages { get; set; }
+        public List<Message> messages { get; set; }
         public int salary { get; set; }
         public int height { get; set; }
         public string build { get; set; }
@@ -57,10 +57,33 @@ namespace Match.Models
             messagesId = new List<int>();
             conversations = new List<Conversation>();
             conversationsId = new List<int>();
-            likes = new List<User>();
+            likes = new List<Like>();
             likesId = new List<int>();
-            likers = new List<User>();
+            likers = new List<Like>();
             likersId = new List<int>();
+            salary = 0;
+            height = 0;
+            build = "";
+            ethnicity = "";
+            zipcode = 0;
+            history = "";
+            present_kids = "";
+            future_kids = "";
+            drinking = "";
+            marijuana = "";
+            Trump = "";
+            memes = 0;
+            religion = "";
+            horoscope = "";
+            exercise = "";
+            education = "";
+            tattoos = false;
+            diet = "";
+            sex = "";
+            cigarettes = "";
+            chipotle = true;
+            pets = "";
+            netflix = new List<string>();
         }
     }
 }
