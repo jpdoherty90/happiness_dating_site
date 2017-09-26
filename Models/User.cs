@@ -11,7 +11,7 @@ namespace Match.Models
         public string name { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public Image picture { get; set; }
+        //public Image picture { get; set; }
         public int age { get; set; }
         public string gender { get; set; }
         public string seeking { get; set; }
@@ -57,7 +57,7 @@ namespace Match.Models
             messages = new List<Message>();
             messagesId = new List<int>();
             conversations = new List<Conversation>();
-            conversationsId = new List<Conversation>();
+            conversationsId = new List<int>();
             likes = new List<User>();
             likesId = new List<int>();
             likers = new List<User>();
