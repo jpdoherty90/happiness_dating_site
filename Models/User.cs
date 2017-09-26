@@ -23,6 +23,9 @@ namespace Match.Models
         public List<Like> likes { get; set; }
         public List<int> likersId { get; set; }
         public List<Like> likers { get; set; }
+
+        public List<int> MatchesId { get; set; }
+        public List<Match> Matches { get; set; }
         public List<int> messagesId { get; set; }
         public List<Message> messages { get; set; }
         public int salary { get; set; }
@@ -61,6 +64,8 @@ namespace Match.Models
             likesId = new List<int>();
             likers = new List<Like>();
             likersId = new List<int>();
+            Matches = new List<Match>();
+            MatchesId = new List<int>();
             salary = 0;
             height = 0;
             build = "";
