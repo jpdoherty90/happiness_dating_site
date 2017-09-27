@@ -176,8 +176,6 @@ namespace Match.Migrations
 
                     b.Property<string>("pets");
 
-                    b.Property<byte>("picture");
-
                     b.Property<string>("present_kids");
 
                     b.Property<string>("religion");

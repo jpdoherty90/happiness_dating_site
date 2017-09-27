@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace Match.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20170926232520_FirstMigration")]
+    [Migration("20170927150216_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,8 +176,6 @@ namespace Match.Migrations
                     b.Property<string>("password");
 
                     b.Property<string>("pets");
-
-                    b.Property<byte>("picture");
 
                     b.Property<string>("present_kids");
 

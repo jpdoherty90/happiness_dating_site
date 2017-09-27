@@ -78,7 +78,6 @@ namespace Match.Migrations
                     netflix = table.Column<List<string>>(nullable: true),
                     password = table.Column<string>(nullable: true),
                     pets = table.Column<string>(nullable: true),
-                    picture = table.Column<byte>(nullable: false),
                     present_kids = table.Column<string>(nullable: true),
                     religion = table.Column<string>(nullable: true),
                     salary = table.Column<int>(nullable: false),
