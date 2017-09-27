@@ -85,8 +85,8 @@ namespace Match.Controllers
             _context.Users.Add(newUser);
             _context.SaveChanges();
             Console.WriteLine("LOOK HERE!!!!!!!!!!!!!!!!!!!!");
-            Console.WriteLine(model.email);
-            User currentUser = _context.Users.SingleOrDefault(findUser => findUser.email == model.email);
+            Console.WriteLine(newUser.email);
+            User currentUser = _context.Users.SingleOrDefault(findUser => findUser.email == newUser.email);
             HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
             return Redirect("/");
         }
