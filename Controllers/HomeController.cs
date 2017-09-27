@@ -32,16 +32,28 @@ namespace Match.Controllers
         }
 
         [HttpPost]
+        [Route("loginUser")]
+        public IActionResult loginUser(LoginViewModel testLogin){
+            if(ModelState.IsValid){
+                User currentUser = _context.Users.SingleOrDefault(findUser => findUser.email == testLogin.email);
+                if(currentUser != null){
+                    HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
+                    return Redirect("/");
+                }
+                else{
+                    ModelState.AddModelError("email", "Email or Password is incorrect.");
+                    return View("Login", testLogin);
+                }
+            }
+            else{
+                return View("Login", testLogin);
+            }
+        }
+
+        [HttpPost]
         [Route("addUser")]
         public IActionResult addUser(UserViewModel model)
         {   
-            Console.WriteLine(model.gender);
-            Console.WriteLine(model.zipcode);
-            Console.WriteLine(model.name);
-            Console.WriteLine(model.username);
-            Console.WriteLine(model.email);
-            Console.WriteLine(model.password);
-            Console.WriteLine(model.age);
             string Gender = "";
             string Seeking = "";
             if(model.gender == "1"){
@@ -72,8 +84,10 @@ namespace Match.Controllers
             };
             _context.Users.Add(newUser);
             _context.SaveChanges();
-            // User currentUser = _context.Users.SingleOrDefault(user => user.email == model.email);
-            // HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
+            Console.WriteLine("LOOK HERE!!!!!!!!!!!!!!!!!!!!");
+            Console.WriteLine(model.email);
+            User currentUser = _context.Users.SingleOrDefault(findUser => findUser.email == model.email);
+            HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
             return Redirect("/");
         }
     }

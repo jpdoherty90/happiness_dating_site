@@ -11,7 +11,6 @@ namespace Match.Models
         public string username { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-        public byte picture { get; set; }
         public int age { get; set; }
         public string gender { get; set; }
         public string seeking { get; set; }
