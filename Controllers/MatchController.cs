@@ -7,23 +7,29 @@ using Microsoft.AspNetCore.Http;
 using Match.Models;
 using System.Linq;
 using System.IO;
-
+using Microsoft.AspNetCore.Hosting;
 
 namespace Match.Controllers
 {
     public class MatchController : Controller
     {
         private Context _context;
- 
-        public MatchController(Context context)
+        private IHostingEnvironment _hostingEnv;
+        private string appRootFolder;
+        public MatchController(Context context, IHostingEnvironment env)
         {
             _context = context;
+            _hostingEnv = env;
+            appRootFolder = _hostingEnv.ContentRootPath;
         }
 
         [HttpGet]
         [Route("dashboard")]
         public IActionResult Dashboard()
         {
+            int myId = (int)HttpContext.Session.GetInt32("currentUser");
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            ViewBag.myUser = myUser;
             return View();
         }
 
@@ -37,17 +43,22 @@ namespace Match.Controllers
 
         [HttpPost]
         [Route("testing")]
-        public async Task<IActionResult> TestImg(IFormFile pic){
-            // int myId = (int)HttpContext.Session.GetInt32("currentUser");
-            // User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
-            using (var ms = new MemoryStream())
+        public IActionResult TestImg(IFormFile pic){
+            int myId = (int)HttpContext.Session.GetInt32("currentUser");
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            var filename = appRootFolder + "/wwwroot/images/" + myUser.username + ".jpg";
+            if (System.IO.File.Exists(filename))
             {
-                await pic.CopyToAsync(ms);
-                // myUser.profile_picture = ms.ToArray();
-                ViewBag.test = ms.ToArray();
-                Console.WriteLine("WRITING FILE STARTING HERE");
+                System.IO.File.Delete(filename);
             }
-            return View("Dashboard");
+            using (FileStream fs = System.IO.File.Create(filename))
+            {
+                pic.CopyTo(fs);
+                fs.Flush();
+            }
+            myUser.profile_picture = "~/images/" + myUser.username + ".jpg";
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
         }
 
         [HttpGet]
