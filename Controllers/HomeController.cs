@@ -126,6 +126,7 @@ namespace Match.Controllers
                             Console.WriteLine("MADE IT PAST HEIGHT");
 
                             //Make sure they each make the minimum amount of cash the other is willing to accept
+                            string U2sal = user2.salary;
                             if ((user2.salary >= user1prefs.MinSalary) && (user1.salary >= user2prefs.MinSalary))
                             {
                                 Console.WriteLine("MADE IT PAST SALARY");
