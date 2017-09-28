@@ -14,6 +14,7 @@ namespace Match.Models
         public int age { get; set; }
         public string gender { get; set; }
         public string seeking { get; set; }
+        public byte[] profile_picture {get; set;}
 
         public int PreferenceId { get; set; }
         public Preference Preference {get; set;}

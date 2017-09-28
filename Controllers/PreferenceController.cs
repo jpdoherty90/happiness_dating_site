@@ -21,6 +21,9 @@ namespace Match.Controllers
         [Route("/preference")]
         public IActionResult Index()
         {
+            int? currentUserId = HttpContext.Session.GetInt32("currentUser");
+            User currentUser = _context.Users.SingleOrDefault(findUser => findUser.UserId == currentUserId);
+            ViewBag.CurrentUser = currentUser;
             return View();
         }
 
@@ -49,7 +52,31 @@ namespace Match.Controllers
             Console.WriteLine("ETHNICITY:" + ethnicity);
             Console.WriteLine("DRINKING:" + userInterest.drinking);
             Console.WriteLine("RELIGION:" + userInterest.religion);
-            return Redirect("/");
+            int? currentUserId = HttpContext.Session.GetInt32("currentUser");
+            User currentUser = _context.Users.SingleOrDefault(findUser => findUser.UserId == currentUserId);
+            int height = (userInterest.feet * 12) + userInterest.inch;
+            currentUser.height = height;
+            currentUser.salary = 55; 
+            currentUser.marijuana = userInterest.weed; 
+            currentUser.build = userInterest.body;
+            currentUser.pets = userInterest.pets;
+            currentUser.diet = userInterest.diet;
+            currentUser.kids = userInterest.kids;
+            if(userInterest.divorced == "Yes"){
+                currentUser.Divorced = true;
+            }else{
+                currentUser.Divorced = false;
+            }
+            if(userInterest.widowed == "Yes"){
+                currentUser.Widowed = true;
+            }else{
+                currentUser.Widowed = false;
+            }
+            currentUser.ethnicity = userInterest.ethnicity;
+            currentUser.drinking = userInterest.drinking;
+            currentUser.religion = userInterest.religion;
+            _context.SaveChanges();
+            return Redirect("/addUserPreferences");
         }
     }
 }
