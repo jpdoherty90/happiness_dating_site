@@ -8,6 +8,7 @@ namespace Match.Models
     public class Percentage : BaseEntity
     {
 
+        public int PercentageId { get; set; }
         public int Percent { get; set; }
 
 

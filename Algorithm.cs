@@ -39,7 +39,7 @@ namespace Match.Controllers
                     if ((user2.height >= user1prefs.MinHeight && user2.height <= user1prefs.MaxHeight) && (user1.height >= user2prefs.MinHeight && user1.height <= user2prefs.MaxHeight))
                     {
 
-                        //Make sure they each make enough money for what the other one wants
+                        //Make sure they each make the minimum amount of cash the other is willing to accept
                         if ((user2.salary >= user1prefs.MinSalary) && (user1.salary >= user2prefs.MinSalary))
                         {
 
@@ -74,24 +74,13 @@ namespace Match.Controllers
                                     bool u2Drinking = StringWithDealBreaker(user2.drinking, user1prefs.Drinking, user1prefs.DrinkingDealBreaker);
                                     bool u1Marijuana = StringWithDealBreaker(user1.marijuana, user2prefs.Marijuana, user2prefs.MarijuanaDealBreaker);
                                     bool u2Marijuana = StringWithDealBreaker(user2.marijuana, user1prefs.Marijuana, user1prefs.MarijuanaDealBreaker);
-                                    bool u1Cigarettes = StringWithDealBreaker(user1.cigarettes, user2prefs.Cigarettes, user2prefs.CigarettesDealBreaker);
-                                    bool u2Cigarettes = StringWithDealBreaker(user2.cigarettes, user1prefs.Cigarettes, user1prefs.CigarettesDealBreaker);
-                                    bool u1Sex = StringWithDealBreaker(user1.sex, user2prefs.Sex, user2prefs.SexDealBreaker);
-                                    bool u2Sex = StringWithDealBreaker(user2.sex, user1prefs.Sex, user1prefs.SexDealBreaker);
-                                    bool u1Exercise = StringWithDealBreaker(user1.exercise, user2prefs.Exercise, user2prefs.ExerciseDealBreaker);
-                                    bool u2Exercise = StringWithDealBreaker(user2.exercise, user1prefs.Exercise, user1prefs.ExerciseDealBreaker);
                                     bool u1Diet = StringWithDealBreaker(user1.diet, user2prefs.Diet, user2prefs.DietDealBreaker);
                                     bool u2Diet = StringWithDealBreaker(user2.diet, user1prefs.Diet, user1prefs.DietDealBreaker);
                                     bool u1Pets = StringWithDealBreaker(user1.pets, user2prefs.Pets, user2prefs.PetsDealBreaker);
                                     bool u2Pets = StringWithDealBreaker(user2.pets, user1prefs.Pets, user1prefs.PetsDealBreaker);
-                                    bool u1Education = StringWithDealBreaker(user1.education, user2prefs.Education, user2prefs.EducationDealBreaker);
-                                    bool u2Education = StringWithDealBreaker(user2.education, user1prefs.Education, user1prefs.EducationDealBreaker);
-                                    bool u1PresentKids = StringWithDealBreaker(user1.present_kids, user2prefs.PresentKids, user2prefs.PresentKidsDealBreaker);
-                                    bool u2PresentKids = StringWithDealBreaker(user2.present_kids, user1prefs.PresentKids, user1prefs.PresentKidsDealBreaker);
-                                    bool u1FutureKids = StringWithDealBreaker(user1.future_kids, user2prefs.FutureKids, user2prefs.FutureKidsDealBreaker);
-                                    bool u2FutureKids = StringWithDealBreaker(user2.future_kids, user1prefs.FutureKids, user1prefs.FutureKidsDealBreaker);
-                                    bool u1Tattoos = StringWithDealBreaker(user1.tattoos, user2prefs.Tattoos, user2prefs.TattoosDealBreaker);
-                                    bool u2Tattoos = StringWithDealBreaker(user2.tattoos, user1prefs.Tattoos, user1prefs.TattoosDealBreaker);
+                                    bool u1Kids = StringWithDealBreaker(user1.kids, user2prefs.Kids, user2prefs.KidsDealBreaker);
+                                    bool u2Kids = StringWithDealBreaker(user2.kids, user1prefs.Kids, user1prefs.KidsDealBreaker);
+                                    
 
                                     if (u1build
                                     || u2build
@@ -103,28 +92,16 @@ namespace Match.Controllers
                                     || u2Drinking
                                     || u1Marijuana
                                     || u2Marijuana
-                                    || u1Cigarettes
-                                    || u2Cigarettes
-                                    || u1Sex
-                                    || u2Sex
-                                    || u1Exercise
-                                    || u2Exercise
+                                    || u1Kids
+                                    || u2Kids
                                     || u1Diet
                                     || u2Diet
                                     || u1Pets
-                                    || u2Pets
-                                    || u1Tattoos
-                                    || u2Tattoos
-                                    || u1FutureKids
-                                    || u2FutureKids
-                                    || u1PresentKids
-                                    || u2PresentKids
-                                    || u1Education
-                                    || u2Education) {
+                                    || u2Pets) {
                                         return;
                                     }
 
-                                    int MatchPercent = (int) ((((float)Count)/28.0)*100.0);
+                                    int MatchPercent = (int) ((((float)Count)/16.0)*100.0);
 
                                     if (MatchPercent >= 70) {
 
@@ -144,9 +121,6 @@ namespace Match.Controllers
 
                                     }
 
-
-
-
                                 }
 
                             }
@@ -160,6 +134,7 @@ namespace Match.Controllers
             } 
 
         }
+
 
     }
 

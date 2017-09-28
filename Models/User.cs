@@ -15,12 +15,8 @@ namespace Match.Models
         public string gender { get; set; }
         public string seeking { get; set; }
 
-
-
         public int PreferenceId { get; set; }
         public Preference Preference {get; set;}
-        
-        public string interests { get; set; }
 
         [InverseProperty("PersonLiking")]
         public List<Like> likes { get; set; }
@@ -44,22 +40,15 @@ namespace Match.Models
         public int zipcode { get; set; }
         public bool Divorced { get; set; }
         public bool Widowed { get; set; }
-        public string present_kids { get; set; }
-        public string future_kids { get; set; }
+        public string kids { get; set; }
         public string drinking { get; set; }
         public string marijuana { get; set; }
         public string religion { get; set; }
-        public string exercise { get; set; }
-        public string education { get; set; }
-        public string tattoos { get; set; }
         public string diet { get; set; }
-        public string sex { get; set; }
-        public string cigarettes { get; set; }
         public string pets { get; set; }
        
         public User()
         {
-            interests = "";
             messagesRecieved = new List<Message>();
             messagesSent = new List<Message>();
             likes = new List<Like>();
@@ -74,17 +63,10 @@ namespace Match.Models
             zipcode = 0;
             Divorced = false;
             Widowed = false;
-            present_kids = "";
-            future_kids = "";
             drinking = "";
             marijuana = "";
             religion = "";
-            exercise = "";
-            education = "";
-            tattoos = "";
             diet = "";
-            sex = "";
-            cigarettes = "";
             pets = "";
 
         }
