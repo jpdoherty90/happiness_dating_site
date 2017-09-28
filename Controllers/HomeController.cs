@@ -38,7 +38,7 @@ namespace Match.Controllers
                 User currentUser = _context.Users.SingleOrDefault(findUser => findUser.email == testLogin.email);
                 if(currentUser != null){
                     HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
-                    return Redirect("/");
+                    return Redirect("/dashboard");
                 }
                 else{
                     ModelState.AddModelError("email", "Email or Password is incorrect.");
@@ -91,7 +91,7 @@ namespace Match.Controllers
             Console.WriteLine(currentUser.name);
             Console.WriteLine(currentUser.username);
             HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
-            return Redirect("/");
+            return Redirect("/preference");
         }
     }
 }

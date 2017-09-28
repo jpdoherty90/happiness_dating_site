@@ -30,6 +30,9 @@
 .caret{
     display: none;
 }
+.alignRadioButtons{
+    margin-left: 100px;
+}
 .logRegRedirects{
     font-size: 15px;
     margin-top: 20px;
