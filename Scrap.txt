@@ -1,0 +1,170 @@
+                    // // user1's salary preferences
+                    // if (user2.salary >= user1prefs.MinSalary) {
+                    //     Count += 1;
+                    // } else {
+                    //     return;
+                    // }
+
+                    // // user2's salary preferences
+                    // if (user1.salary >= user2prefs.MinSalary) {
+                    //     Count += 1;
+                    // } else {
+                    //     return;
+                    // }
+                    
+                    // // user1's height preferences
+                    // if (user2.height >= user1prefs.MinHeight && user2.height <= user1prefs.MaxHeight) {
+                    //     Count += 1;
+                    // } else {
+                    //     return;
+                    // }
+
+                    // // user2's height preferences
+                    // if (user1.height >= user2prefs.MinHeight && user1.height <= user2prefs.MaxHeight) {
+                    //     Count += 1;
+                    // } else {
+                    //     return;
+                    // }
+
+                    // // user1 build (body-type) preferences
+                    // if (user2.build == user1prefs.Build) {
+                    //     Count += 1;
+                    // } else if (user1prefs.BuildDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // // user2 build (body-type) preferences
+                    // if (user1.build == user2prefs.Build) {
+                    //     Count += 1;
+                    // } else if (user2prefs.BuildDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // // user1 ethnicity preferences
+                    // if (user2.ethnicity == user1prefs.Ethnicity) {
+                    //     Count += 1;
+                    // } else if (user1prefs.EthnicityDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // // user2 ethnicity preferences
+                    // if (user1.ethnicity == user2prefs.Ethnicity) {
+                    //     Count += 1;
+                    // } else if (user2prefs.EthnicityDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // // user1 Religion preferences
+                    // if (user2.religion == user1prefs.Religion) {
+                    //     Count += 1;
+                    // } else if (user1prefs.ReligionDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // // user2 Religion preferences
+                    // if (user1.religion == user2prefs.Religion) {
+                    //     Count += 1;
+                    // } else if (user2prefs.ReligionDealBreaker == true) {
+                    //     return;
+                    // }
+
+                                        // // user1 drinking prefs
+                    // if (user2.drinking == user1prefs.Drinking) {
+                    //     Count += 1;
+                    // } else if (user1prefs.DrinkingDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // // user2 drinking prefs
+                    // if (user1.drinking == user2prefs.Drinking) {
+                    //     Count += 1;
+                    // } else if (user2prefs.DrinkingDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // // user1 Marijuana prefs
+                    // if (user2.marijuana == user1prefs.Marijuana) {
+                    //     Count += 1;
+                    // } else if (user1prefs.MarijuanaDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // // user2 Marijuana prefs
+                    // if (user1.marijuana == user2prefs.Marijuana) {
+                    //     Count += 1;
+                    // } else if (user2prefs.MarijuanaDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // // user1 Cigarettes prefs
+                    // if (user2.cigarettes == user1prefs.Cigarettes) {
+                    //     Count += 1;
+                    // } else if (user1prefs.CigarettesDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // // user2 Cigarettes prefs
+                    // if (user1.cigarettes == user2prefs.Cigarettes) {
+                    //     Count += 1;
+                    // } else if (user2prefs.CigarettesDealBreaker == true) {
+                    //     return;
+                    // }
+
+                    // Make sure divorce isn't a dealbreaker for anyone
+                    if (user1.Divorced == true && user2prefs.DivorcedDealBreaker == true) {
+                        return;
+                    }
+                    if (user2.Divorced == true && user1prefs.DivorcedDealBreaker == true) {
+                        return;
+                    }
+
+                    // Make sure widow/widower isn't a dealbreaker for anyone
+                    if (user1.Widowed == true && user2prefs.WidowedDealBreaker == true) {
+                        return;
+                    }
+                    if (user2.Widowed == true && user1prefs.WidowedDealBreaker == true) {
+                        return;
+                    }
+
+
+                                        // user1 present kids preferences
+                    if (user2.present_kids == user1prefs.PresentKids) {
+                        Count += 1;
+                    } else if (user1prefs.PresentKidsDealBreaker == true) {
+                        return;
+                    }
+
+                    // user2 present kids preferences
+                    if (user1.present_kids == user2prefs.PresentKids) {
+                        Count += 1;
+                    } else if (user2prefs.PresentKidsDealBreaker == true) {
+                        return;
+                    }
+
+                    // user1 future kids preferences
+                    if (user2.future_kids == user1prefs.FutureKids) {
+                        Count += 1;
+                    } else if (user1prefs.FutureKidsDealBreaker == true) {
+                        return;
+                    }
+
+                    // user2 future kids preferences
+                    if (user1.future_kids == user2prefs.FutureKids) {
+                        Count += 1;
+                    } else if (user2prefs.FutureKidsDealBreaker == true) {
+                        return;
+                    }
+
+                    // user1 Tattoos prefs
+                    if (user2.tattoos == user1prefs.Tattoos) {
+                        Count += 1;
+                    } else if (user1prefs.TattoosDealBreaker == true) {
+                        return;
+                    }
+
+                    // user2 Tattoos prefs
+                    if (user1.tattoos == user2prefs.Tattoos) {
+                        Count += 1;
+                    } else if (user2prefs.TattoosDealBreaker == true) {
+                        return;
+                    }

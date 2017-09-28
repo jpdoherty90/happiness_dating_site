@@ -32,29 +32,24 @@ namespace Match.Models
         public string build { get; set; }
         public string ethnicity { get; set; }
         public int zipcode { get; set; }
-        public string history { get; set; }
+        public bool Divorced { get; set; }
+        public bool Widowed { get; set; }
         public string present_kids { get; set; }
         public string future_kids { get; set; }
         public string drinking { get; set; }
         public string marijuana { get; set; }
-        public string Trump { get; set; }
-        public int memes { get; set; }
         public string religion { get; set; }
-        public string horoscope { get; set; }
         public string exercise { get; set; }
         public string education { get; set; }
-        public bool tattoos { get; set; }
+        public string tattoos { get; set; }
         public string diet { get; set; }
         public string sex { get; set; }
         public string cigarettes { get; set; }
-        public bool chipotle { get; set; }
         public string pets { get; set; }
-        public string netflix {get; set;}
        
         public User()
         {
             interests = "";
-            netflix = "";
             messagesRecieved = new List<Message>();
             messagesSent = new List<Message>();
             likes = new List<Like>();
@@ -67,23 +62,21 @@ namespace Match.Models
             build = "";
             ethnicity = "";
             zipcode = 0;
-            history = "";
+            Divorced = false;
+            Widowed = false;
             present_kids = "";
             future_kids = "";
             drinking = "";
             marijuana = "";
-            Trump = "";
-            memes = 0;
             religion = "";
-            horoscope = "";
             exercise = "";
             education = "";
-            tattoos = false;
+            tattoos = "";
             diet = "";
             sex = "";
             cigarettes = "";
-            chipotle = true;
             pets = "";
+
         }
     }
 }
