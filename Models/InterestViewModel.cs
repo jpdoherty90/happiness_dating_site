@@ -14,7 +14,7 @@ namespace Match.Models
         public int inch { get; set; }
  
         [Display(Name = "Salary")]
-        public int salary { get; set; }
+        public string salary { get; set; }
 
         [Display(Name = "Weed")]
         public string weed { get; set; }
