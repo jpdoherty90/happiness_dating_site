@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
             asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.css"
             asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/preference.css" />
+    <link rel="stylesheet" href="~/css/nouislider.min.css">
+
+
 </head>
 <body>
     <!-- container -->
@@ -23,10 +28,12 @@
                 asp-fallback-src="~/lib/jquery/dist/jquery.js"
                 asp-fallback-test="window.jQuery">
         </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/wNumb.js" asp-append-version="true"></script>
+        <script src="~/js/nouislider.min.js" asp-append-version="true"></script>
 
     @RenderSection("scripts", required: false)
 </body>

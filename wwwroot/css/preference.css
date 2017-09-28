@@ -1,0 +1,11 @@
+#landingPage{
+    height: 100vh;
+    background-image: url("https://wallpaperscraft.com/image/girl_dating_flowers_hugs_67458_1920x1080.jpg");
+}
+.infoContainer{
+    width: 700px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
