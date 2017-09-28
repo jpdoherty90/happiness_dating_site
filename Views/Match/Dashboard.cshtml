@@ -1,23 +1,11 @@
-<!-- <nav id="dash-nav">
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Sadness<i class="material-icons">sentiment_dissatisfied</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down try">
-        <li><a class="no-underline" href="#">Matches</a></li>
-        <li><a class="no-underline" href="#">Discover</a></li>
-        <li><a class="no-underline" href="#">Messages</a></li>
-        <li><a class="no-underline" href="#">Interests</a></li>
-      </ul>
-    </div>
-  </nav> -->
-
-  <div id="dash-nav">
+<div id="dash-nav">
       <div class="left-bar"><a href="dashboard" class="brand-logo">Sadness.com</a></div>
       <div class="middle-bar">
         <div class="center-help">
+          <div class="hover-square"><a class="no-underline" href="profile">Profile</a></div>
           <div class="hover-square"><a class="no-underline" href="#">Matches</a></div>
-          <div class="hover-square"><a class="no-underline" href="#">Discover</a></div>
           <div class="hover-square"><a class="no-underline" href="#">Messages</a></div>
-          <div class="hover-square"><a class="no-underline" href="#">Interests</a></div>
+          <div class="hover-square"><a class="no-underline" href="#">Likes</a></div>
         </div>
       </div>
       <div class="right-bar">
@@ -33,4 +21,20 @@
   <ul id='dropdownSettings' class='dropdown-content'>
     <li><a href="logout">Log out</a></li>
   </ul>
+
+<!-- <div class="weird">
+  <h1>SOSOSOS</h1>
+  <form action="/testing" method="post" enctype="multipart/form-data">
+    <input type="file" name="pic" accept="image/*">
+    <input type="submit">
+  </form>
+</div>
+@{
+  if(@ViewBag.test != null) {
+    <img src="data:image;base64,@System.Convert.ToBase64String(@ViewBag.test)" alt="test"/>
+    <p>Test?</p>
+  }
+} -->
+
+
         
