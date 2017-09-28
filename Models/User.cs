@@ -20,19 +20,14 @@ namespace Match.Models
 
         [InverseProperty("PersonLiking")]
         public List<Like> likes { get; set; }
-
         [InverseProperty("PersonLiked")]
         public List<Like> likers { get; set; }
-
         public List<User> Matches { get; set; }
         public List<Percentage> MatchPercentages { get; set; }
-
         [InverseProperty("Sender")]
         public List<Message> messagesSent { get; set; }
-
         [InverseProperty("Reciever")]
         public List<Message> messagesRecieved { get; set; }
-
         public int salary { get; set; }
         public int height { get; set; }
         public string build { get; set; }
