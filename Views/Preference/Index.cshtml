@@ -6,7 +6,7 @@
 <div id="landingPage">
     <div id="welcomeContainer" class="infoContainer">
         <h4 style="margin-bottom:150px;">Match</h4>
-        <h2>Hi, Erick</h2>
+        <h2>Hi, @ViewBag.CurrentUser.name</h2>
         <h2>Nice to meet you.</h2>
         <h5 style="font-size:20px;">Help us get to know you so that we can recommend some great people</h5>
         <a style="margin-top:100px" id="begin" class="waves-effect waves-light btn-large red"><i class="material-icons right">favorite</i>Lets Begin</a>
@@ -40,7 +40,6 @@
             <h2 style="margin-bottom:200px;;margin-top:100px;">What is your income?</h2>
             <div id="slider-format" style="background-color:darkseagreen"></div>
             <input id="input-format" name="salary" type="text" style="text-align:center">
-            <!-- asp-for="salary" -->
             <li><a style="margin-top:100px" id="goToWeed" class="waves-effect waves-light btn-large blue"><i class="material-icons right">attach_money</i>Salary</a></li>
         </div>
 
@@ -116,7 +115,7 @@
                         <option value="" disabled selected>Tell us your eating habbits?</option>
                         <option value="1">Gluten Free</option>
                         <option value="2">Vegetarian</option>
-                        <option value="3">Nothing but meat</option>
+                        <option value="3">Ron Swanson</option>
                         <option value="4">Seafood, I see-food and I eat it</option>
                     </select>
                 </div>
@@ -244,6 +243,7 @@
                         <option value="2">Islam</option>
                         <option value="3">Secular/Agnostic/Atheist</option>
                         <option value="4">Hinduism</option>
+                        <option value="5">Jewish</option>
                     </select>
                 </div>
             </div>
