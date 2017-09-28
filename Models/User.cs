@@ -15,7 +15,6 @@ namespace Match.Models
         public string gender { get; set; }
         public string seeking { get; set; }
         public byte[] profile_picture {get; set;}
-
         public int PreferenceId { get; set; }
         public Preference Preference {get; set;}
 
@@ -29,7 +28,7 @@ namespace Match.Models
         public List<Message> messagesSent { get; set; }
         [InverseProperty("Reciever")]
         public List<Message> messagesRecieved { get; set; }
-        public int salary { get; set; }
+        public string salary { get; set; }
         public int height { get; set; }
         public string build { get; set; }
         public string ethnicity { get; set; }
@@ -52,7 +51,7 @@ namespace Match.Models
             Matches = new List<User>();
             MatchPercentages = new List<Percentage>();
             Preference = new Preference();
-            salary = 0;
+            salary = "";
             height = 0;
             build = "";
             ethnicity = "";
