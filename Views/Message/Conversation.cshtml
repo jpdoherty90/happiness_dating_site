@@ -18,7 +18,7 @@
 </div>
 </div>
 <ul id='dropdownSettings' class='dropdown-content'>
-  <li><a href="logout">Log out</a></li>
+  <li><a href="/logout">Log out</a></li>
 </ul>
 <ul id='likeTypes' class='dropdown-content'>
   <li><a href="/likes">My Likes</a></li>
@@ -48,6 +48,7 @@
                                 <h6>@msg.SentAt.ToString("t")</h6>
                             </div>
                         } else {
+                            <p>@ViewBag.Friend.name</p>
                             <div class="them">
                                 <h5>@msg.Content</h5>
                                 <h6>@msg.SentAt.ToString("t")</h6>
