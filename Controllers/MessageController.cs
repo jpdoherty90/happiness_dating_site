@@ -71,7 +71,7 @@ namespace Match.Controllers
 
 
             if (MsgsSent.Count > 0 && MsgsRecieved.Count > 0) {
-                var CombinedMsgs = MsgsSent.Union(MsgsRecieved).OrderBy(m => m.SentAt);
+                var CombinedMsgs = MsgsSent.Union(MsgsRecieved).OrderByDescending(m => m.SentAt);
                 ViewBag.MsgsInConvo = CombinedMsgs;    
             } else if (MsgsSent.Count > 0) {
                 ViewBag.MsgsInConvo = MsgsSent;

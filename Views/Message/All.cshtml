@@ -28,12 +28,14 @@
 
 <div class="body-container">
   <div class="body-stuff">
+    <h4>Here are all your conversations:</h4>
     @{
       for (var i = 0; i < @ViewBag.AllConvos.Count; i++) {
         <div class="conversation">
-            <a href="/conversation/@ViewBag.Friends[i].UserId"><p>Your conversation with @ViewBag.Friends[i].name</p></a>
+            <a href="/conversation/@ViewBag.Friends[i].UserId"><h5>@ViewBag.Friends[i].name</h5></a>
             <p>@ViewBag.AllConvos[i].Content</p>
         </div>
+        <hr>
       }
     }
   </div>
