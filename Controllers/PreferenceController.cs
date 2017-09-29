@@ -266,7 +266,7 @@ namespace Match.Controllers
 
         [HttpPost]
         [Route("/addUserInterest")]
-        public IActionResult addUserInterest(InterestViewModel userInterest, string salary, string divorced, string widowed, string ethnicity)
+        public IActionResult addUserInterest(InterestViewModel userInterest, string salary, string divorced, string widowed, string ethnicity, string userBio)
         {
             int? currentUserId = HttpContext.Session.GetInt32("currentUser");
             User currentUser = _context.Users.SingleOrDefault(findUser => findUser.UserId == currentUserId);
@@ -291,6 +291,7 @@ namespace Match.Controllers
             currentUser.ethnicity = userInterest.ethnicity;
             currentUser.drinking = userInterest.drinking;
             currentUser.religion = userInterest.religion;
+            currentUser.bio = userBio;
             _context.SaveChanges();
             return Redirect("/preferences");
         }
