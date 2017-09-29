@@ -12,7 +12,7 @@ namespace Match.Models
 
         public int max_age { get; set; }
 
-        public int MinSalary { get; set; }
+        public string MinSalary { get; set; }
 
         public int MinHeight { get; set; }
 
@@ -60,7 +60,7 @@ namespace Match.Models
         {
             min_age = 0;
             max_age = 0;
-            MinSalary = 0;
+            MinSalary = "";
             MinHeight = 0;
             MaxHeight = 0;
             Build = "";
