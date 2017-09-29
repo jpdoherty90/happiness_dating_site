@@ -71,8 +71,8 @@
                 </div>
             </div>
             <p style="margin-left:250px;">
-                <input value="Yes" name="bodyDealbreaker" type="checkbox" id="body"/>
-                <label for="body" style="color: black;font-size: 25px;">Dealbreaker?</label>
+                <input value="Yes" name="bodyDealbreaker" type="checkbox" id="bodyP"/>
+                <label for="bodyP" style="color: black;font-size: 25px;">Dealbreaker?</label>
             </p>
             <a style="margin-top:100px" id="goToEthnicityP" class="waves-effect waves-light btn-large red"><i class="material-icons right">accessibility</i>Body</a>
         </div>
@@ -105,15 +105,15 @@
                 </div>
             </div>
             <p style="margin-left:250px;">
-                <input value="Yes" name="EthnicityDealBreaker" type="checkbox" id="ethnicity"/>
-                <label for="ethnicity" style="color: black;font-size: 25px;">Dealbreaker?</label>
+                <input value="Yes" name="EthnicityDealBreaker" type="checkbox" id="ethnicityP"/>
+                <label for="ethnicityP" style="color: black;font-size: 25px;">Dealbreaker?</label>
             </p>
             <a style="margin-top:50px" id="goToMaritalP" class="waves-effect waves-light btn-large red"><i class="material-icons right">android</i>Race</a>
         </div>
 
         <!-- GET USER MARITAL STATUS  -->
         <div class="infoContainerP" id="divorcedWidowedContainerP">
-            <h2 style="margin-bottom:150px;margin-top:100px;">Do you want someone whos been hurt?</h2>
+            <h2 style="margin-bottom:150px;margin-top:100px;">Do you want someone who's been hurt?</h2>
             <div class="row">
                 <div class="col s6">
                     <label style="color:black;font-size: 25px;">Divored</label>
@@ -156,8 +156,8 @@
                 </div>
             </div>
             <p style="margin-left:250px;">
-                <input value="Yes" name="KidsDealBreaker" type="checkbox" id="kids" />
-                <label for="kids" style="color:black;font-size: 25px;">Dealbreaker?</label>
+                <input value="Yes" name="KidsDealBreaker" type="checkbox" id="kidP" />
+                <label for="kidP" style="color:black;font-size: 25px;">Dealbreaker?</label>
             </p>
             <a style="margin-top:100px" id="goToDrinkP" class="waves-effect waves-light btn-large red"><i class="material-icons right">child_friendly</i>Kids</a>
         </div>
@@ -169,15 +169,15 @@
                 <div class="input-field col s12">
                     <select asp-for="Drinking"> 
                         <option value="" disabled selected>Choose your posion</option>
-                        <option value="1">Only the holy wine at church</option>
-                        <option value="2">If its not an IPA, I dont want it</option>
-                        <option value="3">I need rehab</option>
+                        <option value="1">No</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">All day everyday</option>
                     </select>
                 </div>
             </div>
             <p style="margin-left:250px;">
-                <input value="Yes" name="DrinkingDealBreaker" type="checkbox" id="drink" />
-                <label for="drink" style="color:black;font-size: 25px;">Dealbreaker?</label>
+                <input value="Yes" name="DrinkingDealBreaker" type="checkbox" id="drinkP" />
+                <label for="drinkP" style="color:black;font-size: 25px;">Dealbreaker?</label>
             </p>
             <a style="margin-top:50px" id="goToWeedP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_bar</i>Drink</a>
         </div>
@@ -192,13 +192,13 @@
                         <option value="1">Never</option>
                         <option value="2">Ehh</option>
                         <option value="3">Sure, sounds like fun</option>
-                        <option value="4">Yes</option>
+                        <option value="4">Match it</option>
                     </select>
                 </div>
             </div>
             <p style="margin-left:250px;">
-                <input value="Yes" name="MarijuanaDealBreaker" type="checkbox" id="weed" />
-                <label for="weed" style="color:black;font-size: 25px;">Dealbreaker?</label>
+                <input value="Yes" name="MarijuanaDealBreaker" type="checkbox" id="weedP" />
+                <label for="weedP" style="color:black;font-size: 25px;">Dealbreaker?</label>
             </p>
             <a style="margin-top:100px" id="goToDietP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_florist</i>Herb</a>
         </div>
@@ -213,13 +213,13 @@
                         <option value="1">Gluten Free</option>
                         <option value="2">Vegetarian</option>
                         <option value="3">Meat, meat and more meat</option>
-                        <option value="4">Whatever get put infront</option>
+                        <option value="4">Anything</option>
                     </select>
                 </div>
             </div>
             <p style="margin-left:250px;">
-                <input value="Yes" name="DietDealBreaker" type="checkbox" id="diet" />
-                <label for="diet" style="color:black;font-size: 25px;">Dealbreaker?</label>
+                <input value="Yes" name="DietDealBreaker" type="checkbox" id="dietP" />
+                <label for="dietP" style="color:black;font-size: 25px;">Dealbreaker?</label>
             </p>
             <a style="margin-top:100px" id="goToPetsP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_grocery_store</i>Food</a>
         </div>
@@ -239,8 +239,8 @@
                 </div>
             </div>
             <p style="margin-left:250px;">
-                <input value="Yes" name="PetsDealBreaker" type="checkbox" id="pets" />
-                <label for="pets" style="color:black;font-size: 25px;">Dealbreaker?</label>
+                <input value="Yes" name="PetsDealBreaker" type="checkbox" id="petsP" />
+                <label for="petsP" style="color:black;font-size: 25px;">Dealbreaker?</label>
             </p>
             <a style="margin-top:100px" id="goToSubmitP" class="waves-effect waves-light btn-large red"><i class="material-icons right">pets</i>Pets</a>
         </div>
@@ -248,7 +248,7 @@
         <!-- COMPLETE USER PROFILE!!!!!  -->
         <div class="infoContainer" id="finishInterestContainerP">
             <h2 style="margin-top:100px;color:black">Thank for completing our registration process!</h2>
-            <h2 style="margin-bottom:100px;color:black">Lets find you some future mates!</h2>
+            <h4 style="margin-bottom:100px;color:black">Lets find you some future mates!</h4>
             <a style="margin-top:50px" id="submitInterestFormP" class="waves-effect waves-light btn-large blue"><i class="material-icons right">fast_forward</i>Done</a>
         </div>
 

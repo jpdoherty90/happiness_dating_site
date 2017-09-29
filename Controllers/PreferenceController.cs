@@ -132,7 +132,6 @@ namespace Match.Controllers
             return RedirectToAction("Dashboard", "Match");
         }
 
-
         public void Algorithm(int user1id, int user2id)
         {
             Console.WriteLine("STARTING THE ALGORITHM");
