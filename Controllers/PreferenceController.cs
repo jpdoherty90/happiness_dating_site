@@ -123,6 +123,10 @@ namespace Match.Controllers
                 currentUser.Preference.PetsDealBreaker = true;
             }
             _context.SaveChanges();
+            List<User> AllUsers = _context.Users.ToList();
+            foreach(var guy in AllUsers) {
+                Algorithm(currentUser.UserId, guy.UserId);
+            }
             return Redirect("/dashboard");
         }
 

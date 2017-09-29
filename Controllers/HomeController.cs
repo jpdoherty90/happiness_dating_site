@@ -87,10 +87,10 @@ namespace Match.Controllers
             _context.Users.Add(newUser);
             _context.SaveChanges();
             User currentUser = _context.Users.SingleOrDefault(user => user.email == newUser.email);
-            List<User> AllUsers = _context.Users.ToList();
-            foreach(var guy in AllUsers) {
-                Algorithm(currentUser.UserId, guy.UserId);
-            }
+            // List<User> AllUsers = _context.Users.ToList();
+            // foreach(var guy in AllUsers) {
+            //     Algorithm(currentUser.UserId, guy.UserId);
+            // }
             HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
             return Redirect("/preference");
         }
