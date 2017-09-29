@@ -155,6 +155,7 @@
     background-color: #1574BB;
     border-radius: 20px;
     margin-bottom: 20px;
+    margin-left: 67%;
 }
 .them{
     max-width: 320px;
@@ -163,7 +164,6 @@
     background-color: seagreen;
     border-radius: 20px;
     margin-bottom: 20px;
-    margin-left: 67%;
 }
 
 #contentContainer{

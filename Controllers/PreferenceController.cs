@@ -22,6 +22,9 @@ namespace Match.Controllers
         [Route("/preference")]
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
             int? currentUserId = HttpContext.Session.GetInt32("currentUser");
             User currentUser = _context.Users.SingleOrDefault(findUser => findUser.UserId == currentUserId);
             ViewBag.CurrentUser = currentUser;
@@ -32,6 +35,9 @@ namespace Match.Controllers
         [Route("/preferences")]
         public IActionResult preferences()
         {
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
             return View("Preference");
         }
 
