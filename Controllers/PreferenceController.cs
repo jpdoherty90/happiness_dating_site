@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Match.Models;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Match.Controllers
 {
@@ -42,7 +43,9 @@ namespace Match.Controllers
             int maxHeight = (userPreference.MaxFeet * 12) + userPreference.MaxInch;
 
             int? currentUserId = HttpContext.Session.GetInt32("currentUser");
-            User currentUser = _context.Users.SingleOrDefault(findUser => findUser.UserId == currentUserId);
+            User currentUser = _context.Users.Include(u => u.Preference).SingleOrDefault(findUser => findUser.UserId == currentUserId);
+            Console.WriteLine("CURRENT USER:");
+            Console.WriteLine(currentUser.name);
 
             currentUser.Preference.min_age =  userPreference.MinAge;
             currentUser.Preference.max_age =  userPreference.MaxAge;
