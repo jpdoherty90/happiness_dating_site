@@ -155,6 +155,7 @@
     background-color: #1574BB;
     border-radius: 20px;
     margin-bottom: 20px;
+    margin-left: 67%;
 }
 .them{
     max-width: 320px;
@@ -163,7 +164,6 @@
     background-color: seagreen;
     border-radius: 20px;
     margin-bottom: 20px;
-    margin-left: 67%;
 }
 
 #contentContainer{
@@ -173,7 +173,6 @@
 
 .body-stuff2{
     width: 1000px;
-    height: 100%;
     border: 1px solid rgb(240, 240, 240);
     border-radius: 1px;
     margin: auto;
@@ -186,7 +185,6 @@
     width:100%;
     height: 100vh;
     padding: 40px 0px;
-    /* background: rgb(240,240,240); */
     background-image: url("http://www.loveimagesdownload.com/wp-content/uploads/2016/08/the-tree-of-love-559.jpg");
     background-size: cover;             
     background-repeat: no-repeat;
