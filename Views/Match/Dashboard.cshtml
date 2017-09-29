@@ -3,7 +3,7 @@
 <div class="middle-bar">
 <div class="center-help">
 <div class="hover-square"><a class="no-underline" href="profile">Profile</a></div>
-<div class="hover-square"><a class="no-underline" href="#">Matches</a></div>
+<div class="hover-square"><a class="no-underline" href="lovers">Matches</a></div>
 <div class="hover-square"><a class="no-underline" href="#">Messages</a></div>
 <div class="hover-square"><a class="no-underline" href="#">Likes</a></div>
 </div>
@@ -28,7 +28,10 @@
       <div class="col-md-4"><div class="frame"><img id="profP" src="@Url.Content(ViewBag.myUser.profile_picture)"/></div>
         <button class="waves-effect waves-teal btn-flat" id="update-btn">Update Photo?</button>
       </div>
-      <div class="col-md-8"><h1>@ViewBag.myUser.name</h1></div>
+      <div class="col-md-8"><h1>@ViewBag.myUser.name</h1>
+        <h5>@ViewBag.city, @ViewBag.state</h5>
+        <h5>@ViewBag.myUser.age years old</h5>
+      </div>
     </div>
   
   

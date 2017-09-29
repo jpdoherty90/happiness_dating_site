@@ -139,7 +139,7 @@
 
 .body-stuff{
     width: 1000px;
-    height: 600px;
+    height: 400px;
     border: 1px solid rgb(200,200,200);
     border-radius: 1px;
     margin: auto;
@@ -175,6 +175,9 @@
     margin-left: 70px;
 }
 
+.hide-song{
+    display: none;
+}
 .conversation {
     /* text-align: center; */
     padding-left: 25px;

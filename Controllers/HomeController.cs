@@ -86,21 +86,18 @@ namespace Match.Controllers
             };
             _context.Users.Add(newUser);
             _context.SaveChanges();
-            Console.WriteLine("LOOK HERE!!!!!!!!!!!!!!!!!!!!");
-            Console.WriteLine(model.email);
             User currentUser = _context.Users.SingleOrDefault(user => user.email == newUser.email);
-            Console.WriteLine("CURRENT USER:");
-            Console.WriteLine(currentUser.name);
-            Console.WriteLine(currentUser.username);
+            List<User> AllUsers = _context.Users.ToList();
+            foreach(var guy in AllUsers) {
+                Algorithm(currentUser.UserId, guy.UserId);
+            }
             HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
             return Redirect("/preference");
         }
 
-        [HttpGet]
-        [Route("test")]
-        public IActionResult Test() {
+    
 
-            void Algorithm(int user1id, int user2id)
+            public void Algorithm(int user1id, int user2id)
             {
                 Console.WriteLine("STARTING THE ALGORITHM");
 
@@ -233,9 +230,5 @@ namespace Match.Controllers
 
             }
 
-            Algorithm(1, 2);
-
-            return Redirect("/");
-        }
     }
 }
