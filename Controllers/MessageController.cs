@@ -30,19 +30,31 @@ namespace Match.Controllers
 
             List<Message> MsgsRecieved = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.RecieverId == (int)CurrUserId).ToList();
 
-            var CombinedMsgs = MsgsSent.Union(MsgsRecieved).OrderBy(m => m.SentAt);
+            List<Message> CombinedMsgs = MsgsSent.Union(MsgsRecieved).OrderBy(m => m.SentAt).ToList();
 
             List<int> Recievers = new List<int>();
             List<Message> Convos = new List<Message>();
 
-            foreach (var msg in CombinedMsgs) {
-                if(!Recievers.Contains(msg.SenderId) && msg.SenderId != CurrUserId) {
-                    Recievers.Add(msg.SenderId);
-                    Convos.Add(msg);
+            // foreach (var msg in CombinedMsgs) {
+            //     if(!Recievers.Contains(msg.SenderId) && msg.SenderId != CurrUserId) {
+            //         Recievers.Add(msg.SenderId);
+            //         Convos.Add(msg);
+            //     }
+            //     if(!Recievers.Contains(msg.RecieverId) && msg.RecieverId != CurrUserId) {
+            //         Recievers.Add(msg.RecieverId);
+            //         Convos.Add(msg);
+            //     }
+            // }
+            
+
+            for (var i = CombinedMsgs.Count() - 1; i > -1; i--) {
+                if(!Recievers.Contains(CombinedMsgs[i].SenderId) && CombinedMsgs[i].SenderId != CurrUserId) {
+                    Recievers.Add(CombinedMsgs[i].SenderId);
+                    Convos.Add(CombinedMsgs[i]);
                 }
-                if(!Recievers.Contains(msg.RecieverId) && msg.RecieverId != CurrUserId) {
-                    Recievers.Add(msg.RecieverId);
-                    Convos.Add(msg);
+                if(!Recievers.Contains(CombinedMsgs[i].RecieverId) && CombinedMsgs[i].RecieverId != CurrUserId) {
+                    Recievers.Add(CombinedMsgs[i].RecieverId);
+                    Convos.Add(CombinedMsgs[i]);
                 }
             }
 
@@ -71,15 +83,13 @@ namespace Match.Controllers
 
 
             if (MsgsSent.Count > 0 && MsgsRecieved.Count > 0) {
-                var CombinedMsgs = MsgsSent.Union(MsgsRecieved).OrderBy(m => m.SentAt);
+                var CombinedMsgs = MsgsSent.Union(MsgsRecieved).OrderByDescending(m => m.SentAt);
                 ViewBag.MsgsInConvo = CombinedMsgs;    
             } else if (MsgsSent.Count > 0) {
                 ViewBag.MsgsInConvo = MsgsSent;
             } else if (MsgsRecieved.Count > 0) {
                 ViewBag.MsgsInConvo = MsgsRecieved;
             }
-            
-
 
             ViewBag.Curr = CurrUserId;
             ViewBag.FriendId = friendId;

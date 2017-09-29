@@ -27,30 +27,36 @@
 
 <div class="body-container">
     <div class="body-stuff">
-    
-        <form action="/write_message/@ViewBag.FriendId" method="POST">
-            <p>Write something to @ViewBag.Friend.name:</p>
-            <textarea name="textContent"></textarea>
-            <button type="submit">Send</button>
-        </form>
-        <hr>
-
-        @{
-            if (@ViewBag.MsgsInConvo != null) {
-                foreach(var msg in @ViewBag.MsgsInConvo) {
-                    if(msg.SenderId == @ViewBag.Curr) {
-                        <div class="you">
-                            @msg.Content
-                        </div>
-                    } else {
-                        <div class="them">
-                            @msg.Content
-                        </div>
-                    }
-                }    
+        <div id="messageContainer" style="padding:20px;">
+            <form action="/write_message/@ViewBag.FriendId" method="POST">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="textarea1" name="textContent" class="materialize-textarea" data-length="200"></textarea>
+                    <label for="textarea1">Write something to @ViewBag.Friend.name:</label>
+                    <button id="messageSent" onclick="Materialize.toast('Message sent', 8000)" style="margin-left:85%" class="btn waves-effect waves-light red" type="submit">Send<i class="material-icons right">send</i></button>
+                </div>
+            </form>
+            <hr>
+        </div>
+        <div id="contentContainer" style="padding:20px;">
+            @{
+                if (@ViewBag.MsgsInConvo != null) {
+                    foreach(var msg in @ViewBag.MsgsInConvo) {
+                        if(msg.SenderId == @ViewBag.Curr) {
+                            <div class="you">
+                                <h5>@msg.Content</h5>
+                                <h6>@msg.SentAt.ToString("t")</h6>
+                            </div>
+                        } else {
+                            <div class="them">
+                                <h5>@msg.Content</h5>
+                                <h6>@msg.SentAt.ToString("t")</h6>
+                            </div>
+                        }
+                    }    
+                }
+                
             }
-            
-        }
-
+        </div>
     </div>
 </div>
