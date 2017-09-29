@@ -1,0 +1,10 @@
+
+@Model IEnumerable<Match.Models.User>
+
+<h1>TESTING</h1>
+
+@{
+    foreach (var friend in @ViewBag.Friends) {
+        <p>@friend.name</p>
+    }
+}
