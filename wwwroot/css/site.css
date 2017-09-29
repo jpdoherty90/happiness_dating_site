@@ -205,11 +205,53 @@
 
 .lover-cube{
     display: inline-block;
-    border: 1px solid black;
+    background: rgb(180,180,180);
     margin-right: 20px;
     padding: 5px;
+    border-radius: 7px;
+    text-align: center;
+}
+
+.lover-cube h5 a{
+    color: maroon;
+}
+
+.cube-contain{
+    display: inline-block;
 }
 
 .link-text{
     color: maroon;
+}
+
+.lover-hover{
+    display: inline-block;
+    background: rgb(60,60,60);
+    margin-right: 20px;
+    padding: 5px;
+    border-radius: 7px;
+    text-align: center;
+    position: relative;
+}
+
+.lover-hover img{
+    opacity: .4;
+}
+
+.lover-hover h6{
+    color: white;
+}
+
+.lover-hover h5{
+    color: #2857a3;
+}
+
+.lover-cube div{
+    display: none;
+}
+
+.hover-test{
+    position: absolute; 
+    top: 10px;
+    left: 15px; 
 }
