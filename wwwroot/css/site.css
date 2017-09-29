@@ -174,3 +174,14 @@
 #update-btn{
     margin-left: 70px;
 }
+
+.conversation {
+    /* text-align: center; */
+    padding-left: 25px;
+    margin: 25px;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    background: rgb(240,240,240);
+
+}
+

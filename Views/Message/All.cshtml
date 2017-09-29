@@ -1,10 +1,45 @@
 
-@Model IEnumerable<Match.Models.User>
+@model IEnumerable<Match.Models.User>
 
-<h1>TESTING</h1>
 
-@{
-    foreach (var friend in @ViewBag.Friends) {
-        <p>@friend.name</p>
+<div id="dash-nav">
+<div class="left-bar"><a href="dashboard" class="brand-logo">Sadness.com</a></div>
+<div class="middle-bar">
+<div class="center-help">
+<div class="hover-square"><a class="no-underline" href="profile">Profile</a></div>
+<div class="hover-square"><a class="no-underline" href="#">Matches</a></div>
+<div class="hover-square"><a class="no-underline" href="#">Messages</a></div>
+<div class="hover-square"><a class="no-underline" href="#">Likes</a></div>
+</div>
+</div>
+<div class="right-bar">
+<a class='dropdown-button' href='' data-activates='dropdownAccount'><i class="material-icons sad">sentiment_dissatisfied</i></a>
+<a class='dropdown-button' href='#' data-activates='dropdownSettings'><i class="material-icons sad">settings</i></a>
+</div>
+</div>
+
+<ul id='dropdownAccount' class='dropdown-content'>
+  <li><a href="#!">one</a></li>
+  <li><a href="#!">two</a></li>
+</ul>
+<ul id='dropdownSettings' class='dropdown-content'>
+  <li><a href="logout">Log out</a></li>
+</ul>
+
+<div class="body-container">
+  <div class="body-stuff">
+    @{
+        foreach (var convo in @ViewBag.AllConvos) {
+
+            <div class="conversation">
+                <a><p>Conversation between @convo.Sender.name and @convo.Reciever.name</p></a>
+                <p>@convo.Content</p>
+            </div>
+
+        }
     }
-}
+  </div>
+</div>
+
+
+</div>

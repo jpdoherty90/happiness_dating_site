@@ -47,12 +47,12 @@ namespace Match.Controllers
             //int CurrUserId = (int)HttpContext.Session.GetInt32("currentUser");
 
             //var MsgsSent = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.SenderId == (int)CurrUserId);
-            List<Message> MsgsSent = _context.Messages.Include(m => m.Reciever).OrderBy(m => m.SentAt).Where(msg => msg.SenderId == 1).ToList();
+            List<Message> MsgsSent = _context.Messages.Include(m => m.Sender).Include(m => m.Reciever).OrderBy(m => m.SentAt).Where(msg => msg.SenderId == 1).ToList();
             Console.WriteLine("MESSAGES SENT:");
             Console.WriteLine(MsgsSent);
 
             //var MsgsRecievd = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.RecieverId == (int)CurrUserId);
-            List<Message> MsgsRecieved = _context.Messages.Include(m => m.Sender).OrderBy(m => m.SentAt).Where(msg => msg.RecieverId == 1).ToList();
+            List<Message> MsgsRecieved = _context.Messages.Include(m => m.Sender).Include(m => m.Reciever).OrderBy(m => m.SentAt).Where(msg => msg.RecieverId == 1).ToList();
             Console.WriteLine("MESSAGES RECIEVED:");
             Console.WriteLine(MsgsRecieved);
 
@@ -70,30 +70,44 @@ namespace Match.Controllers
             // }
 
             List<int> Recievers = new List<int>();
+            List<Message> Convos = new List<Message>();
+
+            // foreach (var msg in CombinedMsgs) {
+            //     if(!Recievers.Contains(msg.SenderId)) {
+            //         Recievers.Add(msg.SenderId);
+            //     }
+            //     if(!Recievers.Contains(msg.RecieverId)) {
+            //         Recievers.Add(msg.RecieverId);
+            //     }
+            // }
+            //Recievers.RemoveAll(item => item == CurrUserId);
 
             foreach (var msg in CombinedMsgs) {
                 if(!Recievers.Contains(msg.SenderId)) {
                     Recievers.Add(msg.SenderId);
+                    Convos.Add(msg);
                 }
                 if(!Recievers.Contains(msg.RecieverId)) {
                     Recievers.Add(msg.RecieverId);
+                    Convos.Add(msg);
                 }
             }
-            //Recievers.RemoveAll(item => item == CurrUserId);
-            
-            Console.WriteLine(Recievers);
 
-            List<User> MessageFriends = new List<User>();
+            //List<User> MessageFriends = new List<User>();
 
-            for (var i = 0; i < Recievers.Count; i++) {
-                MessageFriends.Add(_context.Users.SingleOrDefault(u => u.UserId == Recievers[i]));
-            }
+            // for (var i = 0; i < Recievers.Count; i++) {
+            //     MessageFriends.Add(_context.Users.SingleOrDefault(u => u.UserId == Recievers[i]));
+            // }
 
-            ViewBag.Friends = MessageFriends;
+            // ViewBag.Friends = MessageFriends;
+            ViewBag.AllConvos = Convos;
 
             return View("All");
 
 
         }
+
+        [HttpGet]
+        
     }
 }
