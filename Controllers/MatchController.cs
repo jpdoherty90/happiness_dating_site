@@ -27,9 +27,23 @@ namespace Match.Controllers
         [Route("dashboard")]
         public IActionResult Dashboard()
         {
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
+
             int myId = (int)HttpContext.Session.GetInt32("currentUser");
             User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
             ViewBag.myUser = myUser;
+
+            var Loc = new Dictionary<string, object>();
+            WebRequest.GetZipDataAsync(myUser.zipcode, ApiResponse =>
+                {
+                    Loc = ApiResponse;
+                }
+            ).Wait();
+            ViewBag.city = Loc["city"];
+            ViewBag.state = Loc["state"];
+
             return View();
         }
 
@@ -64,7 +78,24 @@ namespace Match.Controllers
         [HttpGet]
         [Route("profile")]
         public IActionResult LoadUserProfile(IFormFile pic){
-            return View("Profile");
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
+
+            int myId = (int)HttpContext.Session.GetInt32("currentUser");
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            ViewBag.myUser = myUser;
+
+            var Loc = new Dictionary<string, object>();
+            WebRequest.GetZipDataAsync(myUser.zipcode, ApiResponse =>
+                {
+                    Loc = ApiResponse;
+                }
+            ).Wait();
+            ViewBag.city = Loc["city"];
+            ViewBag.state = Loc["state"];
+
+            return View("Dashboard");
         }
 
     }
