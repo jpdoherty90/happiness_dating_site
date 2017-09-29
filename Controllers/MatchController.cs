@@ -43,8 +43,8 @@ namespace Match.Controllers
                     Loc = ApiResponse;
                 }
             ).Wait();
-            ViewBag.city = Loc["city"];
-            ViewBag.state = Loc["state"];
+            // ViewBag.city = Loc["city"];
+            // ViewBag.state = Loc["state"];
 
             return View();
         }
@@ -94,8 +94,8 @@ namespace Match.Controllers
                     Loc = ApiResponse;
                 }
             ).Wait();
-            ViewBag.city = Loc["city"];
-            ViewBag.state = Loc["state"];
+            // ViewBag.city = Loc["city"];
+            // ViewBag.state = Loc["state"];
 
             return View("Dashboard");
         }
@@ -115,8 +115,8 @@ namespace Match.Controllers
                     Loc = ApiResponse;
                 }
             ).Wait();
-            ViewBag.city = Loc["city"];
-            ViewBag.state = Loc["state"];
+            // ViewBag.city = Loc["city"];
+            // ViewBag.state = Loc["state"];
 
             return View("Profile");
         }

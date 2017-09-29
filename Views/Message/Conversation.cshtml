@@ -3,13 +3,13 @@
 
 
 <div id="dash-nav">
-<div class="left-bar"><a href="dashboard" class="brand-logo">Sadness.com</a></div>
+<div class="left-bar"><a href="/dashboard" class="brand-logo">Do You Even Pull?</a></div>
 <div class="middle-bar">
 <div class="center-help">
-<div class="hover-square"><a class="no-underline" href="profile">Profile</a></div>
-<div class="hover-square"><a class="no-underline" href="#">Matches</a></div>
-<div class="hover-square"><a class="no-underline" href="#">Messages</a></div>
-<div class="hover-square"><a class="no-underline" href="#">Likes</a></div>
+<div class="hover-square"><a class="no-underline" href="/profile">Profile</a></div>
+<div class="hover-square"><a class="no-underline" href="/lovers">Matches</a></div>
+<div class="hover-square"><a class="no-underline" href="/all">Messages</a></div>
+<div class="hover-square"><a class="no-underline" href="#/likes">Likes</a></div>
 </div>
 </div>
 <div class="right-bar">
@@ -23,15 +23,15 @@
   <li><a href="#!">two</a></li>
 </ul>
 <ul id='dropdownSettings' class='dropdown-content'>
-  <li><a href="logout">Log out</a></li>
+  <li><a href="/logout">Log out</a></li>
 </ul>
 
 <div class="body-container">
     <div class="body-stuff">
     
-        <form action="write_message/@ViewBag.FriendId" method="POST">
+        <form action="/write_message/@ViewBag.FriendId" method="POST">
             <p>Write something to @ViewBag.Friend.name:</p>
-            <textarea></textarea>
+            <textarea name="textContent"></textarea>
             <button type="submit">Send</button>
         </form>
         <hr>
@@ -41,11 +41,11 @@
                 foreach(var msg in @ViewBag.MsgsInConvo) {
                     if(msg.SenderId == @ViewBag.Curr) {
                         <div class="you">
-                            msg.Content
+                            @msg.Content
                         </div>
                     } else {
                         <div class="them">
-                            msg.Content
+                            @msg.Content
                         </div>
                     }
                 }    

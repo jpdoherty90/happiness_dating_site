@@ -46,17 +46,16 @@ namespace Match.Controllers
                 }
             }
 
-            //List<User> MessageFriends = new List<User>();
+            List<User> MessageFriends = new List<User>();
 
-            // for (var i = 0; i < Recievers.Count; i++) {
-            //     MessageFriends.Add(_context.Users.SingleOrDefault(u => u.UserId == Recievers[i]));
-            // }
+            for (var i = 0; i < Recievers.Count; i++) {
+                MessageFriends.Add(_context.Users.SingleOrDefault(u => u.UserId == Recievers[i]));
+            }
 
-            // ViewBag.Friends = MessageFriends;
+            ViewBag.Friends = MessageFriends;
             ViewBag.AllConvos = Convos;
 
             return View("All");
-
 
         }
 
@@ -87,6 +86,25 @@ namespace Match.Controllers
             ViewBag.Friend = _context.Users.SingleOrDefault(u => u.UserId == friendId);
 
             return View("Conversation");
+        }
+
+        [HttpPost]
+        [Route("write_message/{friendId}")]
+        public IActionResult Write(int friendId, string textContent) {
+
+            int CurrUserId = (int)HttpContext.Session.GetInt32("currentUser");
+
+            Message newMsg = new Message{
+                Content = textContent,
+                SenderId = CurrUserId,
+                RecieverId = friendId,
+                SentAt = DateTime.Now
+            };
+
+            _context.Messages.Add(newMsg);
+            _context.SaveChanges();
+
+            return Redirect($"/conversation/{friendId}");
         }
 
     }

@@ -6,10 +6,10 @@
 <div class="left-bar"><a href="dashboard" class="brand-logo">Sadness.com</a></div>
 <div class="middle-bar">
 <div class="center-help">
-<div class="hover-square"><a class="no-underline" href="profile">Profile</a></div>
-<div class="hover-square"><a class="no-underline" href="#">Matches</a></div>
-<div class="hover-square"><a class="no-underline" href="#">Messages</a></div>
-<div class="hover-square"><a class="no-underline" href="#">Likes</a></div>
+<div class="hover-square"><a class="no-underline" href="/profile">Profile</a></div>
+<div class="hover-square"><a class="no-underline" href="/lovers">Matches</a></div>
+<div class="hover-square"><a class="no-underline" href="/all">Messages</a></div>
+<div class="hover-square"><a class="no-underline" href="/likes">Likes</a></div>
 </div>
 </div>
 <div class="right-bar">
@@ -29,18 +29,13 @@
 <div class="body-container">
   <div class="body-stuff">
     @{
-        foreach (var convo in @ViewBag.AllConvos) {
-
-            <div class="conversation">
-                <a><p>Conversation between @convo.Sender.name and @convo.Reciever.name</p></a>
-                <p>@convo.Content</p>
-                
-            </div>
-
-        }
+      for (var i = 0; i < @ViewBag.AllConvos.Count; i++) {
+        <div class="conversation">
+            <a href="/conversation/@ViewBag.Friends[i].UserId"><p>Your conversation with @ViewBag.Friends[i].name</p></a>
+            <p>@ViewBag.AllConvos[i].Content</p>
+        </div>
+      }
     }
   </div>
 </div>
-
-
 </div>
