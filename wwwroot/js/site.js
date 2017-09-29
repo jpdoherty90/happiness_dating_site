@@ -103,4 +103,9 @@ $(document).ready(function(){
     $("#submitInterestForm").click(function(){
         $("#interestForm").submit();        
     });
+
+    $("#update-btn").click(function(){
+        $(this).delay(500).hide(0);
+        $("#shh").delay(500).show(0);
+    });
 })
