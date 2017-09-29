@@ -176,6 +176,17 @@ namespace Match.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("likers")]
+        public IActionResult Likers()
+        {
+            int myId = (int)HttpContext.Session.GetInt32("currentUser");
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            List<Like> MyLikers = _context.Likes.Include(user => user.PersonLiking).Where(like=> like.PersonLikedId == myId).ToList();
+            ViewBag.myLikers = MyLikers;
+            return View();
+        }
+
     }
 
     public class MatchHelper {
