@@ -29,6 +29,7 @@
       <div class="col-md-8"><h1>@ViewBag.myUser.name</h1>
         <h5>@ViewBag.city, @ViewBag.state</h5>
         <h5>@ViewBag.myUser.age years old</h5>
+        <h6>@ViewBag.myUser.bio</h6>
         @if(@ViewBag.liking == false) {
             <a class="link-text" href="/proflike/@ViewBag.myUser.UserId"><button>Like</button></a>
         }

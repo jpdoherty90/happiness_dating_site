@@ -4,7 +4,7 @@
 <div class="center-help">
 <div class="hover-square"><a class="no-underline" href="/profile">Profile</a></div>
 <div class="hover-square"><a class="no-underline" href="/lovers">Matches</a></div>
-<div class="hover-square"><a class="no-underline" href="#">Messages</a></div>
+<div class="hover-square"><a class="no-underline" href="/all">Messages</a></div>
 <div class="hover-square"><a class="no-underline dropdown-button" data-activates='likeTypes' href="">Likes</a></div>
 </div>
 </div>
@@ -23,6 +23,12 @@
 
 <div class="body-container">
   <div class="body-stuff2">
+      @{
+          if (@ViewBag.myLovers.Count == 0) {
+              <h4>We are so sorry! It would appear you will die alone...Maybe try <a href="http://www.uglyschmucks.com/" target="_blank">here</a>?</h4>
+          }
+      }
+
     @{
         foreach(var match in @ViewBag.myLovers){
             string percentStr = @match.percentage + "% Match";
