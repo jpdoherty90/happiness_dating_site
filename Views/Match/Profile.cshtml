@@ -1,5 +1,5 @@
 <div id="dash-nav">
-<div class="left-bar"><a href="dashboard" class="maroon brand-logo">Sadness.com</a></div>
+<div class="left-bar"><a href="dashboard" class="maroon brand-logo">Do You Even Pull?</a></div>
 <div class="middle-bar">
 <div class="center-help">
 <div class="hover-square"><a class="no-underline" href="/profile">Profile</a></div>
@@ -29,7 +29,13 @@
       <div class="col-md-8"><h1>@ViewBag.myUser.name</h1>
         <h5>@ViewBag.city, @ViewBag.state</h5>
         <h5>@ViewBag.myUser.age years old</h5>
-        <a class="link-text" href="/like/@ViewBag.myUser.UserId"><button>Like</button></a><a class="link-text" href="/conversation/@ViewBag.myUser.UserId"><button>Message</button></a>
+        @if(@ViewBag.liking == false) {
+            <a class="link-text" href="/proflike/@ViewBag.myUser.UserId"><button>Like</button></a>
+        }
+        @if(@ViewBag.liking == true) {
+            <a class="link-text" href="/profunlike/@ViewBag.myUser.UserId"><button>Unlike</button></a>
+        }
+        <a class="link-text" href="/conversation/@ViewBag.myUser.UserId"><button>Message</button></a>
       </div>
     </div>
   

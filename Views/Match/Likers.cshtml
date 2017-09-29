@@ -1,5 +1,5 @@
 <div id="dash-nav">
-<div class="left-bar"><a href="dashboard" class="maroon brand-logo">Sadness.com</a></div>
+<div class="left-bar"><a href="dashboard" class="maroon brand-logo">Do You Even Pull?</a></div>
 <div class="middle-bar">
 <div class="center-help">
 <div class="hover-square"><a class="no-underline" href="/profile">Profile</a></div>
@@ -25,10 +25,22 @@
   <div class="body-stuff2">
     @{
         foreach(var like in @ViewBag.myLikers){
+            bool liking = false;
             <div class="lover-cube">
                 <img id="profP" src="@Url.Content(like.PersonLiking.profile_picture)"/>
                 <p><a class="link-text" href="/lovers/@like.PersonLikingId">@like.PersonLiking.name</a>, @like.PersonLiking.age years old</p>
-                <a href="/unlike/@like.PersonLikingId" class="link-text"><button>Like</button></a><a class="link-text" href="/conversation/@like.PersonLikingId"><button>Message</button></a>
+                @foreach(var likeCheck in @ViewBag.AllMyLikes) {
+                    if (likeCheck.PersonLikedId == @like.PersonLikingId){
+                        liking = true;
+                    }
+                }
+                @if(@liking == true) {
+                    <a href="/unlike/@like.PersonLikingId" class="link-text"><button>Unike</button></a>
+                }
+                @if(@liking == false) {
+                    <a href="/like/@like.PersonLikingId" class="link-text"><button>Like</button></a>
+                }
+                <a class="link-text" href="/conversation/@like.PersonLikingId"><button>Message</button></a>
             </div>
         }
     }
