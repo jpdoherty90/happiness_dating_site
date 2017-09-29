@@ -1,40 +1,49 @@
 <div id="dash-nav">
-      <div class="left-bar"><a href="dashboard" class="brand-logo">Sadness.com</a></div>
-      <div class="middle-bar">
-        <div class="center-help">
-          <div class="hover-square"><a class="no-underline" href="profile">Profile</a></div>
-          <div class="hover-square"><a class="no-underline" href="#">Matches</a></div>
-          <div class="hover-square"><a class="no-underline" href="#">Messages</a></div>
-          <div class="hover-square"><a class="no-underline" href="#">Likes</a></div>
-        </div>
-      </div>
-      <div class="right-bar">
-        <a class='dropdown-button' href='' data-activates='dropdownAccount'><i class="material-icons sad">sentiment_dissatisfied</i></a>
-        <a class='dropdown-button' href='#' data-activates='dropdownSettings'><i class="material-icons sad">settings</i></a>
-      </div>
-  </div>
-
-  <ul id='dropdownAccount' class='dropdown-content'>
-    <li><a href="#!">one</a></li>
-    <li><a href="#!">two</a></li>
-  </ul>
-  <ul id='dropdownSettings' class='dropdown-content'>
-    <li><a href="logout">Log out</a></li>
-  </ul>
-
-<!-- <div class="weird">
-  <h1>SOSOSOS</h1>
-  <form action="/testing" method="post" enctype="multipart/form-data">
-    <input type="file" name="pic" accept="image/*">
-    <input type="submit">
-  </form>
+<div class="left-bar"><a href="dashboard" class="brand-logo">Sadness.com</a></div>
+<div class="middle-bar">
+<div class="center-help">
+<div class="hover-square"><a class="no-underline" href="profile">Profile</a></div>
+<div class="hover-square"><a class="no-underline" href="#">Matches</a></div>
+<div class="hover-square"><a class="no-underline" href="#">Messages</a></div>
+<div class="hover-square"><a class="no-underline" href="#">Likes</a></div>
 </div>
-@{
-  if(@ViewBag.test != null) {
-    <img src="data:image;base64,@System.Convert.ToBase64String(@ViewBag.test)" alt="test"/>
-    <p>Test?</p>
-  }
-} -->
+</div>
+<div class="right-bar">
+<a class='dropdown-button' href='' data-activates='dropdownAccount'><i class="material-icons sad">sentiment_dissatisfied</i></a>
+<a class='dropdown-button' href='#' data-activates='dropdownSettings'><i class="material-icons sad">settings</i></a>
+</div>
+</div>
+
+<ul id='dropdownAccount' class='dropdown-content'>
+  <li><a href="#!">one</a></li>
+  <li><a href="#!">two</a></li>
+</ul>
+<ul id='dropdownSettings' class='dropdown-content'>
+  <li><a href="logout">Log out</a></li>
+</ul>
+<div class="body-container">
+  <div class="body-stuff">
+
+    <div class="row">
+      <div class="col-md-4"><div class="frame"><img id="profP" src="@Url.Content(ViewBag.myUser.profile_picture)"/></div>
+        <button class="waves-effect waves-teal btn-flat" id="update-btn">Update Photo?</button>
+      </div>
+      <div class="col-md-8"><h1>@ViewBag.myUser.name</h1></div>
+    </div>
+  
+  
+  <form id="shh" action="/testing" method="post" enctype="multipart/form-data">
+    <input type="file" name="pic" value="Update Photo" accept="image/*">
+    <input type="submit" value="Select">
+  </form>
+
+
+
+
+
+</div>
+
+</div>
 
 
         

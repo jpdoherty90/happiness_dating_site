@@ -195,4 +195,8 @@ $(document).ready(function(){
     $("#submitInterestFormP").click(function(){
         $("#preferencesForm").submit();                
     });
+    $("#update-btn").click(function(){
+        $(this).delay(500).hide(0);
+        $("#shh").delay(500).show(0);
+    });
 })

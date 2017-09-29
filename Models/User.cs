@@ -14,18 +14,22 @@ namespace Match.Models
         public int age { get; set; }
         public string gender { get; set; }
         public string seeking { get; set; }
-        public byte[] profile_picture {get; set;}
+        public string profile_picture {get; set;}
+
         public int PreferenceId { get; set; }
         public Preference Preference {get; set;}
 
         [InverseProperty("PersonLiking")]
         public List<Like> likes { get; set; }
+
         [InverseProperty("PersonLiked")]
         public List<Like> likers { get; set; }
         public List<User> Matches { get; set; }
         public List<Percentage> MatchPercentages { get; set; }
+
         [InverseProperty("Sender")]
         public List<Message> messagesSent { get; set; }
+        
         [InverseProperty("Reciever")]
         public List<Message> messagesRecieved { get; set; }
         public string salary { get; set; }
@@ -63,7 +67,7 @@ namespace Match.Models
             religion = "";
             diet = "";
             pets = "";
-
+            profile_picture = "https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236_960_720.png";
         }
     }
 }

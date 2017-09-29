@@ -10,7 +10,7 @@ namespace Match.Models
 
         public int PercentageId { get; set; }
         public int Percent { get; set; }
-
+        
 
     }
     
