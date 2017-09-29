@@ -67,7 +67,8 @@ namespace Match.Models
             religion = "";
             diet = "";
             pets = "";
-            profile_picture = "https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236_960_720.png";
+            profile_picture = "http://www.lulusrepose.com/images/icons/avatar.jpg";
         }
+
     }
 }
