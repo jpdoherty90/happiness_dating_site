@@ -33,19 +33,22 @@
             bool liking = false;
             <div class="lover-cube">
                 <img id="profP" src="@Url.Content(like.PersonLiking.profile_picture)"/>
-                <p><a class="link-text" href="/lovers/@like.PersonLikingId">@like.PersonLiking.name</a>, @like.PersonLiking.age years old</p>
+                <h5><a href="/lovers/@like.PersonLikingId">@like.PersonLiking.name</a></h5>
+                <h6>@like.PersonLiking.age years old</h6>
                 @foreach(var likeCheck in @ViewBag.AllMyLikes) {
                     if (likeCheck.PersonLikedId == @like.PersonLikingId){
                         liking = true;
                     }
                 }
+                <div class="hover-test">
                 @if(@liking == true) {
-                    <a href="/unlike/@like.PersonLikingId" class="link-text"><button>Unike</button></a>
+                    <a href="/unlike/@like.PersonLikingId" class="link-text"><i class="material-icons sad maroon">favorite</i></a>
                 }
                 @if(@liking == false) {
-                    <a href="/like/@like.PersonLikingId" class="link-text"><button>Like</button></a>
+                    <a href="/like/@like.PersonLikingId" class="link-text"><i class="material-icons sad maroon">favorite_border</i></a>
                 }
-                <a class="link-text" href="/conversation/@like.PersonLikingId"><button>Message</button></a>
+                <a class="link-text" href="/conversation/@like.PersonLikingId"><i class="material-icons sad maroon">mail</i></a>
+                </div>
             </div>
         }
     }

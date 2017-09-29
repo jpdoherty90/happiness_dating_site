@@ -31,12 +31,12 @@
         <h5>@ViewBag.myUser.age years old</h5>
         <h6>@ViewBag.myUser.bio</h6>
         @if(@ViewBag.liking == false) {
-            <a class="link-text" href="/proflike/@ViewBag.myUser.UserId"><button>Like</button></a>
+            <a class="link-text" href="/proflike/@ViewBag.myUser.UserId"><i class="material-icons sad maroon">favorite_border</i></a>
         }
         @if(@ViewBag.liking == true) {
-            <a class="link-text" href="/profunlike/@ViewBag.myUser.UserId"><button>Unlike</button></a>
+            <a class="link-text" href="/profunlike/@ViewBag.myUser.UserId"><i class="material-icons sad maroon">favorite</i></a>
         }
-        <a class="link-text" href="/conversation/@ViewBag.myUser.UserId"><button>Message</button></a>
+        <a class="link-text" href="/conversation/@ViewBag.myUser.UserId"><i class="material-icons sad maroon">mail</i></a>
       </div>
     </div>
   
