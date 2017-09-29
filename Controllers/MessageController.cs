@@ -23,6 +23,9 @@ namespace Match.Controllers
         [HttpGet]
         [Route("all")]
         public IActionResult All() {
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
 
             int CurrUserId = (int)HttpContext.Session.GetInt32("currentUser");
 
@@ -74,6 +77,9 @@ namespace Match.Controllers
         [HttpGet]
         [Route("conversation/{friendId}")]
         public IActionResult Conversation(int friendId) {
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
 
             int CurrUserId = (int)HttpContext.Session.GetInt32("currentUser");
 

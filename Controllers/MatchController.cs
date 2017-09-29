@@ -80,6 +80,7 @@ namespace Match.Controllers
         [HttpGet]
         [Route("profile")]
         public IActionResult LoadUserProfile(IFormFile pic){
+            
             if (HttpContext.Session.GetInt32("currentUser") == null){
                 return RedirectToAction("Index", "Home");
             }
@@ -103,10 +104,10 @@ namespace Match.Controllers
         [HttpGet]
         [Route("lovers/{myId}")]
         public IActionResult LoadLoverProfile(int myId){
-            int checkId = (int)HttpContext.Session.GetInt32("currentUser");
             if (HttpContext.Session.GetInt32("currentUser") == null){
                 return RedirectToAction("Index", "Home");
             }
+            int checkId = (int)HttpContext.Session.GetInt32("currentUser");
             User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
             ViewBag.myUser = myUser;
             List<Like> myLikes = _context.Likes.Where(like => like.PersonLikedId == myId && like.PersonLikingId == checkId).ToList();
@@ -132,6 +133,9 @@ namespace Match.Controllers
         [Route("lovers")]
         public IActionResult Matches()
         {
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
             int myId = (int)HttpContext.Session.GetInt32("currentUser");
             User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
             ViewBag.user = myUser;
@@ -173,6 +177,7 @@ namespace Match.Controllers
         [HttpGet]
         [Route("like/{myId}")]
         public IActionResult LikeLover(int myId){
+            
             int currentId = (int)HttpContext.Session.GetInt32("currentUser");
             Like newLike = new Like{
                 PersonLikingId = currentId,
@@ -222,6 +227,9 @@ namespace Match.Controllers
         [Route("likes")]
         public IActionResult Likes()
         {
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
             int myId = (int)HttpContext.Session.GetInt32("currentUser");
             User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
             List<Like> MyLikes = _context.Likes.Include(user => user.PersonLiked).Where(like=> like.PersonLikingId == myId).ToList();
@@ -233,6 +241,9 @@ namespace Match.Controllers
         [Route("likers")]
         public IActionResult Likers()
         {
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
             int myId = (int)HttpContext.Session.GetInt32("currentUser");
             User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
             List<Like> MyLikers = _context.Likes.Include(user => user.PersonLiking).Where(like=> like.PersonLikedId == myId).ToList();
