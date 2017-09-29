@@ -24,70 +24,23 @@ namespace Match.Controllers
         [Route("all")]
         public IActionResult All() {
 
-            Message FakeMsg1 = new Message
-            {
-                Content = "What's you're number?",
-                SenderId = 1, 
-                RecieverId = 2,
-                SentAt = DateTime.Now
-            };
+            int CurrUserId = (int)HttpContext.Session.GetInt32("currentUser");
 
-            Message FakeMsg2 = new Message
-            {
-                Content = "Why don't I just come over?",
-                SenderId = 2, 
-                RecieverId = 1,
-                SentAt = DateTime.Now
-            };
+            List<Message> MsgsSent = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.SenderId == (int)CurrUserId).ToList();
 
-            _context.Messages.Add(FakeMsg1);
-            _context.Messages.Add(FakeMsg2);
-            _context.SaveChanges();
-
-            //int CurrUserId = (int)HttpContext.Session.GetInt32("currentUser");
-
-            //var MsgsSent = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.SenderId == (int)CurrUserId);
-            List<Message> MsgsSent = _context.Messages.Include(m => m.Sender).Include(m => m.Reciever).OrderBy(m => m.SentAt).Where(msg => msg.SenderId == 1).ToList();
-            Console.WriteLine("MESSAGES SENT:");
-            Console.WriteLine(MsgsSent);
-
-            //var MsgsRecievd = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.RecieverId == (int)CurrUserId);
-            List<Message> MsgsRecieved = _context.Messages.Include(m => m.Sender).Include(m => m.Reciever).OrderBy(m => m.SentAt).Where(msg => msg.RecieverId == 1).ToList();
-            Console.WriteLine("MESSAGES RECIEVED:");
-            Console.WriteLine(MsgsRecieved);
+            List<Message> MsgsRecieved = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.RecieverId == (int)CurrUserId).ToList();
 
             var CombinedMsgs = MsgsSent.Union(MsgsRecieved).OrderBy(m => m.SentAt);
-
-
-            // foreach (var msg in MsgsSent) {
-            //     Console.WriteLine("NEXT MESSAGE:");
-            //     Console.WriteLine(msg.Content);
-            // }
-
-            // foreach (var msg in MsgsRecieved) {
-            //     Console.WriteLine("NEXT MESSAGE:");
-            //     Console.WriteLine(msg.Content);
-            // }
 
             List<int> Recievers = new List<int>();
             List<Message> Convos = new List<Message>();
 
-            // foreach (var msg in CombinedMsgs) {
-            //     if(!Recievers.Contains(msg.SenderId)) {
-            //         Recievers.Add(msg.SenderId);
-            //     }
-            //     if(!Recievers.Contains(msg.RecieverId)) {
-            //         Recievers.Add(msg.RecieverId);
-            //     }
-            // }
-            //Recievers.RemoveAll(item => item == CurrUserId);
-
             foreach (var msg in CombinedMsgs) {
-                if(!Recievers.Contains(msg.SenderId)) {
+                if(!Recievers.Contains(msg.SenderId) && msg.SenderId != CurrUserId) {
                     Recievers.Add(msg.SenderId);
                     Convos.Add(msg);
                 }
-                if(!Recievers.Contains(msg.RecieverId)) {
+                if(!Recievers.Contains(msg.RecieverId) && msg.RecieverId != CurrUserId) {
                     Recievers.Add(msg.RecieverId);
                     Convos.Add(msg);
                 }
@@ -107,8 +60,5 @@ namespace Match.Controllers
 
         }
 
-        // [HttpGet]
-        
-        // [HttpGet]
     }
 }
