@@ -1,26 +1,26 @@
 <div id="dash-nav">
-<div class="left-bar"><a href="/dashboard" class="brand-logo">Sadness.com</a></div>
+<div class="left-bar"><a href="dashboard" class="maroon brand-logo">Do You Even Pull?</a></div>
 <div class="middle-bar">
 <div class="center-help">
 <div class="hover-square"><a class="no-underline" href="/profile">Profile</a></div>
 <div class="hover-square"><a class="no-underline" href="/lovers">Matches</a></div>
 <div class="hover-square"><a class="no-underline" href="#">Messages</a></div>
-<div class="hover-square"><a class="no-underline" href="/likes">Likes</a></div>
+<div class="hover-square"><a class="no-underline dropdown-button" data-activates='likeTypes' href="">Likes</a></div>
 </div>
 </div>
 <div class="right-bar">
-<a class='dropdown-button' href='' data-activates='dropdownAccount'><i class="material-icons sad">sentiment_dissatisfied</i></a>
-<a class='dropdown-button' href='#' data-activates='dropdownSettings'><i class="material-icons sad">settings</i></a>
+<a class='dropdown-button' href='' data-activates='dropdownAccount'><i class="material-icons sad maroon">sentiment_dissatisfied</i></a>
+<a class='dropdown-button' href='#' data-activates='dropdownSettings'><i class="material-icons sad maroon">settings</i></a>
 </div>
 </div>
-
-<ul id='dropdownAccount' class='dropdown-content'>
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-</ul>
 <ul id='dropdownSettings' class='dropdown-content'>
   <li><a href="logout">Log out</a></li>
 </ul>
+<ul id='likeTypes' class='dropdown-content'>
+  <li><a href="/likes">My Likes</a></li>
+  <li><a href="/likers">My Likers</a></li>
+</ul>
+
 <div class="body-container">
   <div class="body-stuff">
 
@@ -29,7 +29,13 @@
       <div class="col-md-8"><h1>@ViewBag.myUser.name</h1>
         <h5>@ViewBag.city, @ViewBag.state</h5>
         <h5>@ViewBag.myUser.age years old</h5>
-        <a class="link-text" href="/like/@ViewBag.myUser.UserId"><button>Like</button></a><a class="link-text" href="/conversation/@ViewBag.myUser.UserId"><button>Message</button></a>
+        @if(@ViewBag.liking == false) {
+            <a class="link-text" href="/proflike/@ViewBag.myUser.UserId"><button>Like</button></a>
+        }
+        @if(@ViewBag.liking == true) {
+            <a class="link-text" href="/profunlike/@ViewBag.myUser.UserId"><button>Unlike</button></a>
+        }
+        <a class="link-text" href="/conversation/@ViewBag.myUser.UserId"><button>Message</button></a>
       </div>
     </div>
   

@@ -24,11 +24,23 @@
 <div class="body-container">
   <div class="body-stuff2">
     @{
-        foreach(var like in @ViewBag.myLikes){
+        foreach(var like in @ViewBag.myLikers){
+            bool liking = false;
             <div class="lover-cube">
-                <img id="profP" src="@Url.Content(like.PersonLiked.profile_picture)"/>
-                <p><a class="link-text" href="/lovers/@like.PersonLikedId">@like.PersonLiked.name</a>, @like.PersonLiked.age years old</p>
-                <a href="/unlike/@like.PersonLikedId" class="link-text"><button>Unlike</button></a><a class="link-text" href="/conversation/@like.PersonLikedId"><button>Message</button></a>
+                <img id="profP" src="@Url.Content(like.PersonLiking.profile_picture)"/>
+                <p><a class="link-text" href="/lovers/@like.PersonLikingId">@like.PersonLiking.name</a>, @like.PersonLiking.age years old</p>
+                @foreach(var likeCheck in @ViewBag.AllMyLikes) {
+                    if (likeCheck.PersonLikedId == @like.PersonLikingId){
+                        liking = true;
+                    }
+                }
+                @if(@liking == true) {
+                    <a href="/unlike/@like.PersonLikingId" class="link-text"><button>Unike</button></a>
+                }
+                @if(@liking == false) {
+                    <a href="/like/@like.PersonLikingId" class="link-text"><button>Like</button></a>
+                }
+                <a class="link-text" href="/conversation/@like.PersonLikingId"><button>Message</button></a>
             </div>
         }
     }
