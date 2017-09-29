@@ -22,19 +22,15 @@
 </ul>
 
 <div class="body-container">
-  <div class="body-stuff">
-
-    <div class="row">
-      <div class="col-md-4"><div class="frame"><img id="profP" src="@Url.Content(ViewBag.myUser.profile_picture)"/></div></div>
-      <div class="col-md-8"><h1>@ViewBag.myUser.name</h1>
-        <h5>@ViewBag.city, @ViewBag.state</h5>
-        <h5>@ViewBag.myUser.age years old</h5>
-        <a class="link-text" href="/like/@ViewBag.myUser.UserId"><button>Like</button></a><a class="link-text" href="/conversation/@ViewBag.myUser.UserId"><button>Message</button></a>
-      </div>
-    </div>
-  
-  
-  <form id="shh" action="/testing" method="post" enctype="multipart/form-data">
-    <input type="file" name="pic" value="Update Photo" accept="image/*">
-    <input type="submit" value="Select">
-  </form>
+  <div class="body-stuff2">
+    @{
+        foreach(var like in @ViewBag.myLikers){
+            <div class="lover-cube">
+                <img id="profP" src="@Url.Content(like.PersonLiking.profile_picture)"/>
+                <p><a class="link-text" href="/lovers/@like.PersonLikingId">@like.PersonLiking.name</a>, @like.PersonLiking.age years old</p>
+                <a href="/unlike/@like.PersonLikingId" class="link-text"><button>Like</button></a><a class="link-text" href="/conversation/@like.PersonLikingId"><button>Message</button></a>
+            </div>
+        }
+    }
+  </div>
+</div>

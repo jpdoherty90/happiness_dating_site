@@ -60,5 +60,34 @@ namespace Match.Controllers
 
         }
 
+        [HttpGet]
+        [Route("conversation/{friendId}")]
+        public IActionResult Conversation(int friendId) {
+
+            int CurrUserId = (int)HttpContext.Session.GetInt32("currentUser");
+
+            List<Message> MsgsSent = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.SenderId == (int)CurrUserId).Where(msg => msg.RecieverId == friendId).ToList();
+
+            List<Message> MsgsRecieved = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.RecieverId == (int)CurrUserId).Where(msg => msg.SenderId == friendId).ToList();
+
+
+            if (MsgsSent.Count > 0 && MsgsRecieved.Count > 0) {
+                var CombinedMsgs = MsgsSent.Union(MsgsRecieved).OrderBy(m => m.SentAt);
+                ViewBag.MsgsInConvo = CombinedMsgs;    
+            } else if (MsgsSent.Count > 0) {
+                ViewBag.MsgsInConvo = MsgsSent;
+            } else if (MsgsRecieved.Count > 0) {
+                ViewBag.MsgsInConvo = MsgsRecieved;
+            }
+            
+
+
+            ViewBag.Curr = CurrUserId;
+            ViewBag.FriendId = friendId;
+            ViewBag.Friend = _context.Users.SingleOrDefault(u => u.UserId == friendId);
+
+            return View("Conversation");
+        }
+
     }
 }

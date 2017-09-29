@@ -27,20 +27,31 @@
 </ul>
 
 <div class="body-container">
-  <div class="body-stuff">
-    @{
-        foreach (var convo in @ViewBag.AllConvos) {
+    <div class="body-stuff">
+    
+        <form action="write_message/@ViewBag.FriendId" method="POST">
+            <p>Write something to @ViewBag.Friend.name:</p>
+            <textarea></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <hr>
 
-            <div class="conversation">
-                <a><p>Conversation between @convo.Sender.name and @convo.Reciever.name</p></a>
-                <p>@convo.Content</p>
-                
-            </div>
-
+        @{
+            if (@ViewBag.MsgsInConvo != null) {
+                foreach(var msg in @ViewBag.MsgsInConvo) {
+                    if(msg.SenderId == @ViewBag.Curr) {
+                        <div class="you">
+                            msg.Content
+                        </div>
+                    } else {
+                        <div class="them">
+                            msg.Content
+                        </div>
+                    }
+                }    
+            }
+            
         }
-    }
-  </div>
-</div>
 
-
+    </div>
 </div>
