@@ -186,7 +186,7 @@
             </div>
             <div class="row">
                 <div class="col s12">
-                    <label style="color: white;font-size: 25px;">Choose your closest ethnicity</label>
+                    <label style="color: white;font-size:25px;margin-bottom:100px;margin-top:100px;">Choose your closest ethnicity</label>
                     <p>
                         <input value="Caucasian" name="ethnicity" type="radio" id="white" />
                         <label for="white" style="color: white;font-size: 25px;">Caucasian</label>
@@ -258,7 +258,13 @@
                 <div class="determinate" style="width: 100%"></div>
             </div>
             <h2 style="margin-top:100px;">Thank for letting us know about you!</h2>
-            <h2 style="margin-bottom:100px;">Now lets choose what your looking for!</h2>
+            <h4 style="margin-bottom:100px;">Now just add quick bio about yourself!</h4>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea asp-for="bio" id="textarea1" name="userBio" class="materialize-textarea" data-length="120"></textarea>
+                    <label style="color: white;font-size: 25px;" for="textarea1">Bio</label>
+                </div>
+            </div>
             <a style="margin-top:50px" id="submitInterestForm" class="waves-effect waves-light btn-large blue"><i class="material-icons right">fast_forward</i>Continue</a>
         </div>
     </form>

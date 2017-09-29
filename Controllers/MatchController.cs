@@ -100,6 +100,27 @@ namespace Match.Controllers
             return View("Dashboard");
         }
 
+        [HttpGet]
+        [Route("lovers/{myId}")]
+        public IActionResult LoadLoverProfile(int myId){
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            ViewBag.myUser = myUser;
+
+            var Loc = new Dictionary<string, object>();
+            WebRequest.GetZipDataAsync(myUser.zipcode, ApiResponse =>
+                {
+                    Loc = ApiResponse;
+                }
+            ).Wait();
+            ViewBag.city = Loc["city"];
+            ViewBag.state = Loc["state"];
+
+            return View("Profile");
+        }
+
 
         [HttpGet]
         [Route("lovers")]
@@ -108,8 +129,58 @@ namespace Match.Controllers
             int myId = (int)HttpContext.Session.GetInt32("currentUser");
             User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
             ViewBag.user = myUser;
+            List<LoveMatch> MyMatches = _context.Matches.Where(match=> match.User1Id == myId || match.User2Id == myId).OrderByDescending(match => match.percentage).ToList();
+            List<User> AllOtherUsers = _context.Users.Where(user => user.UserId != myId).ToList();
+            List<MatchHelper> LoveList = new List<MatchHelper>();
+            foreach(var match in MyMatches){
+                if (match.User1Id != myId) {
+                    MatchHelper newLove = new MatchHelper();
+                    User loverUser = _context.Users.SingleOrDefault(user => user.UserId == match.User1Id);
+                    newLove.lover = loverUser;
+                    newLove.percentage = match.percentage;
+                    LoveList.Add(newLove);
+                } else {
+                    MatchHelper newLove = new MatchHelper();
+                    User loverUser = _context.Users.SingleOrDefault(user => user.UserId == match.User2Id);
+                    newLove.lover = loverUser;
+                    newLove.percentage = match.percentage;
+                    LoveList.Add(newLove);
+                }
+            }
+
+            ViewBag.myLovers = LoveList;
             return View();
         }
+
+        [HttpGet]
+        [Route("like/{myId}")]
+        public IActionResult LikeLover(int myId){
+            int currentId = (int)HttpContext.Session.GetInt32("currentUser");
+            Like newLike = new Like{
+                PersonLikingId = currentId,
+                PersonLikedId = myId
+            };
+            _context.Add(newLike);
+            _context.SaveChanges();
+            return RedirectToAction("Matches");
+        }
+
+        [HttpGet]
+        [Route("likes")]
+        public IActionResult Likes()
+        {
+            int myId = (int)HttpContext.Session.GetInt32("currentUser");
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            List<Like> MyLikes = _context.Likes.Include(user => user.PersonLiked).Where(like=> like.PersonLikingId == myId).ToList();
+            ViewBag.myLikes = MyLikes;
+            return View();
+        }
+
+    }
+
+    public class MatchHelper {
+        public User lover { get; set; }    
+        public int percentage {get;set;}
 
     }
 }
