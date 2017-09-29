@@ -100,6 +100,27 @@ namespace Match.Controllers
             return View("Dashboard");
         }
 
+        [HttpGet]
+        [Route("lovers/{myId}")]
+        public IActionResult LoadLoverProfile(int myId){
+            if (HttpContext.Session.GetInt32("currentUser") == null){
+                return RedirectToAction("Index", "Home");
+            }
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            ViewBag.myUser = myUser;
+
+            var Loc = new Dictionary<string, object>();
+            WebRequest.GetZipDataAsync(myUser.zipcode, ApiResponse =>
+                {
+                    Loc = ApiResponse;
+                }
+            ).Wait();
+            ViewBag.city = Loc["city"];
+            ViewBag.state = Loc["state"];
+
+            return View("Profile");
+        }
+
 
         [HttpGet]
         [Route("lovers")]
@@ -128,6 +149,30 @@ namespace Match.Controllers
             }
 
             ViewBag.myLovers = LoveList;
+            return View();
+        }
+
+        [HttpGet]
+        [Route("like/{myId}")]
+        public IActionResult LikeLover(int myId){
+            int currentId = (int)HttpContext.Session.GetInt32("currentUser");
+            Like newLike = new Like{
+                PersonLikingId = currentId,
+                PersonLikedId = myId
+            };
+            _context.Add(newLike);
+            _context.SaveChanges();
+            return RedirectToAction("Matches");
+        }
+
+        [HttpGet]
+        [Route("likes")]
+        public IActionResult Likes()
+        {
+            int myId = (int)HttpContext.Session.GetInt32("currentUser");
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            List<Like> MyLikes = _context.Likes.Include(user => user.PersonLiked).Where(like=> like.PersonLikingId == myId).ToList();
+            ViewBag.myLikes = MyLikes;
             return View();
         }
 

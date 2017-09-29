@@ -41,7 +41,7 @@
 }
 
 #dash-nav{
-    background: #1574BB;
+    background: #f5413e;
     box-sizing: border-box;
     padding: 0px 50px;
     width: 100%;
@@ -121,11 +121,15 @@
 
 .hover-square:hover{
     text-decoration: underline;
-    background: rgb(15,81,127);
+    background: maroon;
+}
+
+.maroon:hover{
+    color: maroon;
 }
 
 .sad:hover{
-    color: rgb(15,81,127);
+    color: maroon;
 }
 
 .dropdown-button{
@@ -133,7 +137,7 @@
 }
 
 .dropdown-content li a{
-    color: rgb(15,81,127);   
+    color: maroon;  
 }
 
 
@@ -144,6 +148,17 @@
     border-radius: 1px;
     margin: auto;
     background: white;
+}
+
+.body-stuff2{
+    width: 1000px;
+    height: 100%;
+    border: 1px solid rgb(200,200,200);
+    border-radius: 1px;
+    margin: auto;
+    background: white;
+    padding: 20px 0px 20px 20px;
+    box-sizing: border-box;
 }
 
 .body-container{
@@ -188,3 +203,13 @@
 
 }
 
+.lover-cube{
+    display: inline-block;
+    border: 1px solid black;
+    margin-right: 20px;
+    padding: 5px;
+}
+
+.link-text{
+    color: maroon;
+}

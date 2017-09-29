@@ -1,0 +1,29 @@
+<div id="dash-nav">
+<div class="left-bar"><a href="dashboard" class="maroon brand-logo">Sadness.com</a></div>
+<div class="middle-bar">
+<div class="center-help">
+<div class="hover-square"><a class="no-underline" href="profile">Profile</a></div>
+<div class="hover-square"><a class="no-underline" href="lovers">Matches</a></div>
+<div class="hover-square"><a class="no-underline" href="#">Messages</a></div>
+<div class="hover-square"><a class="no-underline" href="#">Likes</a></div>
+</div>
+</div>
+<div class="right-bar">
+<a class='dropdown-button' href='' data-activates='dropdownAccount'><i class="material-icons sad maroon">sentiment_dissatisfied</i></a>
+<a class='dropdown-button' href='#' data-activates='dropdownSettings'><i class="material-icons sad maroon">settings</i></a>
+</div>
+</div>
+
+<div class="body-container">
+  <div class="body-stuff2">
+    @{
+        foreach(var like in @ViewBag.myLikes){
+            <div class="lover-cube">
+                <img id="profP" src="@Url.Content(like.PersonLiked.profile_picture)"/>
+                <p><a class="link-text" href="/lovers/@like.PersonLikedId">@like.PersonLiked.name</a>, @like.PersonLiked.age years old</p>
+                <a href="/unlike/@like.PersonLikedId" class="link-text"><button>Unlike</button></a><a class="link-text" href="/conversation/@like.PersonLikedId"><button>Message</button></a>
+            </div>
+        }
+    }
+  </div>
+</div>
