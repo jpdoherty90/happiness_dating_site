@@ -23,6 +23,11 @@
 
 <div class="body-container">
   <div class="body-stuff2">
+      @{
+          if(@ViewBag.myLikers.Count == 0){
+              <h4>Uh oh! It would appear that no one likes you!</h4>
+          }
+      }
     @{
         foreach(var like in @ViewBag.myLikers){
             bool liking = false;
