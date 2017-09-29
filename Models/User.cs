@@ -24,8 +24,7 @@ namespace Match.Models
 
         [InverseProperty("PersonLiked")]
         public List<Like> likers { get; set; }
-        public List<User> Matches { get; set; }
-        public List<Percentage> MatchPercentages { get; set; }
+
 
         [InverseProperty("Sender")]
         public List<Message> messagesSent { get; set; }
@@ -52,8 +51,6 @@ namespace Match.Models
             messagesSent = new List<Message>();
             likes = new List<Like>();
             likers = new List<Like>();
-            Matches = new List<User>();
-            MatchPercentages = new List<Percentage>();
             Preference = new Preference();
             salary = "";
             height = 0;
