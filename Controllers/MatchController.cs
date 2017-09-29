@@ -8,6 +8,8 @@ using Match.Models;
 using System.Linq;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace Match.Controllers
 {
@@ -96,6 +98,17 @@ namespace Match.Controllers
             ViewBag.state = Loc["state"];
 
             return View("Dashboard");
+        }
+
+
+        [HttpGet]
+        [Route("lovers")]
+        public IActionResult Matches()
+        {
+            int myId = (int)HttpContext.Session.GetInt32("currentUser");
+            User myUser = _context.Users.Include(user=> user.Matches).SingleOrDefault(user => user.UserId == myId);
+            ViewBag.user = myUser;
+            return View();
         }
 
     }

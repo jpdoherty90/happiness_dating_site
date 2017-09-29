@@ -86,21 +86,18 @@ namespace Match.Controllers
             };
             _context.Users.Add(newUser);
             _context.SaveChanges();
-            Console.WriteLine("LOOK HERE!!!!!!!!!!!!!!!!!!!!");
-            Console.WriteLine(model.email);
             User currentUser = _context.Users.SingleOrDefault(user => user.email == newUser.email);
-            Console.WriteLine("CURRENT USER:");
-            Console.WriteLine(currentUser.name);
-            Console.WriteLine(currentUser.username);
+            List<User> AllUsers = _context.Users.ToList();
+            foreach(var guy in AllUsers) {
+                Algorithm(currentUser.UserId, guy.UserId);
+            }
             HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
             return Redirect("/preference");
         }
 
-        [HttpGet]
-        [Route("test")]
-        public IActionResult Test() {
+    
 
-            void Algorithm(int user1id, int user2id)
+            public void Algorithm(int user1id, int user2id)
             {
                 Console.WriteLine("STARTING THE ALGORITHM");
 
@@ -126,7 +123,10 @@ namespace Match.Controllers
                             Console.WriteLine("MADE IT PAST HEIGHT");
 
                             //Make sure they each make the minimum amount of cash the other is willing to accept
-                            if ((user2.salary >= user1prefs.MinSalary) && (user1.salary >= user2prefs.MinSalary))
+                            int U2sal = Convert.ToInt32(user2.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
+                            int U1sal = Convert.ToInt32(user1.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
+                            
+                            if ((U2sal >= user1prefs.MinSalary) && (U1sal >= user2prefs.MinSalary))
                             {
                                 Console.WriteLine("MADE IT PAST SALARY");
 
@@ -229,9 +229,5 @@ namespace Match.Controllers
 
             }
 
-            Algorithm(1, 2);
-
-            return Redirect("/");
-        }
     }
 }

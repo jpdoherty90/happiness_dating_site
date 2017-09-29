@@ -174,3 +174,7 @@
 #update-btn{
     margin-left: 70px;
 }
+
+.hide-song{
+    display: none;
+}

@@ -69,5 +69,6 @@ namespace Match.Models
             pets = "";
             profile_picture = "http://www.lulusrepose.com/images/icons/avatar.jpg";
         }
+
     }
 }

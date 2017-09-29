@@ -16,7 +16,7 @@ namespace Match.Models
         [ForeignKey("SenderId")]
         public User Sender { get; set; }
 
-        public int RevieverId { get; set; }
+        public int RecieverId { get; set; }
 
         [ForeignKey("RecieverId")]
         public User Reciever { get; set; }
