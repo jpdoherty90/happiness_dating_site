@@ -206,9 +206,6 @@ namespace Match.Controllers
                                     bool u1Kids = StringWithDealBreaker(user1.kids, user2prefs.Kids, user2prefs.KidsDealBreaker);
                                     bool u2Kids = StringWithDealBreaker(user2.kids, user1prefs.Kids, user1prefs.KidsDealBreaker);
 
-                                    Console.WriteLine("COUNT");
-                                    Console.WriteLine(Count);
-
                                     if (u1build
                                     || u2build
                                     || u1ethnicity
