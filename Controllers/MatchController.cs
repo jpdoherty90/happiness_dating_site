@@ -108,8 +108,34 @@ namespace Match.Controllers
             int myId = (int)HttpContext.Session.GetInt32("currentUser");
             User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
             ViewBag.user = myUser;
+            List<LoveMatch> MyMatches = _context.Matches.Where(match=> match.User1Id == myId || match.User2Id == myId).OrderByDescending(match => match.percentage).ToList();
+            List<User> AllOtherUsers = _context.Users.Where(user => user.UserId != myId).ToList();
+            List<MatchHelper> LoveList = new List<MatchHelper>();
+            foreach(var match in MyMatches){
+                if (match.User1Id != myId) {
+                    MatchHelper newLove = new MatchHelper();
+                    User loverUser = _context.Users.SingleOrDefault(user => user.UserId == match.User1Id);
+                    newLove.lover = loverUser;
+                    newLove.percentage = match.percentage;
+                    LoveList.Add(newLove);
+                } else {
+                    MatchHelper newLove = new MatchHelper();
+                    User loverUser = _context.Users.SingleOrDefault(user => user.UserId == match.User2Id);
+                    newLove.lover = loverUser;
+                    newLove.percentage = match.percentage;
+                    LoveList.Add(newLove);
+                }
+            }
+
+            ViewBag.myLovers = LoveList;
             return View();
         }
+
+    }
+
+    public class MatchHelper {
+        public User lover { get; set; }    
+        public int percentage {get;set;}
 
     }
 }

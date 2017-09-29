@@ -14,4 +14,8 @@
 </div>
 </div>
 
-
+@{
+    foreach(var match in @ViewBag.myLovers){
+        <p>@match.lover.name @match.percentage</p>
+    }
+}
