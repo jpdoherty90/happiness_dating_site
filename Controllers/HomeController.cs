@@ -201,10 +201,6 @@ namespace Match.Controllers
                                                 Percent = MatchPercent
                                             };
 
-                                            user1.Matches.Add(user2);
-                                            user1.MatchPercentages.Add(newPercentage);
-                                            user2.Matches.Add(user1);
-                                            user2.MatchPercentages.Add(newPercentage);
 
                                             _context.SaveChanges();
 
