@@ -129,7 +129,7 @@ namespace Match.Controllers
                 Algorithm(currentUser.UserId, guy.UserId);
             }
 
-            return RedirectToAction("/dashboard");
+            return RedirectToAction("Dashboard", "Match");
         }
 
 
@@ -236,16 +236,15 @@ namespace Match.Controllers
 
                                     if (MatchPercent >= 70) {
 
-                                        Percentage newPercentage = new Percentage
+                                        LoveMatch newLove = new LoveMatch
                                         {
-                                            Percent = MatchPercent
+                                            percentage = MatchPercent,
+                                            User1Id = user1.UserId,
+                                            User2Id = user2.UserId
+
                                         };
 
-                                        user1.Matches.Add(user2);
-                                        user1.MatchPercentages.Add(newPercentage);
-                                        user2.Matches.Add(user1);
-                                        user2.MatchPercentages.Add(newPercentage);
-
+                                        _context.Add(newLove);
                                         _context.SaveChanges();
 
 

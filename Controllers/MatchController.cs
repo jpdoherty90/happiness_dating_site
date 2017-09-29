@@ -106,7 +106,7 @@ namespace Match.Controllers
         public IActionResult Matches()
         {
             int myId = (int)HttpContext.Session.GetInt32("currentUser");
-            User myUser = _context.Users.Include(user=> user.Matches).SingleOrDefault(user => user.UserId == myId);
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
             ViewBag.user = myUser;
             return View();
         }

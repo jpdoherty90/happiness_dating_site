@@ -14,5 +14,6 @@ namespace Match.Models
         public DbSet<Message> Messages { get; set; }
 
         public DbSet<Preference> Preferences { get; set; }
+        public DbSet<LoveMatch> Matches { get; set; }
     }
 }
