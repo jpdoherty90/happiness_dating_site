@@ -2,10 +2,25 @@
     height: 100vh;
     background-image: url("https://wallpaperscraft.com/image/girl_dating_flowers_hugs_67458_1920x1080.jpg");
 }
+#PreferenceLandingPage{
+    width: 100%;
+    height: 100vh;  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("https://expertbeacon.com/sites/default/files/warning_signs_that_the_man_you_are_dating_is_not_right_for_you.jpg"); 
+}
 .infoContainer{
     width: 700px;
     margin: auto;
     text-align: center;
     padding: 20px;
     color: white;
+}
+.infoContainerP{
+    width: 700px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    color: black;
 }

@@ -1,1 +1,256 @@
-<h1>LETS CHOOSE YOUR PREFERENCES</h1>
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model Match.Models.PreferenceViewModel
+@using Match
+<div id="PreferenceLandingPage">
+    <form id="preferencesForm" asp-controller="Preference" asp-action="addUserPreference" method="post" class="form">
+        
+        <!-- GET MIN AND MAX AGE -->
+        <div class="infoContainerP" id="ageContainerP">
+            <h2 style="margin-bottom:150px;margin-top:100px;">What age range are you looking for?</h2>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="feet" type="number" asp-for="MinAge">
+                    <label asp-for="MinAge" style="color: black;font-size: 25px;"></label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="inch" type="number" asp-for="MaxAge">
+                    <label asp-for="MaxAge" style="color: black;font-size: 25px;"></label>
+                </div>
+            </div>
+            <a style="margin-top:100px" id="goToSalaryP" class="waves-effect waves-light btn-large red"><i class="material-icons right">call_made</i>Age</a>
+        </div>        
+
+        <!-- GET MIN SALARY -->
+        <div class="infoContainerP" id="salaryContainerP">
+            <h2 style="margin-bottom:200px;margin-top:100px;">Whats the Minimum salary that your willing to accept?</h2>
+            <div id="slider-format" style="background-color:darkseagreen"></div>
+            <input id="input-format" name="salary" type="text" style="text-align:center">
+            <a style="margin-top:100px" id="goToHeightP" class="waves-effect waves-light btn-large red"><i class="material-icons right">attach_money</i>Salary</a>
+        </div>   
+
+        <!-- GET MIN AND MAX HEIGHT -->
+        <div class="infoContainerP" id="heightContainerP">
+            <h2 style="margin-bottom:100px;margin-top:100px;">What height range are you looking for?</h2>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="MinimumFeet" type="number" asp-for="MinimumFeet">
+                    <label asp-for="MinimumFeet" style="color: black;font-size: 25px;"></label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="MinimumInch" type="number" asp-for="MinimumInch">
+                    <label asp-for="MinimumInch" style="color: black;font-size: 25px;"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="MaxFeet" type="number" asp-for="MaxFeet">
+                    <label asp-for="MaxFeet" style="color: black;font-size: 25px;"></label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="MaxInch" type="number" asp-for="MaxInch">
+                    <label asp-for="MaxInch" style="color: black;font-size: 25px;"></label>
+                </div>
+            </div>
+            <a style="margin-top:100px" id="goToBodyP" class="waves-effect waves-light btn-large red"><i class="material-icons right">call_made</i>Height</a>
+        </div>     
+
+        <!-- GET USER BODYTYPE  -->
+        <div class="infoContainerP" id="bodyContainerP">
+            <h2 style="margin-bottom:150px;margin-top:100px;">What body type are you looking for?</h2>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select asp-for="Build"> 
+                        <option value="" disabled selected>Choose your preferred body type</option>
+                        <option value="1">Slim</option>
+                        <option value="2">Average</option>
+                        <option value="3">Above Average</option>
+                        <option value="4">Heavy set</option>
+                    </select>
+                </div>
+            </div>
+            <p style="margin-left:250px;">
+                <input value="Yes" name="bodyDealbreaker" type="checkbox" id="body"/>
+                <label for="body" style="color: black;font-size: 25px;">Dealbreaker?</label>
+            </p>
+            <a style="margin-top:100px" id="goToEthnicityP" class="waves-effect waves-light btn-large red"><i class="material-icons right">accessibility</i>Body</a>
+        </div>
+
+        <!-- GET USER ETHNICITY  -->
+        <div class="infoContainerP" id="ethnicityContainerP">
+            <h2 style="margin-bottom:50px;margin-top:100px;">What Ethnicity are you looking for?</h2>
+            <div class="row">
+                <div class="col s10 offset-s2">
+                    <p>
+                        <input value="Caucasian" name="ethnicity" type="radio" id="white" />
+                        <label for="white" style="color:black;font-size: 25px;">Caucasian</label>
+                    </p>
+                    <p>
+                        <input value="African American" name="ethnicity" type="radio" id="black" />
+                        <label for="black" style="color:black;font-size: 25px;">African American</label>
+                    </p>
+                    <p>
+                        <input value="Hispanic/Latino" name="ethnicity" type="radio" id="hispanicLatino" />
+                        <label for="hispanicLatino" style="color:black;font-size: 25px;">Hispanic/Latino</label>
+                    </p>
+                    <p>
+                        <input value="Asian" name="ethnicity" type="radio" id="asian" />
+                        <label for="asian" style="color:black;font-size: 25px;">Asian</label>
+                    </p>
+                    <p>
+                        <input value="Macedonian" name="ethnicity" type="radio" id="macedonian" />
+                        <label for="macedonian" style="color:black;font-size: 25px;">Macedonian</label>
+                    </p>
+                </div>
+            </div>
+            <p style="margin-left:250px;">
+                <input value="Yes" name="EthnicityDealBreaker" type="checkbox" id="ethnicity"/>
+                <label for="ethnicity" style="color: black;font-size: 25px;">Dealbreaker?</label>
+            </p>
+            <a style="margin-top:50px" id="goToMaritalP" class="waves-effect waves-light btn-large red"><i class="material-icons right">android</i>Race</a>
+        </div>
+
+        <!-- GET USER MARITAL STATUS  -->
+        <div class="infoContainerP" id="divorcedWidowedContainerP">
+            <h2 style="margin-bottom:150px;margin-top:100px;">Do you want someone whos been hurt?</h2>
+            <div class="row">
+                <div class="col s6">
+                    <label style="color:black;font-size: 25px;">Divored</label>
+                    <p class="alignRadioButtons">
+                        <input value="Yes" name="divorced" type="radio" id="DYes"/>
+                        <label for="DYes" style="color:black;font-size: 25px;">Yes</label>
+                    </p>
+                    <p class="alignRadioButtons">
+                        <input value="No" name="divorced" type="radio" id="DNo"/>
+                        <label for="DNo" style="color:black;font-size: 25px;">No</label>
+                    </p>
+                </div>
+                <div class="col s6">
+                    <label style="color:black;font-size: 25px;">Widowed</label>
+                    <p class="alignRadioButtons">
+                        <input value="Yes" name="widowed" type="radio" id="WYes" />
+                        <label for="WYes" style="color:black;font-size: 25px;">Yes</label>
+                    </p>
+                    <p class="alignRadioButtons">
+                        <input value="No" name="widowed" type="radio" id="WNo" />
+                        <label for="WNo" style="color:black;font-size: 25px;">No</label>
+                    </p>
+                </div>
+            </div>
+            <a style="margin-top:100px" id="goToKidsP" class="waves-effect waves-light btn-large red"><i class="material-icons right">people</i>Marital</a>
+        </div>
+
+        <!-- GET USER KIDS  -->
+        <div class="infoContainerP" id="kidsContainerP">
+            <h2 style="margin-bottom:150px;margin-top:100px;">Do you want someone with kids?</h2>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select asp-for="Kids"> 
+                        <option value="" disabled selected>We all know the answer</option>
+                        <option value="1">LOL is that even a question?</option>
+                        <option value="2">Yea im open to it</option>
+                        <option value="3">Yes</option>
+                        <option value="4">I want kids now</option>
+                    </select>
+                </div>
+            </div>
+            <p style="margin-left:250px;">
+                <input value="Yes" name="KidsDealBreaker" type="checkbox" id="kids" />
+                <label for="kids" style="color:black;font-size: 25px;">Dealbreaker?</label>
+            </p>
+            <a style="margin-top:100px" id="goToDrinkP" class="waves-effect waves-light btn-large red"><i class="material-icons right">child_friendly</i>Kids</a>
+        </div>
+
+        <!-- GET USER DRINKING  -->
+        <div class="infoContainerP" id="drinkingContainerP">
+            <h2 style="margin-bottom:100px;margin-top:100px;">Do you want someone who drinks?</h2>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select asp-for="Drinking"> 
+                        <option value="" disabled selected>Choose your posion</option>
+                        <option value="1">Only the holy wine at church</option>
+                        <option value="2">If its not an IPA, I dont want it</option>
+                        <option value="3">I need rehab</option>
+                    </select>
+                </div>
+            </div>
+            <p style="margin-left:250px;">
+                <input value="Yes" name="DrinkingDealBreaker" type="checkbox" id="drink" />
+                <label for="drink" style="color:black;font-size: 25px;">Dealbreaker?</label>
+            </p>
+            <a style="margin-top:50px" id="goToWeedP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_bar</i>Drink</a>
+        </div>
+
+        <!-- GET USER WEED -->
+        <div class="infoContainerP" id="weedContainerP">
+            <h2 style="margin-bottom:150px;margin-top:100px">Do you want some to blaze with?</h2>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select asp-for="Marijuana"> 
+                        <option value="" disabled selected>Choose something</option>
+                        <option value="1">Never</option>
+                        <option value="2">Ehh</option>
+                        <option value="3">Sure, sounds like fun</option>
+                        <option value="4">Yes</option>
+                    </select>
+                </div>
+            </div>
+            <p style="margin-left:250px;">
+                <input value="Yes" name="MarijuanaDealBreaker" type="checkbox" id="weed" />
+                <label for="weed" style="color:black;font-size: 25px;">Dealbreaker?</label>
+            </p>
+            <a style="margin-top:100px" id="goToDietP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_florist</i>Herb</a>
+        </div>
+
+        <!-- GET USER DIET  -->
+        <div class="infoContainerP" id="dietContainerP">
+            <h2 style="margin-bottom:150px;margin-top:100px;">What diet lifestyle are you looking for?</h2>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select asp-for="Diet"> 
+                        <option value="" disabled selected>Whats cooking?</option>
+                        <option value="1">Gluten Free</option>
+                        <option value="2">Vegetarian</option>
+                        <option value="3">Meat, meat and more meat</option>
+                        <option value="4">Whatever get put infront</option>
+                    </select>
+                </div>
+            </div>
+            <p style="margin-left:250px;">
+                <input value="Yes" name="DietDealBreaker" type="checkbox" id="diet" />
+                <label for="diet" style="color:black;font-size: 25px;">Dealbreaker?</label>
+            </p>
+            <a style="margin-top:100px" id="goToPetsP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_grocery_store</i>Food</a>
+        </div>
+
+        <!-- GET USER PETS  -->
+        <div class="infoContainerP" id="petsContainerP">
+            <h2 style="margin-bottom:150px;margin-top:100px">Do you want someone with pets?</h2>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select asp-for="Pets"> 
+                        <option value="" disabled selected>Choose one</option>
+                        <option value="1">No pets</option>
+                        <option value="2">Open to animals</option>
+                        <option value="3">Has pets</option>
+                        <option value="4">Pets over kids all day</option>
+                    </select>
+                </div>
+            </div>
+            <p style="margin-left:250px;">
+                <input value="Yes" name="PetsDealBreaker" type="checkbox" id="pets" />
+                <label for="pets" style="color:black;font-size: 25px;">Dealbreaker?</label>
+            </p>
+            <a style="margin-top:100px" id="goToSubmitP" class="waves-effect waves-light btn-large red"><i class="material-icons right">pets</i>Pets</a>
+        </div>
+
+        <!-- COMPLETE USER PROFILE!!!!!  -->
+        <div class="infoContainer" id="finishInterestContainerP">
+            <h2 style="margin-top:100px;color:black">Thank for completing our registration process!</h2>
+            <h2 style="margin-bottom:100px;color:black">Lets find you some future mates!</h2>
+            <a style="margin-top:50px" id="submitInterestFormP" class="waves-effect waves-light btn-large blue"><i class="material-icons right">fast_forward</i>Done</a>
+        </div>
+
+    </form>
+</div>   

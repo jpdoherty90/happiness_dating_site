@@ -103,4 +103,96 @@ $(document).ready(function(){
     $("#submitInterestForm").click(function(){
         $("#interestForm").submit();        
     });
+
+
+
+
+
+    $("#heightContainerP").hide();    
+    $("#salaryContainerP").hide();
+    $("#bodyContainerP").hide();
+    $("#ethnicityContainerP").hide();
+    $("#divorcedWidowedContainerP").hide();
+    $("#kidsContainerP").hide();
+    $("#heightContainerP").hide();
+    $("#drinkingContainerP").hide();
+    $("#weedContainerP").hide();
+    $("#dietContainerP").hide();
+    $("#petsContainerP").hide();
+    $("#finishInterestContainerP").hide();
+            
+    
+    $("#goToSalaryP").click(function(){
+        $("#ageContainerP").hide();          
+        $("#salaryContainerP").show(); 
+
+        var sliderFormat = document.getElementById('slider-format');
+        
+        noUiSlider.create(sliderFormat, {
+            start: [ 20000 ],
+            step: 1000,
+            range: {
+                'min': [ 20000 ],
+                'max': [ 1000000 ]
+            },
+            format: wNumb({
+                decimals: 2,
+                thousand: ',',
+                prefix: '$',
+            })
+        });
+        var inputFormat = document.getElementById('input-format');
+        
+        sliderFormat.noUiSlider.on('update', function( values, handle ) {
+            inputFormat.value = values[handle];
+        });
+        
+        inputFormat.addEventListener('change', function(){
+            sliderFormat.noUiSlider.set(this.value);
+        });         
+    });
+
+    $("#goToHeightP").click(function(){
+        $("#salaryContainerP").hide(); 
+        $("#heightContainerP").show();          
+    });
+    $("#goToBodyP").click(function(){
+        $("#heightContainerP").hide();          
+        $("#bodyContainerP").show();          
+    });
+    $("#goToEthnicityP").click(function(){
+        $("#bodyContainerP").hide();          
+        $("#ethnicityContainerP").show();          
+    });
+    $("#goToMaritalP").click(function(){
+        $("#ethnicityContainerP").hide();          
+        $("#divorcedWidowedContainerP").show();          
+    });
+    $("#goToKidsP").click(function(){
+        $("#divorcedWidowedContainerP").hide();          
+        $("#kidsContainerP").show();          
+    });
+    $("#goToDrinkP").click(function(){
+        $("#kidsContainerP").hide();          
+        $("#drinkingContainerP").show();          
+    });
+    $("#goToWeedP").click(function(){
+        $("#drinkingContainerP").hide();          
+        $("#weedContainerP").show();          
+    });
+    $("#goToDietP").click(function(){
+        $("#weedContainerP").hide();          
+        $("#dietContainerP").show();          
+    });
+    $("#goToPetsP").click(function(){
+        $("#dietContainerP").hide();          
+        $("#petsContainerP").show();          
+    });
+    $("#goToSubmitP").click(function(){
+        $("#petsContainerP").hide();          
+        $("#finishInterestContainerP").show();          
+    });
+    $("#submitInterestFormP").click(function(){
+        $("#preferencesForm").submit();                
+    });
 })
