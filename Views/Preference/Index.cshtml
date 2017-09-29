@@ -8,10 +8,10 @@
 </audio>
 <div id="landingPage">
     <div id="welcomeContainer" class="infoContainer">
-        <h4 style="margin-bottom:150px;">Start pulling today!</h4>
-        <h2>Hi, @ViewBag.CurrentUser.name</h2>
-        <h2>Nice to meet you.</h2>
-        <h5 style="font-size:20px;">Help us get to know you so that we can recommend some great people</h5>
+        <h4 class="fontBorder" style="margin-bottom:150px;">Start pulling today!</h4>
+        <h2 class="fontBorder">Hi, @ViewBag.CurrentUser.name</h2>
+        <h2 class="fontBorder">Nice to meet you.</h2>
+        <h5 class="fontBorder" style="font-size:20px;">Help us get to know you so that we can recommend some great people</h5>
         <a style="margin-top:100px" id="begin" class="waves-effect waves-light btn-large red"><i class="material-icons right">favorite</i>Lets Begin</a>
     </div>
     <form id="interestForm" asp-controller="Preference" asp-action="addUserInterest" method="post" class="form">
@@ -21,15 +21,15 @@
             <div class="progress">
                 <div class="determinate" style="width: 1%"></div>
             </div>
-            <h2 style="margin-bottom:200px;margin-top:100px;">What is your height?</h2>
+            <h2 style="margin-bottom:200px;margin-top:100px;" class="fontBorder">What is your height?</h2>
             <div class="row">
                 <div class="input-field col s6">
                     <input id="feet" type="number" asp-for="feet">
-                    <label asp-for="feet" style="color: white;font-size: 25px;"></label>
+                    <label class="fontBorder" asp-for="feet" style="color: white;font-size: 25px;"></label>
                 </div>
                 <div class="input-field col s6">
                     <input id="inch" type="number" asp-for="inch">
-                    <label asp-for="inch" style="color: white;font-size: 25px;"></label>
+                    <label class="fontBorder" asp-for="inch" style="color: white;font-size: 25px;"></label>
                 </div>
             </div>
             <a style="margin-top:100px" id="goToSalary" class="waves-effect waves-light btn-large blue"><i class="material-icons right">call_made</i>Height</a>
@@ -40,7 +40,7 @@
             <div class="progress">
                 <div class="determinate" style="width: 10%"></div>
             </div>
-            <h2 style="margin-bottom:200px;;margin-top:100px;">What is your income?</h2>
+            <h2 class="fontBorder" style="margin-bottom:200px;;margin-top:100px;">What is your income?</h2>
             <div id="slider-format" style="background-color:darkseagreen"></div>
             <input id="input-format" name="salary" type="text" style="text-align:center">
             <li><a style="margin-top:100px" id="goToWeed" class="waves-effect waves-light btn-large blue"><i class="material-icons right">attach_money</i>Salary</a></li>
@@ -51,7 +51,7 @@
             <div class="progress">
                 <div class="determinate" style="width: 20%"></div>
             </div>
-            <h2 style="margin-bottom:150px;;margin-top:100px">Do you smoke the devils lettuce?</h2>
+            <h2 class="fontBorder" style="margin-bottom:150px;;margin-top:100px">Do you smoke the devils lettuce?</h2>
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="weed"> 
@@ -71,7 +71,7 @@
             <div class="progress">
                 <div class="determinate" style="width: 30%"></div>
             </div>
-            <h2 style="margin-bottom:150px;;margin-top:100px;">What's your body type?</h2>
+            <h2 class="fontBorder" style="margin-bottom:150px;;margin-top:100px;">What's your body type?</h2>
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="body"> 
@@ -91,7 +91,7 @@
             <div class="progress">
                 <div class="determinate" style="width: 40%"></div>
             </div>
-            <h2 style="margin-bottom:150px;;margin-top:100px;">What are your thoughts on pets?</h2>
+            <h2 class="fontBorder" style="margin-bottom:150px;;margin-top:100px;">What are your thoughts on pets?</h2>
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="pets"> 
@@ -111,7 +111,7 @@
             <div class="progress">
                 <div class="determinate" style="width: 50%"></div>
             </div>
-            <h2 style="margin-bottom:150px;;margin-top:100px;">What's your diet?</h2>
+            <h2 class="fontBorder" style="margin-bottom:150px;;margin-top:100px;">What's your diet?</h2>
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="diet"> 
@@ -131,7 +131,7 @@
             <div class="progress">
                 <div class="determinate" style="width: 60%"></div>
             </div>
-            <h2 style="margin-bottom:150px;;margin-top:100px;">Do you have any kids?</h2>
+            <h2 class="fontBorder" style="margin-bottom:150px;;margin-top:100px;">Do you have any kids?</h2>
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="kids"> 
@@ -151,28 +151,28 @@
             <div class="progress">
                 <div class="determinate" style="width: 70%"></div>
             </div>
-            <h2 style="margin-bottom:150px;;margin-top:100px;">What's your marital status?</h2>
+            <h2 class="fontBorder" style="margin-bottom:150px;;margin-top:100px;">What's your marital status?</h2>
             <div class="row">
                 <div class="col s6">
-                    <label style="color: white;font-size: 25px;">Divored?</label>
+                    <label class="fontBorder" style="color: white;font-size: 25px;">Divored?</label>
                     <p class="alignRadioButtons">
-                        <input value="Yes" name="divorced" type="radio" id="DYes"/>
-                        <label for="DYes" style="color: white;font-size: 25px;">Yes</label>
+                        <input class="fontBorder" value="Yes" name="divorced" type="radio" id="DYes"/>
+                        <label class="fontBorder" for="DYes" style="color: white;font-size: 25px;">Yes</label>
                     </p>
                     <p class="alignRadioButtons">
-                        <input value="No" name="divorced" type="radio" id="DNo"/>
-                        <label for="DNo" style="color: white;font-size: 25px;">No</label>
+                        <input class="fontBorder" value="No" name="divorced" type="radio" id="DNo"/>
+                        <label class="fontBorder" for="DNo" style="color: white;font-size: 25px;">No</label>
                     </p>
                 </div>
                 <div class="col s6">
-                    <label style="color: white;font-size: 25px;">Widowed?</label>
+                    <label class="fontBorder" style="color: white;font-size: 25px;">Widowed?</label>
                     <p class="alignRadioButtons">
-                        <input value="Yes" name="widowed" type="radio" id="WYes" />
-                        <label for="WYes" style="color: white;font-size: 25px;">Yes</label>
+                        <input class="fontBorder" value="Yes" name="widowed" type="radio" id="WYes" />
+                        <label class="fontBorder" for="WYes" style="color: white;font-size: 25px;">Yes</label>
                     </p>
                     <p class="alignRadioButtons">
-                        <input value="No" name="widowed" type="radio" id="WNo" />
-                        <label for="WNo" style="color: white;font-size: 25px;">No</label>
+                        <input class="fontBorder" value="No" name="widowed" type="radio" id="WNo" />
+                        <label class="fontBorder" for="WNo" style="color: white;font-size: 25px;">No</label>
                     </p>
                 </div>
             </div>
@@ -186,26 +186,26 @@
             </div>
             <div class="row">
                 <div class="col s12">
-                    <h2 style="color: white;margin-bottom:100px;margin-top:100px;">Choose an ethnicity</h2>
+                    <h2 class="fontBorder" style="color: white;margin-bottom:100px;margin-top:100px;">Choose an ethnicity</h2>
                     <p>
                         <input value="Caucasian" name="ethnicity" type="radio" id="white" />
-                        <label for="white" style="color: white;font-size: 25px;">Caucasian</label>
+                        <label class="fontBorder" for="white" style="color: white;font-size: 25px;">Caucasian</label>
                     </p>
                     <p>
                         <input value="African American" name="ethnicity" type="radio" id="black" />
-                        <label for="black" style="color: white;font-size: 25px;">African American</label>
+                        <label class="fontBorder" for="black" style="color: white;font-size: 25px;">African American</label>
                     </p>
                     <p>
                         <input value="Hispanic/Latino" name="ethnicity" type="radio" id="hispanicLatino" />
-                        <label for="hispanicLatino" style="color: white;font-size: 25px;">Hispanic/Latino</label>
+                        <label class="fontBorder" for="hispanicLatino" style="color: white;font-size: 25px;">Hispanic/Latino</label>
                     </p>
                     <p>
                         <input value="Asian" name="ethnicity" type="radio" id="asian" />
-                        <label for="asian" style="color: white;font-size: 25px;">Asian</label>
+                        <label class="fontBorder" for="asian" style="color: white;font-size: 25px;">Asian</label>
                     </p>
                     <p>
                         <input value="Macedonian" name="ethnicity" type="radio" id="macedonian" />
-                        <label for="macedonian" style="color: white;font-size: 25px;">Macedonian</label>
+                        <label class="fontBorder" for="macedonian" style="color: white;font-size: 25px;">Macedonian</label>
                     </p>
                 </div>
             </div>
@@ -217,7 +217,7 @@
             <div class="progress">
                 <div class="determinate" style="width: 90%"></div>
             </div>
-            <h2 style="margin-bottom:100px;margin-top:100px;">What are your thoughts on drinking?</h2>
+            <h2 class="fontBorder" style="margin-bottom:100px;margin-top:100px;">What are your thoughts on drinking?</h2>
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="drinking"> 
@@ -236,7 +236,7 @@
             <div class="progress">
                 <div class="determinate" style="width: 99%"></div>
             </div>
-            <h2 style="margin-bottom:100px;margin-top:100px;">What do you believe in?</h2>
+            <h2 class="fontBorder" style="margin-bottom:100px;margin-top:100px;">What do you believe in?</h2>
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="religion"> 
@@ -257,8 +257,8 @@
             <div class="progress">
                 <div class="determinate" style="width: 100%"></div>
             </div>
-            <h2 style="margin-top:100px;">Thank for letting us know about you!</h2>
-            <h4 style="margin-bottom:100px;">Now just add quick bio about yourself!</h4>
+            <h2 class="fontBorder" style="margin-top:100px;">Thank for letting us know about you!</h2>
+            <h4 class="fontBorder" style="margin-bottom:100px;">Now just add quick bio about yourself!</h4>
             <div class="row">
                 <div class="input-field col s12">
                     <textarea asp-for="bio" id="textarea1" name="userBio" class="materialize-textarea" data-length="120"></textarea>
