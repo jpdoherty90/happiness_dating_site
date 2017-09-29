@@ -199,4 +199,12 @@ $(document).ready(function(){
         $(this).delay(500).hide(0);
         $("#shh").delay(500).show(0);
     });
+
+    $(".lover-cube").hover(function(){
+        $(this).addClass("lover-hover");
+        $(this).removeClass("lover-cube");
+    }, function(){
+        $(this).addClass("lover-cube");
+        $(this).removeClass("lover-hover");
+    });
 })

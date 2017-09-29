@@ -34,15 +34,16 @@
             string percentStr = @match.percentage + "% Match";
             <div class="lover-cube">
                 <img id="profP" src="@Url.Content(match.lover.profile_picture)"/>
-                <p><a class="link-text" href="/lovers/@match.lover.UserId">@match.lover.name</a>, @match.lover.age years old</p>
-                <p>@percentStr</p>
+                <h5><a href="/lovers/@match.lover.UserId">@match.lover.name</a></h5>
+                <h6>@match.lover.age years old | @percentStr</h6>
+                <div class="hover-test">
                 @if(match.liking == false) {
-                    <a href="/like/@match.lover.UserId" class="link-text"><button>Like</button></a>
+                    <a href="/like/@match.lover.UserId" class="link-text"><i class="material-icons sad maroon">favorite_border</i></a>
                 }
                 @if(match.liking == true) {
-                    <a href="/unlike/@match.lover.UserId" class="link-text"><button>Unlike</button></a>
+                    <a href="/unlike/@match.lover.UserId" class="link-text"><i class="material-icons sad maroon">favorite</i></a>
                 }
-                <a class="link-text" href="/conversation/@match.lover.UserId"><button>Message</button></a>
+                <a class="link-text" href="/conversation/@match.lover.UserId"><i class="material-icons sad">mail</i></a></div>
             </div>
         }
     }
