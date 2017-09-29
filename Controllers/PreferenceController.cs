@@ -129,9 +129,8 @@ namespace Match.Controllers
                 Algorithm(currentUser.UserId, guy.UserId);
             }
 
-            return RedirectToAction("/dashboard");
+            return Redirect("/dashboard");
         }
-
 
         public void Algorithm(int user1id, int user2id)
         {
