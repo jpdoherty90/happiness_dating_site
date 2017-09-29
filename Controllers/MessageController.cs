@@ -106,8 +106,6 @@ namespace Match.Controllers
 
 
         }
-
-        [HttpGet]
-        
+        // [HttpGet]
     }
 }
