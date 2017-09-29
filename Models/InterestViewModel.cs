@@ -45,5 +45,8 @@ namespace Match.Models
 
         [Display(Name = "Religion")]
         public string religion { get; set; }
+
+        [Display(Name = "Bio")]
+        public string bio { get; set; }
     }
 }

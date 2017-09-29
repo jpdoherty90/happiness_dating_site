@@ -44,6 +44,7 @@ namespace Match.Models
         public string religion { get; set; }
         public string diet { get; set; }
         public string pets { get; set; }
+        public string bio { get; set; }
        
         public User()
         {
@@ -64,6 +65,7 @@ namespace Match.Models
             religion = "";
             diet = "";
             pets = "";
+            bio = "";
             profile_picture = "http://www.lulusrepose.com/images/icons/avatar.jpg";
         }
 
