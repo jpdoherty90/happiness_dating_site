@@ -140,7 +140,7 @@ namespace Match.Controllers
 
         public void Algorithm(int user1id, int user2id)
         {
-            Console.WriteLine("STARTING THE ALGORITHM");
+        
 
             User user1 = _context.Users.Include(u => u.Preference).SingleOrDefault(user => user.UserId == user1id);
             User user2 = _context.Users.Include(u => u.Preference).SingleOrDefault(user => user.UserId == user2id);
@@ -232,11 +232,12 @@ namespace Match.Controllers
                                     }
 
                                     int MatchPercent = (int) ((((float)Count)/16.0)*100.0);
+                                    MatchPercent += 10;
 
                                     Console.WriteLine("MATCH PERCENTAGE");
                                     Console.WriteLine(MatchPercent);
 
-                                    if (MatchPercent >= 70) {
+                                    if (MatchPercent >= 60) {
 
                                         LoveMatch newLove = new LoveMatch
                                         {

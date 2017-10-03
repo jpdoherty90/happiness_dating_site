@@ -8,7 +8,7 @@
 </audio>
 <div id="landingPage">
     <div id="welcomeContainer" class="infoContainer">
-        <h4 class="fontBorder" style="margin-bottom:150px;">Start pulling today!</h4>
+        <h4 class="fontBorder" style="margin-bottom:150px;">Get ready for some dates!</h4>
         <h2 class="fontBorder">Hi, @ViewBag.CurrentUser.name</h2>
         <h2 class="fontBorder">Nice to meet you.</h2>
         <h5 class="fontBorder" style="font-size:20px;">Help us get to know you so that we can recommend some great people</h5>
@@ -51,11 +51,11 @@
             <div class="progress">
                 <div class="determinate" style="width: 20%"></div>
             </div>
-            <h2 class="fontBorder" style="margin-bottom:150px;;margin-top:100px">Do you smoke the devils lettuce?</h2>
+            <h2 class="fontBorder" style="margin-bottom:150px;;margin-top:100px">Do you smoke marijuana?</h2>
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="weed"> 
-                        <option value="" disabled selected>What are your thoughts on ganja?</option>
+                        <option value="" disabled selected>What are your thoughts on the devil's lettuce?</option>
                         <option value="1">Never smoked and never will</option>
                         <option value="2">Occasional toker</option>
                         <option value="3">Only when I'm hangin with my boy Snoop</option>
@@ -63,7 +63,7 @@
                     </select>
                 </div>
             </div>
-            <a style="margin-top:100px" id="goToBody" class="waves-effect waves-light btn-large blue"><i class="material-icons right">local_florist</i>Herb</a>
+            <a style="margin-top:100px" id="goToBody" class="waves-effect waves-light btn-large blue"><i class="material-icons right">local_florist</i>Continue</a>
         </div>
 
         <!-- GET USER BODYTYPE  -->
@@ -77,13 +77,13 @@
                     <select asp-for="body"> 
                         <option value="" disabled selected>Choose your body type</option>
                         <option value="1">Super skinny / currently hungry</option>
-                        <option value="2">Ryan Reynold / Megan Fox</option>
+                        <option value="2">Ryan Reynolds / Megan Fox</option>
                         <option value="3">Ronnie from Jersey Shore</option>
-                        <option value="4">Let's just say I went to Wendy's twice already today</option>
+                        <option value="4">Let's just say I went to Wendy's twice yesterday</option>
                     </select>
                 </div>
             </div>
-            <a style="margin-top:100px" id="goToPets" class="waves-effect waves-light btn-large blue"><i class="material-icons right">accessibility</i>Body</a>
+            <a style="margin-top:100px" id="goToPets" class="waves-effect waves-light btn-large blue"><i class="material-icons right">accessibility</i>Continue</a>
         </div>
 
         <!-- GET USER PETS  -->
@@ -103,7 +103,7 @@
                     </select>
                 </div>
             </div>
-            <a style="margin-top:100px" id="goToDiet" class="waves-effect waves-light btn-large blue"><i class="material-icons right">pets</i>Pets</a>
+            <a style="margin-top:100px" id="goToDiet" class="waves-effect waves-light btn-large blue"><i class="material-icons right">pets</i>Continue</a>
         </div>
 
         <!-- GET USER DIET  -->
@@ -115,7 +115,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="diet"> 
-                        <option value="" disabled selected>Tell us your eating habbits?</option>
+                        <option value="" disabled selected>Tell us your eating habbits:</option>
                         <option value="1">Gluten Free</option>
                         <option value="2">Vegetarian</option>
                         <option value="3">Ron Swanson</option>
@@ -123,7 +123,7 @@
                     </select>
                 </div>
             </div>
-            <a style="margin-top:100px" id="goToKids" class="waves-effect waves-light btn-large blue"><i class="material-icons right">local_grocery_store</i>Food</a>
+            <a style="margin-top:100px" id="goToKids" class="waves-effect waves-light btn-large blue"><i class="material-icons right">local_grocery_store</i>Continue</a>
         </div>
 
         <!-- GET USER KIDS  -->
@@ -136,14 +136,14 @@
                 <div class="input-field col s12">
                     <select asp-for="kids"> 
                         <option value="" disabled selected>What's the genetic situation?</option>
-                        <option value="1">I dont want to ruin my life yet, so no</option>
+                        <option value="1">None that I'm aware of</option>
                         <option value="2">Unfortunetly</option>
                         <option value="3">Yes, I've instantiated one or more new user(s)</option>
                         <option value="4">I'm infertile</option>
                     </select>
                 </div>
             </div>
-            <a style="margin-top:100px" id="goTodivorcedWidowed" class="waves-effect waves-light btn-large blue"><i class="material-icons right">child_friendly</i>Kids</a>
+            <a style="margin-top:100px" id="goTodivorcedWidowed" class="waves-effect waves-light btn-large blue"><i class="material-icons right">child_friendly</i>Continue</a>
         </div>
 
         <!-- GET USER MARITAL STATUS  -->
@@ -176,7 +176,7 @@
                     </p>
                 </div>
             </div>
-            <a style="margin-top:100px" id="goToEthnicity" class="waves-effect waves-light btn-large blue"><i class="material-icons right">people</i>Marital</a>
+            <a style="margin-top:100px" id="goToEthnicity" class="waves-effect waves-light btn-large blue"><i class="material-icons right">people</i>Continue</a>
         </div>
 
         <!-- GET USER ETHNICITY  -->
@@ -205,11 +205,11 @@
                     </p>
                     <p>
                         <input value="Macedonian" name="ethnicity" type="radio" id="macedonian" />
-                        <label class="fontBorder" for="macedonian" style="color: white;font-size: 25px;">Macedonian</label>
+                        <label class="fontBorder" for="macedonian" style="color: white;font-size: 25px;">Other</label>
                     </p>
                 </div>
             </div>
-            <a style="margin-top:50px" id="goToDrinking" class="waves-effect waves-light btn-large blue"><i class="material-icons right">android</i>Race</a>
+            <a style="margin-top:50px" id="goToDrinking" class="waves-effect waves-light btn-large blue"><i class="material-icons right">android</i>Continue</a>
         </div>
 
         <!-- GET USER DRINKING  -->
@@ -228,7 +228,7 @@
                     </select>
                 </div>
             </div>
-            <a style="margin-top:50px" id="goToReligion" class="waves-effect waves-light btn-large blue"><i class="material-icons right">local_bar</i>Drink</a>
+            <a style="margin-top:50px" id="goToReligion" class="waves-effect waves-light btn-large blue"><i class="material-icons right">local_bar</i>Continue</a>
         </div>
 
         <!-- GET USER RELIGION  -->
@@ -236,11 +236,11 @@
             <div class="progress">
                 <div class="determinate" style="width: 99%"></div>
             </div>
-            <h2 class="fontBorder" style="margin-bottom:100px;margin-top:100px;">What do you believe in?</h2>
+            <h2 class="fontBorder" style="margin-bottom:100px;margin-top:100px;">What are your religious beliefs?</h2>
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="religion"> 
-                        <option value="" disabled selected>Choose your religion</option>
+                        <option value="" disabled selected>Choose your religion:</option>
                         <option value="1">Christianity</option>
                         <option value="2">Islam</option>
                         <option value="3">Secular/Agnostic/Atheist</option>
@@ -249,7 +249,7 @@
                     </select>
                 </div>
             </div>
-            <a style="margin-top:50px" id="goToFinishedInterest" class="waves-effect waves-light btn-large blue"><i class="material-icons right">explore</i>Belief</a>
+            <a style="margin-top:50px" id="goToFinishedInterest" class="waves-effect waves-light btn-large blue"><i class="material-icons right">explore</i>Continue</a>
         </div>
 
         <!-- COMPLETE USER INTEREST  -->

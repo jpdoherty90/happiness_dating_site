@@ -19,7 +19,7 @@
                     <label asp-for="MaxAge" style="color: black;font-size: 25px;"></label>
                 </div>
             </div>
-            <a style="margin-top:100px" id="goToSalaryP" class="waves-effect waves-light btn-large red"><i class="material-icons right">call_made</i>Age</a>
+            <a style="margin-top:100px" id="goToSalaryP" class="waves-effect waves-light btn-large red"><i class="material-icons right">call_made</i>Continue</a>
         </div>        
 
         <!-- GET MIN SALARY -->
@@ -27,7 +27,7 @@
             <h2 style="margin-bottom:200px;margin-top:100px;">Whats the Minimum salary that your willing to accept?</h2>
             <div id="slider-format" style="background-color:darkseagreen"></div>
             <input id="input-format" name="salary" type="text" style="text-align:center">
-            <a style="margin-top:100px" id="goToHeightP" class="waves-effect waves-light btn-large red"><i class="material-icons right">attach_money</i>Salary</a>
+            <a style="margin-top:100px" id="goToHeightP" class="waves-effect waves-light btn-large red"><i class="material-icons right">attach_money</i>Continue</a>
         </div>   
 
         <!-- GET MIN AND MAX HEIGHT -->
@@ -53,7 +53,7 @@
                     <label asp-for="MaxInch" style="color: black;font-size: 25px;"></label>
                 </div>
             </div>
-            <a style="margin-top:100px" id="goToBodyP" class="waves-effect waves-light btn-large red"><i class="material-icons right">call_made</i>Height</a>
+            <a style="margin-top:100px" id="goToBodyP" class="waves-effect waves-light btn-large red"><i class="material-icons right">call_made</i>Continue</a>
         </div>     
 
         <!-- GET USER BODYTYPE  -->
@@ -74,7 +74,7 @@
                 <input value="Yes" name="bodyDealbreaker" type="checkbox" id="bodyP"/>
                 <label for="bodyP" style="color: black;font-size: 25px;">Dealbreaker?</label>
             </p>
-            <a style="margin-top:100px" id="goToEthnicityP" class="waves-effect waves-light btn-large red"><i class="material-icons right">accessibility</i>Body</a>
+            <a style="margin-top:100px" id="goToEthnicityP" class="waves-effect waves-light btn-large red"><i class="material-icons right">accessibility</i>Continue</a>
         </div>
 
         <!-- GET USER ETHNICITY  -->
@@ -100,7 +100,7 @@
                     </p>
                     <p>
                         <input value="Macedonian" name="ethnicity" type="radio" id="macedonian" />
-                        <label for="macedonian" style="color:black;font-size: 25px;">Macedonian</label>
+                        <label for="macedonian" style="color:black;font-size: 25px;">Other</label>
                     </p>
                 </div>
                 <div class="col s5">
@@ -110,37 +110,37 @@
                     </p>
                 </div>
             </div>
-            <a style="margin-top:50px" id="goToMaritalP" class="waves-effect waves-light btn-large red"><i class="material-icons right">android</i>Race</a>
+            <a style="margin-top:50px" id="goToMaritalP" class="waves-effect waves-light btn-large red"><i class="material-icons right">android</i>Continue</a>
         </div>
 
         <!-- GET USER MARITAL STATUS  -->
         <div class="infoContainerP" id="divorcedWidowedContainerP">
-            <h2 style="margin-bottom:150px;margin-top:100px;">Do you want someone who's been hurt?</h2>
+            <h2 style="margin-bottom:150px;margin-top:100px;">What type of personal history are you looking for?</h2>
             <div class="row">
                 <div class="col s6">
                     <label style="color:black;font-size: 25px;">Divored</label>
                     <p class="alignRadioButtons">
                         <input value="Yes" name="divorced" type="radio" id="DYes"/>
-                        <label for="DYes" style="color:black;font-size: 25px;">Yes</label>
+                        <label for="DYes" style="color:black;font-size: 25px;">Sure</label>
                     </p>
                     <p class="alignRadioButtons">
                         <input value="No" name="divorced" type="radio" id="DNo"/>
-                        <label for="DNo" style="color:black;font-size: 25px;">No</label>
+                        <label for="DNo" style="color:black;font-size: 25px;">No, thank you</label>
                     </p>
                 </div>
                 <div class="col s6">
                     <label style="color:black;font-size: 25px;">Widowed</label>
                     <p class="alignRadioButtons">
                         <input value="Yes" name="widowed" type="radio" id="WYes" />
-                        <label for="WYes" style="color:black;font-size: 25px;">Yes</label>
+                        <label for="WYes" style="color:black;font-size: 25px;">Sure</label>
                     </p>
                     <p class="alignRadioButtons">
                         <input value="No" name="widowed" type="radio" id="WNo" />
-                        <label for="WNo" style="color:black;font-size: 25px;">No</label>
+                        <label for="WNo" style="color:black;font-size: 25px;">No, thank you</label>
                     </p>
                 </div>
             </div>
-            <a style="margin-top:100px" id="goToKidsP" class="waves-effect waves-light btn-large red"><i class="material-icons right">people</i>Marital</a>
+            <a style="margin-top:100px" id="goToKidsP" class="waves-effect waves-light btn-large red"><i class="material-icons right">people</i>Continue</a>
         </div>
 
         <!-- GET USER KIDS  -->
@@ -149,7 +149,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <select asp-for="Kids"> 
-                        <option value="" disabled selected>We all know the answer</option>
+                        <option value="" disabled selected>What are your thoughts on genetic propagation</option>
                         <option value="1">LOL is that even a question?</option>
                         <option value="2">I'm open to it</option>
                         <option value="3">Yes def</option>
@@ -161,7 +161,7 @@
                 <input value="Yes" name="KidsDealBreaker" type="checkbox" id="kidP" />
                 <label for="kidP" style="color:black;font-size: 25px;">Dealbreaker?</label>
             </p>
-            <a style="margin-top:100px" id="goToDrinkP" class="waves-effect waves-light btn-large red"><i class="material-icons right">child_friendly</i>Kids</a>
+            <a style="margin-top:100px" id="goToDrinkP" class="waves-effect waves-light btn-large red"><i class="material-icons right">child_friendly</i>Continue</a>
         </div>
 
         <!-- GET USER DRINKING  -->
@@ -181,7 +181,7 @@
                 <input value="Yes" name="DrinkingDealBreaker" type="checkbox" id="drinkP" />
                 <label for="drinkP" style="color:black;font-size: 25px;">Dealbreaker?</label>
             </p>
-            <a style="margin-top:50px" id="goToWeedP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_bar</i>Drink</a>
+            <a style="margin-top:50px" id="goToWeedP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_bar</i>Continue</a>
         </div>
 
         <!-- GET USER WEED -->
@@ -194,7 +194,7 @@
                         <option value="1">Never</option>
                         <option value="2">Only when drunk</option>
                         <option value="3">Only when listening to the Dead</option>
-                        <option value="4">All day</option>
+                        <option value="4">All day baby</option>
                     </select>
                 </div>
             </div>
@@ -202,7 +202,7 @@
                 <input value="Yes" name="MarijuanaDealBreaker" type="checkbox" id="weedP" />
                 <label for="weedP" style="color:black;font-size: 25px;">Dealbreaker?</label>
             </p>
-            <a style="margin-top:100px" id="goToDietP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_florist</i>Herb</a>
+            <a style="margin-top:100px" id="goToDietP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_florist</i>Continue</a>
         </div>
 
         <!-- GET USER DIET  -->
@@ -223,7 +223,7 @@
                 <input value="Yes" name="DietDealBreaker" type="checkbox" id="dietP" />
                 <label for="dietP" style="color:black;font-size: 25px;">Dealbreaker?</label>
             </p>
-            <a style="margin-top:100px" id="goToPetsP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_grocery_store</i>Food</a>
+            <a style="margin-top:100px" id="goToPetsP" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_grocery_store</i>Continue</a>
         </div>
 
         <!-- GET USER PETS  -->
@@ -244,7 +244,7 @@
                 <input value="Yes" name="PetsDealBreaker" type="checkbox" id="petsP" />
                 <label for="petsP" style="color:black;font-size: 25px;">Dealbreaker?</label>
             </p>
-            <a style="margin-top:100px" id="goToSubmitP" class="waves-effect waves-light btn-large red"><i class="material-icons right">pets</i>Pets</a>
+            <a style="margin-top:100px" id="goToSubmitP" class="waves-effect waves-light btn-large red"><i class="material-icons right">pets</i>Continue</a>
         </div>
 
         <!-- COMPLETE USER PROFILE!!!!!  -->
