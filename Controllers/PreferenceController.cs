@@ -182,7 +182,7 @@ namespace Match.Controllers
                                 {
                                     Console.WriteLine("MADE IT PAST WIDOWED");
 
-                                    // Then factor in all the other shit:
+                                    // Then factor in all the other preferences:
 
                                     int Count = 0;
                                     
