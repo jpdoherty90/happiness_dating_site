@@ -141,7 +141,6 @@ namespace Match.Controllers
         public void Algorithm(int user1id, int user2id)
         {
         
-
             User user1 = _context.Users.Include(u => u.Preference).SingleOrDefault(user => user.UserId == user1id);
             User user2 = _context.Users.Include(u => u.Preference).SingleOrDefault(user => user.UserId == user2id);
 
@@ -151,17 +150,14 @@ namespace Match.Controllers
             // First make sure they are the right gender for each other
             if (user1.seeking == user2.gender && user2.seeking == user1.gender)
             {
-                Console.WriteLine("MADE IT PAST GENDER");
 
                 // Next make sure they are in the right age range for each other
                 if ((user1.age >= user2prefs.min_age && user1.age <= user2prefs.max_age) && (user2.age >= user1prefs.min_age && user2.age <= user1prefs.max_age))
                 {
-                    Console.WriteLine("MADE IT PAST AGE");
 
                     // Make sure both are within each other's height ranges
                     if ((user2.height >= user1prefs.MinHeight && user2.height <= user1prefs.MaxHeight) && (user1.height >= user2prefs.MinHeight && user1.height <= user2prefs.MaxHeight))
                     {
-                        Console.WriteLine("MADE IT PAST HEIGHT");
 
                         //Make sure they each make the minimum amount of cash the other is willing to accept
                         int U2sal = Convert.ToInt32(user2.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
@@ -170,17 +166,14 @@ namespace Match.Controllers
                         int U1salPref = Convert.ToInt32(user1prefs.MinSalary.Replace("$", "").Replace(",", "").Replace(".", ""));
                         if ((U2sal >= U1salPref) && (U1sal >= U2salPref))
                         {
-                            Console.WriteLine("MADE IT PAST SALARY");
 
                             // Make sure divorce isn't an issue for either party
                             if (!(user1.Divorced == true && user2prefs.DivorcedDealBreaker == true) && !(user2.Divorced == true && user1prefs.DivorcedDealBreaker == true)) 
                             {
-                                Console.WriteLine("MADE IT PAST DIVORCE");
 
                                 // Make sure being widowed isn't a big deal for either party
                                 if (!(user1.Widowed == true && user2prefs.WidowedDealBreaker == true) && !(user2.Widowed == true && user1prefs.WidowedDealBreaker == true))
                                 {
-                                    Console.WriteLine("MADE IT PAST WIDOWED");
 
                                     // Then factor in all the other preferences:
 
@@ -232,10 +225,6 @@ namespace Match.Controllers
                                     }
 
                                     int MatchPercent = (int) ((((float)Count)/16.0)*100.0);
-                                    MatchPercent += 10;
-
-                                    Console.WriteLine("MATCH PERCENTAGE");
-                                    Console.WriteLine(MatchPercent);
 
                                     if (MatchPercent >= 60) {
 
@@ -249,8 +238,6 @@ namespace Match.Controllers
 
                                         _context.Add(newLove);
                                         _context.SaveChanges();
-
-
 
                                     }
 
