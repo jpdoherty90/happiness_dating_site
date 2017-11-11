@@ -16,9 +16,6 @@ the front end forms the users fill out as they are registering and detailing the
 matcehd users could message one another, and we built the front-end of messaging to look similar to the 
 familiar iPhone text message UI.
 
-  This project is not currently deployed although deployment of this to Heroku is at the top of my to-do
-list and should be done within a week.
-
   Finally I'd like to mention that while we poured our hearts and souls into this project, it was still
 above all else a learning experience and not a deliverable final product.  It was our first experience
 building a project in C# and ASP.NET.  I have been learning and will continue to learn about OOP, design
