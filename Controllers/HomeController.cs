@@ -35,27 +35,37 @@ namespace Match.Controllers
 
         [HttpPost]
         [Route("loginUser")]
-        public IActionResult loginUser(LoginViewModel testLogin){
+        public IActionResult loginUser(LoginViewModel loginAttempter){
             if(ModelState.IsValid){
-                User currentUser = _context.Users.SingleOrDefault(findUser => findUser.email == testLogin.email);
+                User currentUser = _context.Users.SingleOrDefault(findUser => findUser.email == loginAttempter.email);
                 if(currentUser != null){
                     HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
                     return Redirect("/dashboard");
                 }
                 else{
                     ModelState.AddModelError("email", "Email or Password is incorrect.");
-                    return View("Login", testLogin);
+                    return View("Login", loginAttempter);
                 }
             }
             else{
-                return View("Login", testLogin);
+                return View("Login", loginAttempter);
             }
         }
-
+        
         [HttpPost]
         [Route("addUser")]
         public IActionResult addUser(UserViewModel model)
         {   
+            User newUser = generateNewUser(model);
+            _context.Users.Add(newUser);
+            _context.SaveChanges();
+            User currentUser = _context.Users.SingleOrDefault(user => user.email == newUser.email);
+            HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
+            return Redirect("/preference");
+        }
+
+        private User generateNewUser(UserViewModel model)
+        {
             string Gender = "";
             string Seeking = "";
             if(model.gender == "1"){
@@ -84,12 +94,11 @@ namespace Match.Controllers
                 password = model.password,
                 age = model.age
             };
-            _context.Users.Add(newUser);
-            _context.SaveChanges();
-            User currentUser = _context.Users.SingleOrDefault(user => user.email == newUser.email);
-            HttpContext.Session.SetInt32("currentUser", (int)currentUser.UserId);
-            return Redirect("/preference");
+
+            return newUser;
         }
+
+
 
     }
 }

@@ -38,18 +38,6 @@ namespace Match.Controllers
             List<int> Recievers = new List<int>();
             List<Message> Convos = new List<Message>();
 
-            // foreach (var msg in CombinedMsgs) {
-            //     if(!Recievers.Contains(msg.SenderId) && msg.SenderId != CurrUserId) {
-            //         Recievers.Add(msg.SenderId);
-            //         Convos.Add(msg);
-            //     }
-            //     if(!Recievers.Contains(msg.RecieverId) && msg.RecieverId != CurrUserId) {
-            //         Recievers.Add(msg.RecieverId);
-            //         Convos.Add(msg);
-            //     }
-            // }
-            
-
             for (var i = CombinedMsgs.Count() - 1; i > -1; i--) {
                 if(!Recievers.Contains(CombinedMsgs[i].SenderId) && CombinedMsgs[i].SenderId != CurrUserId) {
                     Recievers.Add(CombinedMsgs[i].SenderId);
