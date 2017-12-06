@@ -25,7 +25,6 @@ namespace Match.Models
         [InverseProperty("PersonLiked")]
         public List<Like> likers { get; set; }
 
-
         [InverseProperty("Sender")]
         public List<Message> messagesSent { get; set; }
         
@@ -68,6 +67,5 @@ namespace Match.Models
             bio = "";
             profile_picture = "http://www.lulusrepose.com/images/icons/avatar.jpg";
         }
-
     }
 }

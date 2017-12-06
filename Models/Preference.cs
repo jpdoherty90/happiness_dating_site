@@ -54,8 +54,6 @@ namespace Match.Models
 
         public bool PetsDealBreaker { get; set; }
 
-
-       
         public Preference()
         {
             min_age = 0;
