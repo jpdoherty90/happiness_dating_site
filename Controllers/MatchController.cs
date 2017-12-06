@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 
-namespace Match.Controllers
+namespace Match.Controllers 
 {
-    public class MatchController : Controller
+    public class MatchController : Controller 
     {
         private Context _context;
         private IHostingEnvironment _hostingEnv;
@@ -25,29 +25,48 @@ namespace Match.Controllers
             appRootFolder = _hostingEnv.ContentRootPath;
         }
 
+
         [HttpGet]
         [Route("dashboard")]
-        public IActionResult Dashboard()
+        public IActionResult Dashboard() 
         {
-            if (HttpContext.Session.GetInt32("currentUser") == null){
+            if (userNotLoggedIn()) {
                 return RedirectToAction("Index", "Home");
             }
-
-            int myId = (int)HttpContext.Session.GetInt32("currentUser");
-            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            int id = getCurrentUserId();;
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == id);
             ViewBag.myUser = myUser;
 
-            var Loc = new Dictionary<string, object>();
-            WebRequest.GetZipDataAsync(myUser.zipcode, ApiResponse =>
-                {
-                    Loc = ApiResponse;
-                }
-            ).Wait();
-            ViewBag.city = Loc["city"];
-            ViewBag.state = Loc["state"];
+            var location = getUserLocation(myUser.zipcode);
+            ViewBag.city = location["city"];
+            ViewBag.state = location["state"];
 
             return View();
         }
+
+
+        private bool userNotLoggedIn() 
+        {
+            return (HttpContext.Session.GetInt32("currentUser") == null);
+        }        
+
+
+        private int getCurrentUserId() 
+        {
+            int id = (int)HttpContext.Session.GetInt32("currentUser");
+            return id;
+        }
+
+
+        private Dictionary<string, object> getUserLocation(int postalCode) 
+        {
+            var location = new Dictionary<string, object>();
+            WebRequest.GetZipDataAsync(postalCode, ApiResponse => {
+                location = ApiResponse;
+            }).Wait();
+            return location;
+        }
+
 
         [HttpGet]
         [Route("logout")]
@@ -57,11 +76,12 @@ namespace Match.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
         [HttpPost]
         [Route("testing")]
-        public IActionResult TestImg(IFormFile pic){
-            int myId = (int)HttpContext.Session.GetInt32("currentUser");
-            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+        public IActionResult TestImg(IFormFile pic)
+        {
+            User myUser = getCurrentUser();
             var filename = appRootFolder + "/wwwroot/images/" + myUser.username + ".jpg";
             if (System.IO.File.Exists(filename))
             {
@@ -77,34 +97,32 @@ namespace Match.Controllers
             return RedirectToAction("Dashboard");
         }
 
-        [HttpGet]
-        [Route("profile")]
-        public IActionResult LoadUserProfile(IFormFile pic){
-            
-            if (HttpContext.Session.GetInt32("currentUser") == null){
-                return RedirectToAction("Index", "Home");
-            }
 
+        private User getCurrentUser() {
             int myId = (int)HttpContext.Session.GetInt32("currentUser");
             User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            return myUser;
+        }
+
+
+        [HttpGet]
+        [Route("profile")]
+        public IActionResult LoadUserProfile(IFormFile pic)
+        {
+            if (userNotLoggedIn()){
+                return RedirectToAction("Index", "Home");
+            }
+            User myUser = getCurrentUser();
             ViewBag.myUser = myUser;
-
-            var Loc = new Dictionary<string, object>();
-            WebRequest.GetZipDataAsync(myUser.zipcode, ApiResponse =>
-                {
-                    Loc = ApiResponse;
-                }
-            ).Wait();
-            ViewBag.city = Loc["city"];
-            ViewBag.state = Loc["state"];
-
             return View("Dashboard");
         }
 
+
         [HttpGet]
         [Route("lovers/{myId}")]
-        public IActionResult LoadLoverProfile(int myId){
-            if (HttpContext.Session.GetInt32("currentUser") == null){
+        public IActionResult LoadLoverProfile(int myId)
+        {
+            if (userNotLoggedIn()){
                 return RedirectToAction("Index", "Home");
             }
             int checkId = (int)HttpContext.Session.GetInt32("currentUser");
@@ -116,14 +134,9 @@ namespace Match.Controllers
             } else {
                 ViewBag.liking = false;
             }
-            var Loc = new Dictionary<string, object>();
-            WebRequest.GetZipDataAsync(myUser.zipcode, ApiResponse =>
-                {
-                    Loc = ApiResponse;
-                }
-            ).Wait();
-            ViewBag.city = Loc["city"];
-            ViewBag.state = Loc["state"];
+            var location = getUserLocation(myUser.zipcode);
+            ViewBag.city = location["city"];
+            ViewBag.state = location["state"];
 
             return View("Profile");
         }
@@ -131,54 +144,53 @@ namespace Match.Controllers
 
         [HttpGet]
         [Route("lovers")]
-        public IActionResult Matches()
+        public IActionResult Matches() 
         {
-            if (HttpContext.Session.GetInt32("currentUser") == null){
+            if (userNotLoggedIn()) {
                 return RedirectToAction("Index", "Home");
             }
             int myId = (int)HttpContext.Session.GetInt32("currentUser");
             User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
             ViewBag.user = myUser;
             List<LoveMatch> MyMatches = _context.Matches.Where(match=> match.User1Id == myId || match.User2Id == myId).OrderByDescending(match => match.percentage).ToList();
-            List<User> AllOtherUsers = _context.Users.Where(user => user.UserId != myId).ToList();
             List<MatchHelper> LoveList = new List<MatchHelper>();
-            foreach(var match in MyMatches){
+            foreach (var match in MyMatches) {
+                MatchHelper newLove = new MatchHelper();
+                User loverUser;
+                List<Like> myLikes;
                 if (match.User1Id != myId) {
-                    MatchHelper newLove = new MatchHelper();
-                    List<Like> myLikes = _context.Likes.Where(like => like.PersonLikedId == match.User1Id && like.PersonLikingId == myId).ToList();
-                    User loverUser = _context.Users.SingleOrDefault(user => user.UserId == match.User1Id);
-                    newLove.lover = loverUser;
-                    newLove.percentage = match.percentage;
-                    if (myLikes.Count != 0) {
-                        newLove.liking = true;
-                    } else {
-                        newLove.liking = false;
-                    }
-                    LoveList.Add(newLove);
+                    myLikes = _context.Likes.Where(like => like.PersonLikedId == match.User1Id && like.PersonLikingId == myId).ToList();
+                    loverUser = _context.Users.SingleOrDefault(user => user.UserId == match.User1Id);
                 } else {
-                    MatchHelper newLove = new MatchHelper();
-                    List<Like> myLikes = _context.Likes.Where(like => like.PersonLikedId == match.User2Id && like.PersonLikingId == myId).ToList();
-                    User loverUser = _context.Users.SingleOrDefault(user => user.UserId == match.User2Id);
-                    newLove.lover = loverUser;
-                    newLove.percentage = match.percentage;
-                    if (myLikes.Count != 0) {
-                        newLove.liking = true;
-                    } else {
-                        newLove.liking = false;
-                    }
-                    LoveList.Add(newLove);
+                    myLikes = _context.Likes.Where(like => like.PersonLikedId == match.User2Id && like.PersonLikingId == myId).ToList();
+                    loverUser = _context.Users.SingleOrDefault(user => user.UserId == match.User2Id);
                 }
+                newLove.lover = loverUser;
+                newLove.percentage = match.percentage;
+                if (myLikes.Count != 0) {
+                    newLove.liking = true;
+                } else {
+                    newLove.liking = false;
+                }
+                LoveList.Add(newLove);
             }
-
             ViewBag.myLovers = LoveList;
             return View();
         }
 
+
+        public class MatchHelper {
+            public User lover { get; set; }    
+            public int percentage {get;set;}
+            public bool liking {get;set;}
+        }
+
+
         [HttpGet]
         [Route("like/{myId}")]
-        public IActionResult LikeLover(int myId){
-            
-            int currentId = (int)HttpContext.Session.GetInt32("currentUser");
+        public IActionResult LikeLover(int myId)
+        {
+            int currentId = getCurrentUserId();
             Like newLike = new Like{
                 PersonLikingId = currentId,
                 PersonLikedId = myId
@@ -187,32 +199,38 @@ namespace Match.Controllers
             _context.SaveChanges();
             return RedirectToAction("Matches");
         }
+
 
         [HttpGet]
         [Route("unlike/{myId}")]
-        public IActionResult UnlikeLover(int myId){
-            int currentId = (int)HttpContext.Session.GetInt32("currentUser");
-            Like byeLike = _context.Likes.SingleOrDefault(like => like.PersonLikedId == myId && like.PersonLikingId == currentId);
-            _context.Remove(byeLike);
+        public IActionResult UnlikeLover(int myId)
+        {
+            int currentId = getCurrentUserId();
+            Like likeToDelete = _context.Likes.SingleOrDefault(like => like.PersonLikedId == myId && like.PersonLikingId == currentId);
+            _context.Remove(likeToDelete);
             _context.SaveChanges();
             return RedirectToAction("Matches");
         }
 
+
         [HttpGet]
         [Route("profunlike/{myId}")]
-        public IActionResult ProfUnlikeLover(int myId){
-            int currentId = (int)HttpContext.Session.GetInt32("currentUser");
-            Like byeLike = _context.Likes.SingleOrDefault(like => like.PersonLikedId == myId && like.PersonLikingId == currentId);
-            _context.Remove(byeLike);
+        public IActionResult ProfUnlikeLover(int myId)
+        {
+            int currentId = getCurrentUserId();
+            Like likeToDelete = _context.Likes.SingleOrDefault(like => like.PersonLikedId == myId && like.PersonLikingId == currentId);
+            _context.Remove(likeToDelete);
             _context.SaveChanges();
             int redirectId = myId;
             return RedirectToAction("LoadLoverProfile", new {myId = redirectId});
         }
 
+
         [HttpGet]
         [Route("proflike/{myId}")]
-        public IActionResult ProfLikeLover(int myId){
-            int currentId = (int)HttpContext.Session.GetInt32("currentUser");
+        public IActionResult ProfLikeLover(int myId)
+        {
+            int currentId = getCurrentUserId();
             Like newLike = new Like{
                 PersonLikingId = currentId,
                 PersonLikedId = myId
@@ -222,16 +240,17 @@ namespace Match.Controllers
             int redirectId = myId;
             return RedirectToAction("LoadLoverProfile", new {myId = redirectId});
         }
+
 
         [HttpGet]
         [Route("likes")]
         public IActionResult Likes()
         {
-            if (HttpContext.Session.GetInt32("currentUser") == null){
+            if (userNotLoggedIn()){
                 return RedirectToAction("Index", "Home");
             }
-            int myId = (int)HttpContext.Session.GetInt32("currentUser");
-            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            int myId = getCurrentUserId();
+            User myUser = getCurrentUser();
             List<Like> MyLikes = _context.Likes.Include(user => user.PersonLiked).Where(like=> like.PersonLikingId == myId).ToList();
             ViewBag.myLikes = MyLikes;
             return View();
@@ -241,11 +260,11 @@ namespace Match.Controllers
         [Route("likers")]
         public IActionResult Likers()
         {
-            if (HttpContext.Session.GetInt32("currentUser") == null){
+            if (userNotLoggedIn()){
                 return RedirectToAction("Index", "Home");
             }
-            int myId = (int)HttpContext.Session.GetInt32("currentUser");
-            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            int myId = getCurrentUserId();
+            User myUser = getCurrentUser();
             List<Like> MyLikers = _context.Likes.Include(user => user.PersonLiking).Where(like=> like.PersonLikedId == myId).ToList();
             List<Like> AllMyLikes = _context.Likes.Where(like => like.PersonLikingId == myId).ToList();
             ViewBag.myLikers = MyLikers;
@@ -255,10 +274,4 @@ namespace Match.Controllers
 
     }
 
-    public class MatchHelper {
-        public User lover { get; set; }    
-        public int percentage {get;set;}
-        public bool liking {get;set;}
-
-    }
 }

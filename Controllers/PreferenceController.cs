@@ -43,7 +43,13 @@ namespace Match.Controllers
 
         [HttpPost]
         [Route("/addUserPreference")]
-        public IActionResult addUserPreference(PreferenceViewModel userPreference, string salary, string divorced, string widowed, string bodyDealbreaker, string ethnicity, string EthnicityDealBreaker, string KidsDealBreaker, string DrinkingDealBreaker, string MarijuanaDealBreaker, string DietDealBreaker, string PetsDealBreaker)
+        public IActionResult addUserPreference(PreferenceViewModel userPreference, 
+                                                string salary, string divorced, 
+                                                string widowed, string bodyDealbreaker, 
+                                                string ethnicity, string EthnicityDealBreaker, 
+                                                string KidsDealBreaker, string DrinkingDealBreaker, 
+                                                string MarijuanaDealBreaker, string DietDealBreaker, 
+                                                string PetsDealBreaker)
         {   
             int minHeight = (userPreference.MinimumFeet * 12) + userPreference.MinimumInch;
             int maxHeight = (userPreference.MaxFeet * 12) + userPreference.MaxInch;

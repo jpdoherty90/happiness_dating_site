@@ -94,11 +94,9 @@ namespace Match.Controllers
                 password = model.password,
                 age = model.age
             };
-
             return newUser;
         }
 
-
-
     }
+    
 }
