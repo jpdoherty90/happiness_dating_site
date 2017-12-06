@@ -11,35 +11,50 @@ namespace Match.Controllers
 {
     public class PreferenceController : Controller
     {
-        private Context _context;
 
+        private Context _context;
         public PreferenceController(Context context)
         {
             _context = context;
         }
 
+
         [HttpGet]
         [Route("/preference")]
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetInt32("currentUser") == null){
+            if (userNotLoggedIn()){
                 return RedirectToAction("Index", "Home");
             }
-            int? currentUserId = HttpContext.Session.GetInt32("currentUser");
-            User currentUser = _context.Users.SingleOrDefault(findUser => findUser.UserId == currentUserId);
+            User currentUser = getCurrentUser();
             ViewBag.CurrentUser = currentUser;
             return View();
         }
+
+
+        private bool userNotLoggedIn() 
+        {
+            return (HttpContext.Session.GetInt32("currentUser") == null);
+        }  
+
+
+        private User getCurrentUser() {
+            int myId = (int)HttpContext.Session.GetInt32("currentUser");
+            User myUser = _context.Users.SingleOrDefault(user => user.UserId == myId);
+            return myUser;
+        }
+
 
         [HttpGet]
         [Route("/preferences")]
         public IActionResult preferences()
         {
-            if (HttpContext.Session.GetInt32("currentUser") == null){
+            if (userNotLoggedIn()){
                 return RedirectToAction("Index", "Home");
             }
             return View("Preference");
         }
+
 
         [HttpPost]
         [Route("/addUserPreference")]
@@ -54,138 +69,77 @@ namespace Match.Controllers
             int minHeight = (userPreference.MinimumFeet * 12) + userPreference.MinimumInch;
             int maxHeight = (userPreference.MaxFeet * 12) + userPreference.MaxInch;
 
-            int? currentUserId = HttpContext.Session.GetInt32("currentUser");
-            User currentUser = _context.Users.Include(u => u.Preference).SingleOrDefault(findUser => findUser.UserId == currentUserId);
-            Console.WriteLine("CURRENT USER:");
-            Console.WriteLine(currentUser.name);
+            User currentUser = getCurrentUser();
 
             currentUser.Preference.min_age =  userPreference.MinAge;
             currentUser.Preference.max_age =  userPreference.MaxAge;
             currentUser.Preference.MinSalary = salary;
             currentUser.Preference.MinHeight = minHeight;
             currentUser.Preference.MaxHeight = maxHeight;
-
             currentUser.Preference.Build = userPreference.Build;
-            if(bodyDealbreaker == null){
-                currentUser.Preference.BuildDealBreaker = false;
-            }
-            else{
-                currentUser.Preference.BuildDealBreaker = true;
-            }
-
             currentUser.Preference.Ethnicity = ethnicity;
-            if(EthnicityDealBreaker == null){
-                currentUser.Preference.EthnicityDealBreaker = false;
-            }
-            else{
-                currentUser.Preference.EthnicityDealBreaker = true;
-            }
-
-            if(divorced == null){
-                currentUser.Preference.DivorcedDealBreaker = false;
-            }
-            else{
-                currentUser.Preference.DivorcedDealBreaker = true;
-            }
-
-            if(widowed == null){
-                currentUser.Preference.WidowedDealBreaker = false;
-            }
-            else{
-                currentUser.Preference.WidowedDealBreaker = true;
-            }
-
             currentUser.Preference.Kids = userPreference.Kids;
-            if(KidsDealBreaker == null){
-                currentUser.Preference.KidsDealBreaker = false;
-            }
-            else{
-                currentUser.Preference.KidsDealBreaker = true;
-            }
-
             currentUser.Preference.Drinking = userPreference.Drinking;
-            if(DrinkingDealBreaker == null){
-                currentUser.Preference.DrinkingDealBreaker = false;
-            }
-            else{
-                currentUser.Preference.DrinkingDealBreaker = true;
-            }
-
             currentUser.Preference.Marijuana = userPreference.Marijuana;
-            if(MarijuanaDealBreaker == null){
-                currentUser.Preference.MarijuanaDealBreaker = false;
-            }
-            else{
-                currentUser.Preference.MarijuanaDealBreaker = true;
-            }
-
             currentUser.Preference.Diet = userPreference.Diet;
-            if(DietDealBreaker == null){
-                currentUser.Preference.DietDealBreaker = false;
-            }
-            else{
-                currentUser.Preference.DietDealBreaker = true;
-            }
-
             currentUser.Preference.Pets = userPreference.Pets;
-            if(PetsDealBreaker == null){
-                currentUser.Preference.PetsDealBreaker = false;
-            }
-            else{
-                currentUser.Preference.PetsDealBreaker = true;
-            }
+
+            currentUser.Preference.BuildDealBreaker = (bodyDealbreaker != null);
+            currentUser.Preference.EthnicityDealBreaker = (EthnicityDealBreaker != null);
+            currentUser.Preference.DivorcedDealBreaker = (divorced != null);
+            currentUser.Preference.WidowedDealBreaker = (widowed != null);
+            currentUser.Preference.KidsDealBreaker = (KidsDealBreaker != null);
+            currentUser.Preference.DrinkingDealBreaker = (DrinkingDealBreaker != null);
+            currentUser.Preference.MarijuanaDealBreaker = (MarijuanaDealBreaker != null);
+            currentUser.Preference.DietDealBreaker = (DietDealBreaker == null);
+            currentUser.Preference.PetsDealBreaker = (PetsDealBreaker != null);
+
             _context.SaveChanges();
-            
+
+            int currentUserId = getCurrentUserId();            
             List<User> AllUsers = _context.Users.Where(u => u.UserId != currentUserId).ToList();
-            foreach(var guy in AllUsers) {
-                Algorithm(currentUser.UserId, guy.UserId);
+            foreach(var person in AllUsers) {
+                MatchingAlgorithm(currentUser.UserId, person.UserId);
             }
 
             return RedirectToAction("Dashboard", "Match");
         }
 
-        public void Algorithm(int user1id, int user2id)
+
+        private int getCurrentUserId() 
         {
-        
+            int id = (int)HttpContext.Session.GetInt32("currentUser");
+            return id;
+        } 
+
+
+        public void MatchingAlgorithm(int user1id, int user2id)
+        {
             User user1 = _context.Users.Include(u => u.Preference).SingleOrDefault(user => user.UserId == user1id);
             User user2 = _context.Users.Include(u => u.Preference).SingleOrDefault(user => user.UserId == user2id);
 
-            Preference user1prefs = user1.Preference;
-            Preference user2prefs = user2.Preference;
+            Preference user1Preferences = user1.Preference;
+            Preference user2Preferences = user2.Preference;
 
-            // First make sure they are the right gender for each other
             if (user1.seeking == user2.gender && user2.seeking == user1.gender)
             {
-
-                // Next make sure they are in the right age range for each other
-                if ((user1.age >= user2prefs.min_age && user1.age <= user2prefs.max_age) && (user2.age >= user1prefs.min_age && user2.age <= user1prefs.max_age))
+                if ((user1.age >= user2Preferences.min_age && user1.age <= user2Preferences.max_age) && (user2.age >= user1Preferences.min_age && user2.age <= user1Preferences.max_age))
                 {
-
-                    // Make sure both are within each other's height ranges
-                    if ((user2.height >= user1prefs.MinHeight && user2.height <= user1prefs.MaxHeight) && (user1.height >= user2prefs.MinHeight && user1.height <= user2prefs.MaxHeight))
+                    if ((user2.height >= user1Preferences.MinHeight && user2.height <= user1Preferences.MaxHeight) && (user1.height >= user2Preferences.MinHeight && user1.height <= user2Preferences.MaxHeight))
                     {
-
-                        //Make sure they each make the minimum amount of cash the other is willing to accept
-                        int U2sal = Convert.ToInt32(user2.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
-                        int U1sal = Convert.ToInt32(user1.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
-                        int U2salPref = Convert.ToInt32(user2prefs.MinSalary.Replace("$", "").Replace(",", "").Replace(".", ""));
-                        int U1salPref = Convert.ToInt32(user1prefs.MinSalary.Replace("$", "").Replace(",", "").Replace(".", ""));
-                        if ((U2sal >= U1salPref) && (U1sal >= U2salPref))
+                        int u2Salary = Convert.ToInt32(user2.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
+                        int u1Salary = Convert.ToInt32(user1.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
+                        int u2SalalryPreference = Convert.ToInt32(user2Preferences.MinSalary.Replace("$", "").Replace(",", "").Replace(".", ""));
+                        int u1SalaryPreference = Convert.ToInt32(user1Preferences.MinSalary.Replace("$", "").Replace(",", "").Replace(".", ""));
+                        if ((u2Salary >= u1SalaryPreference) && (u1Salary >= u2SalalryPreference))
                         {
-
-                            // Make sure divorce isn't an issue for either party
-                            if (!(user1.Divorced == true && user2prefs.DivorcedDealBreaker == true) && !(user2.Divorced == true && user1prefs.DivorcedDealBreaker == true)) 
+                            if (!(user1.Divorced == true && user2Preferences.DivorcedDealBreaker == true) && !(user2.Divorced == true && user1Preferences.DivorcedDealBreaker == true)) 
                             {
-
-                                // Make sure being widowed isn't a big deal for either party
-                                if (!(user1.Widowed == true && user2prefs.WidowedDealBreaker == true) && !(user2.Widowed == true && user1prefs.WidowedDealBreaker == true))
+                                if (!(user1.Widowed == true && user2Preferences.WidowedDealBreaker == true) && !(user2.Widowed == true && user1Preferences.WidowedDealBreaker == true))
                                 {
-
-                                    // Then factor in all the other preferences:
-
                                     int Count = 0;
                                     
-                                    bool StringWithDealBreaker(string val, string pref, bool DBreaker) {
+                                    bool isDealBreaker(string val, string pref, bool DBreaker) {
                                         if (val == pref) {
                                             Count += 1;
                                         } else if (DBreaker) {
@@ -194,80 +148,60 @@ namespace Match.Controllers
                                         return false;
                                     }
 
-                                    bool u1build = StringWithDealBreaker(user1.build, user2prefs.Build, user2prefs.BuildDealBreaker);
-                                    bool u2build = StringWithDealBreaker(user2.build, user1prefs.Build, user1prefs.BuildDealBreaker);
-                                    bool u1ethnicity = StringWithDealBreaker(user1.ethnicity, user2prefs.Ethnicity, user2prefs.EthnicityDealBreaker);
-                                    bool u2ethnicity = StringWithDealBreaker(user2.ethnicity, user1prefs.Ethnicity, user1prefs.EthnicityDealBreaker);
-                                    bool u1Religion = StringWithDealBreaker(user1.religion, user2prefs.Religion, user2prefs.ReligionDealBreaker);
-                                    bool u2Religion = StringWithDealBreaker(user2.religion, user1prefs.Religion, user1prefs.ReligionDealBreaker);
-                                    bool u1Drinking = StringWithDealBreaker(user1.drinking, user2prefs.Drinking, user2prefs.DrinkingDealBreaker);
-                                    bool u2Drinking = StringWithDealBreaker(user2.drinking, user1prefs.Drinking, user1prefs.DrinkingDealBreaker);
-                                    bool u1Marijuana = StringWithDealBreaker(user1.marijuana, user2prefs.Marijuana, user2prefs.MarijuanaDealBreaker);
-                                    bool u2Marijuana = StringWithDealBreaker(user2.marijuana, user1prefs.Marijuana, user1prefs.MarijuanaDealBreaker);
-                                    bool u1Diet = StringWithDealBreaker(user1.diet, user2prefs.Diet, user2prefs.DietDealBreaker);
-                                    bool u2Diet = StringWithDealBreaker(user2.diet, user1prefs.Diet, user1prefs.DietDealBreaker);
-                                    bool u1Pets = StringWithDealBreaker(user1.pets, user2prefs.Pets, user2prefs.PetsDealBreaker);
-                                    bool u2Pets = StringWithDealBreaker(user2.pets, user1prefs.Pets, user1prefs.PetsDealBreaker);
-                                    bool u1Kids = StringWithDealBreaker(user1.kids, user2prefs.Kids, user2prefs.KidsDealBreaker);
-                                    bool u2Kids = StringWithDealBreaker(user2.kids, user1prefs.Kids, user1prefs.KidsDealBreaker);
+                                    bool u1build = isDealBreaker(user1.build, user2Preferences.Build, user2Preferences.BuildDealBreaker);
+                                    bool u2build = isDealBreaker(user2.build, user1Preferences.Build, user1Preferences.BuildDealBreaker);
+                                    bool u1ethnicity = isDealBreaker(user1.ethnicity, user2Preferences.Ethnicity, user2Preferences.EthnicityDealBreaker);
+                                    bool u2ethnicity = isDealBreaker(user2.ethnicity, user1Preferences.Ethnicity, user1Preferences.EthnicityDealBreaker);
+                                    bool u1Religion = isDealBreaker(user1.religion, user2Preferences.Religion, user2Preferences.ReligionDealBreaker);
+                                    bool u2Religion = isDealBreaker(user2.religion, user1Preferences.Religion, user1Preferences.ReligionDealBreaker);
+                                    bool u1Drinking = isDealBreaker(user1.drinking, user2Preferences.Drinking, user2Preferences.DrinkingDealBreaker);
+                                    bool u2Drinking = isDealBreaker(user2.drinking, user1Preferences.Drinking, user1Preferences.DrinkingDealBreaker);
+                                    bool u1Marijuana = isDealBreaker(user1.marijuana, user2Preferences.Marijuana, user2Preferences.MarijuanaDealBreaker);
+                                    bool u2Marijuana = isDealBreaker(user2.marijuana, user1Preferences.Marijuana, user1Preferences.MarijuanaDealBreaker);
+                                    bool u1Diet = isDealBreaker(user1.diet, user2Preferences.Diet, user2Preferences.DietDealBreaker);
+                                    bool u2Diet = isDealBreaker(user2.diet, user1Preferences.Diet, user1Preferences.DietDealBreaker);
+                                    bool u1Pets = isDealBreaker(user1.pets, user2Preferences.Pets, user2Preferences.PetsDealBreaker);
+                                    bool u2Pets = isDealBreaker(user2.pets, user1Preferences.Pets, user1Preferences.PetsDealBreaker);
+                                    bool u1Kids = isDealBreaker(user1.kids, user2Preferences.Kids, user2Preferences.KidsDealBreaker);
+                                    bool u2Kids = isDealBreaker(user2.kids, user1Preferences.Kids, user1Preferences.KidsDealBreaker);
 
-                                    if (u1build
-                                    || u2build
-                                    || u1ethnicity
-                                    || u2ethnicity
-                                    || u1Religion
-                                    || u2Religion
-                                    || u1Drinking
-                                    || u2Drinking
-                                    || u1Marijuana
-                                    || u2Marijuana
-                                    || u1Kids
-                                    || u2Kids
-                                    || u1Diet
-                                    || u2Diet
-                                    || u1Pets
-                                    || u2Pets) {
+                                    if (u1build || u2build || u1ethnicity || u2ethnicity || u1Religion || u2Religion
+                                    || u1Drinking || u2Drinking || u1Marijuana || u2Marijuana || u1Kids || u2Kids 
+                                    || u1Diet || u2Diet || u1Pets || u2Pets) {
                                         return;
                                     }
 
                                     int MatchPercent = (int) ((((float)Count)/16.0)*100.0);
 
                                     if (MatchPercent >= 60) {
-
-                                        LoveMatch newLove = new LoveMatch
-                                        {
-                                            percentage = MatchPercent,
-                                            User1Id = user1.UserId,
-                                            User2Id = user2.UserId
-
-                                        };
-
-                                        _context.Add(newLove);
-                                        _context.SaveChanges();
-
+                                        generateNewMatch(MatchPercent, user1.UserId, user2.UserId);
                                     }
-
                                 }
-
                             }
-
                         }
-
                     }
-
                 }
-
             } 
-
         }
+
+        private void generateNewMatch(int matchPercent, int id1, int id2) {
+            LoveMatch newMatch = new LoveMatch {
+                percentage = matchPercent,
+                User1Id = id1,
+                User2Id = id2
+            };
+            _context.Add(newMatch);
+            _context.SaveChanges();
+        }
+
 
         [HttpPost]
         [Route("/addUserInterest")]
         public IActionResult addUserInterest(InterestViewModel userInterest, string salary, string divorced, string widowed, string ethnicity, string userBio)
         {
-            int? currentUserId = HttpContext.Session.GetInt32("currentUser");
-            User currentUser = _context.Users.SingleOrDefault(findUser => findUser.UserId == currentUserId);
+            User currentUser = getCurrentUser();
             int height = (userInterest.feet * 12) + userInterest.inch;
+
             currentUser.height = height;
             currentUser.salary = salary; 
             currentUser.marijuana = userInterest.weed; 
@@ -275,16 +209,10 @@ namespace Match.Controllers
             currentUser.pets = userInterest.pets;
             currentUser.diet = userInterest.diet;
             currentUser.kids = userInterest.kids;
-            if(userInterest.divorced == "Yes"){
-                currentUser.Divorced = true;
-            }else{
-                currentUser.Divorced = false;
-            }
-            if(userInterest.widowed == "Yes"){
-                currentUser.Widowed = true;
-            }else{
-                currentUser.Widowed = false;
-            }
+
+            currentUser.Divorced = (userInterest.divorced == "Yes");
+            currentUser.Widowed = (userInterest.widowed == "Yes");
+
             currentUser.ethnicity = userInterest.ethnicity;
             currentUser.drinking = userInterest.drinking;
             currentUser.religion = userInterest.religion;
