@@ -12,9 +12,7 @@ namespace Match.Controllers
 {
     public class MessageController : Controller
     {
-
         private Context _context;
-
         public MessageController(Context context)
         {
             _context = context;
@@ -23,16 +21,13 @@ namespace Match.Controllers
         [HttpGet]
         [Route("all")]
         public IActionResult All() {
-            if (HttpContext.Session.GetInt32("currentUser") == null){
+            if (userNotLoggedIn()){
                 return RedirectToAction("Index", "Home");
             }
-
-            int CurrUserId = (int)HttpContext.Session.GetInt32("currentUser");
+            int CurrUserId = getCurrentUserId();
 
             List<Message> MsgsSent = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.SenderId == (int)CurrUserId).ToList();
-
             List<Message> MsgsRecieved = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.RecieverId == (int)CurrUserId).ToList();
-
             List<Message> CombinedMsgs = MsgsSent.Union(MsgsRecieved).OrderBy(m => m.SentAt).ToList();
 
             List<int> Recievers = new List<int>();
@@ -62,19 +57,31 @@ namespace Match.Controllers
 
         }
 
+
+        private bool userNotLoggedIn() 
+        {
+            return (HttpContext.Session.GetInt32("currentUser") == null);
+        }  
+
+
+        private int getCurrentUserId() 
+        {
+            int id = (int)HttpContext.Session.GetInt32("currentUser");
+            return id;
+        } 
+
+
         [HttpGet]
         [Route("conversation/{friendId}")]
-        public IActionResult Conversation(int friendId) {
-            if (HttpContext.Session.GetInt32("currentUser") == null){
+        public IActionResult Conversation(int friendId) 
+        {
+            if (userNotLoggedIn()){
                 return RedirectToAction("Index", "Home");
             }
-
-            int CurrUserId = (int)HttpContext.Session.GetInt32("currentUser");
+            int CurrUserId = getCurrentUserId();
 
             List<Message> MsgsSent = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.SenderId == (int)CurrUserId).Where(msg => msg.RecieverId == friendId).ToList();
-
             List<Message> MsgsRecieved = _context.Messages.Include(m => m.Reciever).Include(m => m.Sender).Where(msg => msg.RecieverId == (int)CurrUserId).Where(msg => msg.SenderId == friendId).ToList();
-
 
             if (MsgsSent.Count > 0 && MsgsRecieved.Count > 0) {
                 var CombinedMsgs = MsgsSent.Union(MsgsRecieved).OrderByDescending(m => m.SentAt);
@@ -84,7 +91,6 @@ namespace Match.Controllers
             } else if (MsgsRecieved.Count > 0) {
                 ViewBag.MsgsInConvo = MsgsRecieved;
             }
-
             ViewBag.Curr = CurrUserId;
             ViewBag.FriendId = friendId;
             ViewBag.Friend = _context.Users.SingleOrDefault(u => u.UserId == friendId);
@@ -92,11 +98,12 @@ namespace Match.Controllers
             return View("Conversation");
         }
 
+
         [HttpPost]
         [Route("write_message/{friendId}")]
-        public IActionResult Write(int friendId, string textContent) {
-
-            int CurrUserId = (int)HttpContext.Session.GetInt32("currentUser");
+        public IActionResult Write(int friendId, string textContent) 
+        {
+            int CurrUserId = getCurrentUserId();
 
             Message newMsg = new Message{
                 Content = textContent,
@@ -104,7 +111,6 @@ namespace Match.Controllers
                 RecieverId = friendId,
                 SentAt = DateTime.Now
             };
-
             _context.Messages.Add(newMsg);
             _context.SaveChanges();
 
@@ -112,4 +118,5 @@ namespace Match.Controllers
         }
 
     }
+
 }
