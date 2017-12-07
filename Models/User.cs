@@ -5,7 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Match.Models
 {
-        public class User : BaseEntity{
+    public class User : BaseEntity
+    {
         public int UserId { get; set; }
         public string name { get; set; }
         public string username { get; set; }
@@ -44,7 +45,7 @@ namespace Match.Models
         public string diet { get; set; }
         public string pets { get; set; }
         public string bio { get; set; }
-       
+    
         public User()
         {
             messagesRecieved = new List<Message>();
