@@ -21,9 +21,7 @@ namespace Match.Controllers
         [Route("/preference")]
         public IActionResult Index()
         {
-            if (userNotLoggedIn()){
-                return RedirectToAction("Index", "Home");
-            }
+            if (userNotLoggedIn()) { return RedirectToAction("Index", "Home"); }
             User currentUser = getCurrentUser();
             ViewBag.CurrentUser = currentUser;
             return View();
@@ -43,12 +41,9 @@ namespace Match.Controllers
         [Route("/preferences")]
         public IActionResult preferences()
         {
-            if (userNotLoggedIn()){
-                return RedirectToAction("Index", "Home");
-            }
+            if (userNotLoggedIn()) { return RedirectToAction("Index", "Home"); }
             return View("Preference");
         }
-
 
         [HttpPost]
         [Route("/addUserPreference")]
@@ -61,7 +56,7 @@ namespace Match.Controllers
             int minHeight = (userPreference.MinimumFeet * 12) + userPreference.MinimumInch;
             int maxHeight = (userPreference.MaxFeet * 12) + userPreference.MaxInch;
 
-            User currentUser = getCurrentUser();
+            User currentUser = getCurrentUserWithPreferences();
 
             currentUser.Preference.min_age =  userPreference.MinAge;
             currentUser.Preference.max_age =  userPreference.MaxAge;
@@ -95,15 +90,19 @@ namespace Match.Controllers
             {
                 MatchingAlgorithm(currentUser.UserId, person.UserId);
             }
-
             return RedirectToAction("Dashboard", "Match");
+        }
+
+        private User getCurrentUserWithPreferences() {
+            int myId = getCurrentUserId();
+            User myUser = _context.Users.Include(u => u.Preference).SingleOrDefault(findUser => findUser.UserId == myId);
+            return myUser;
         }
 
         private int getCurrentUserId() {
             int id = (int)HttpContext.Session.GetInt32("currentUser");
             return id;
         } 
-
 
         public static void MatchingAlgorithm(int user1id, int user2id)
         {
@@ -113,43 +112,50 @@ namespace Match.Controllers
             Preference user1Preferences = user1.Preference;
             Preference user2Preferences = user2.Preference;
 
-            if (user1.seeking == user2.gender && user2.seeking == user1.gender)
+            if (!usersAreSeekingEachOther(user1, user2)
+                || !usersInEachOthersAgeRange(user1, user2, user1Preferences, user2Preferences)
+                || !usersInEachOthersHeightRanges(user1, user2, user1Preferences, user2Preferences)) {
+                return;
+            }
+
+            int u2Salary = Convert.ToInt32(user2.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
+            int u1Salary = Convert.ToInt32(user1.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
+            int u2SalalryPreference = Convert.ToInt32(user2Preferences.MinSalary.Replace("$", "").Replace(",", "").Replace(".", ""));
+            int u1SalaryPreference = Convert.ToInt32(user1Preferences.MinSalary.Replace("$", "").Replace(",", "").Replace(".", ""));
+            if ((u2Salary >= u1SalaryPreference) && (u1Salary >= u2SalalryPreference))
             {
-                if ((user1.age >= user2Preferences.min_age && user1.age <= user2Preferences.max_age) && (user2.age >= user1Preferences.min_age && user2.age <= user1Preferences.max_age))
+                if (!(user1.Divorced == true && user2Preferences.DivorcedDealBreaker == true) && !(user2.Divorced == true && user1Preferences.DivorcedDealBreaker == true)) 
                 {
-                    if ((user2.height >= user1Preferences.MinHeight && user2.height <= user1Preferences.MaxHeight) && (user1.height >= user2Preferences.MinHeight && user1.height <= user2Preferences.MaxHeight))
+                    if (!(user1.Widowed == true && user2Preferences.WidowedDealBreaker == true) && !(user2.Widowed == true && user1Preferences.WidowedDealBreaker == true))
                     {
-                        int u2Salary = Convert.ToInt32(user2.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
-                        int u1Salary = Convert.ToInt32(user1.salary.Replace("$", "").Replace(",", "").Replace(".", ""));
-                        int u2SalalryPreference = Convert.ToInt32(user2Preferences.MinSalary.Replace("$", "").Replace(",", "").Replace(".", ""));
-                        int u1SalaryPreference = Convert.ToInt32(user1Preferences.MinSalary.Replace("$", "").Replace(",", "").Replace(".", ""));
-                        if ((u2Salary >= u1SalaryPreference) && (u1Salary >= u2SalalryPreference))
-                        {
-                            if (!(user1.Divorced == true && user2Preferences.DivorcedDealBreaker == true) && !(user2.Divorced == true && user1Preferences.DivorcedDealBreaker == true)) 
-                            {
-                                if (!(user1.Widowed == true && user2Preferences.WidowedDealBreaker == true) && !(user2.Widowed == true && user1Preferences.WidowedDealBreaker == true))
-                                {
-
-                                    int count = determineCount(user1, user2, user1Preferences, user2Preferences);
-
-                                    if (count == -1) {
-                                        return;
-                                    }
-
-                                    int MatchPercent = (int) ((((float)count)/16.0)*100.0);
-
-                                    if (MatchPercent >= 50) {
-                                        generateNewMatch(MatchPercent, user1.UserId, user2.UserId);
-                                    }
-
-                                }
-                            }
+                        int count = determineCount(user1, user2, user1Preferences, user2Preferences);
+                        if (count == -1) {
+                            return;
+                        }
+                        int MatchPercent = (int) ((((float)count)/16.0)*100.0);
+                        if (MatchPercent >= 50) {
+                            generateNewMatch(MatchPercent, user1.UserId, user2.UserId);
                         }
                     }
                 }
-            } 
+            }
         }
 
+        private static bool usersAreSeekingEachOther(User user1, User user2) {
+            return (user1.seeking == user2.gender && user2.seeking == user1.gender);
+        }
+
+        private static bool usersInEachOthersAgeRange(User user1, User user2, Preference user1Pref, Preference user2Pref) {
+            bool user1Passes = (user1.age >= user2Pref.min_age && user1.age <= user2Pref.max_age);
+            bool user2Passes = (user2.age >= user1Pref.min_age && user2.age <= user1Pref.max_age);
+            return (user1Passes && user2Passes);
+        }
+
+        private static bool usersInEachOthersHeightRanges(User user1, User user2, Preference user1Pref, Preference user2Pref) {
+            bool user1Passes = (user1.height >= user2Pref.MinHeight && user1.height <= user2Pref.MaxHeight);
+            bool user2Passes = (user2.height >= user1Pref.MinHeight && user2.height <= user1Pref.MaxHeight);
+            return (user1Passes && user2Passes);
+        }
 
         private static int determineCount(User user1, User user2, Preference u1Prefs, Preference u2Prefs) 
         {
@@ -180,7 +186,6 @@ namespace Match.Controllers
                     thereIsADealbreaker = true;
                 }
             }
-
             if (thereIsADealbreaker) {
                 return -1;
             }
@@ -190,7 +195,6 @@ namespace Match.Controllers
 
         }
 
-        
         private static void generateNewMatch(int matchPercent, int id1, int id2) {
             LoveMatch newMatch = new LoveMatch {
                 percentage = matchPercent,
@@ -200,10 +204,11 @@ namespace Match.Controllers
             _context.Add(newMatch);
             _context.SaveChanges();
         }
-        
+
         [HttpPost]
         [Route("/addUserInterest")]
-        public IActionResult addUserInterest(InterestViewModel userInterest, string salary, string divorced, string widowed, string ethnicity, string userBio)
+        public IActionResult addUserInterest(InterestViewModel userInterest, string salary, string divorced, string widowed,
+                                                string ethnicity, string userBio)
         {
             User currentUser = getCurrentUser();
             int height = (userInterest.feet * 12) + userInterest.inch;
