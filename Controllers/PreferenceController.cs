@@ -50,7 +50,7 @@ namespace Match.Controllers
         public IActionResult addUserPreference(PreferenceViewModel userPreference, string salary, string divorced, 
                                                 string widowed, string bodyDealbreaker, string ethnicity, 
                                                 string EthnicityDealBreaker, string KidsDealBreaker, 
-                                                string DrinkingDealBreaker, string MarijuanaDealBreaker, 
+                                                string DrinkingDealBreaker, string MusicDealBreaker, 
                                                 string DietDealBreaker, string PetsDealBreaker)
         {   
             int minHeight = (userPreference.MinimumFeet * 12) + userPreference.MinimumInch;
@@ -67,7 +67,7 @@ namespace Match.Controllers
             currentUser.Preference.Ethnicity = ethnicity;
             currentUser.Preference.Kids = userPreference.Kids;
             currentUser.Preference.Drinking = userPreference.Drinking;
-            currentUser.Preference.Marijuana = userPreference.Marijuana;
+            currentUser.Preference.Music = userPreference.Music;
             currentUser.Preference.Diet = userPreference.Diet;
             currentUser.Preference.Pets = userPreference.Pets;
 
@@ -77,7 +77,7 @@ namespace Match.Controllers
             currentUser.Preference.WidowedDealBreaker = (widowed != null);
             currentUser.Preference.KidsDealBreaker = (KidsDealBreaker != null);
             currentUser.Preference.DrinkingDealBreaker = (DrinkingDealBreaker != null);
-            currentUser.Preference.MarijuanaDealBreaker = (MarijuanaDealBreaker != null);
+            currentUser.Preference.MusicDealBreaker = (MusicDealBreaker != null);
             currentUser.Preference.DietDealBreaker = (DietDealBreaker == null);
             currentUser.Preference.PetsDealBreaker = (PetsDealBreaker != null);
 
@@ -170,8 +170,8 @@ namespace Match.Controllers
             incrementCount(user2.religion, u1Prefs.Religion, u1Prefs.ReligionDealBreaker);
             incrementCount(user1.drinking, u2Prefs.Drinking, u2Prefs.DrinkingDealBreaker);
             incrementCount(user2.drinking, u1Prefs.Drinking, u1Prefs.DrinkingDealBreaker);
-            incrementCount(user1.marijuana, u2Prefs.Marijuana, u2Prefs.MarijuanaDealBreaker);
-            incrementCount(user2.marijuana, u1Prefs.Marijuana, u1Prefs.MarijuanaDealBreaker);
+            incrementCount(user1.music, u2Prefs.Music, u2Prefs.MusicDealBreaker);
+            incrementCount(user2.music, u1Prefs.Music, u1Prefs.MusicDealBreaker);
             incrementCount(user1.diet, u2Prefs.Diet, u2Prefs.DietDealBreaker);
             incrementCount(user2.diet, u1Prefs.Diet, u1Prefs.DietDealBreaker);
             incrementCount(user1.pets, u2Prefs.Pets, u2Prefs.PetsDealBreaker);
@@ -215,7 +215,7 @@ namespace Match.Controllers
 
             currentUser.height = height;
             currentUser.salary = salary; 
-            currentUser.marijuana = userInterest.weed; 
+            currentUser.music = userInterest.weed; 
             currentUser.build = userInterest.body;
             currentUser.pets = userInterest.pets;
             currentUser.diet = userInterest.diet;

@@ -42,9 +42,9 @@ namespace Match.Models
 
         public bool DrinkingDealBreaker { get; set; }
 
-        public string Marijuana { get; set; }
+        public string Music { get; set; }
 
-        public bool MarijuanaDealBreaker { get; set; }
+        public bool MusicDealBreaker { get; set; }
 
         public string Diet { get; set; }
 
@@ -69,8 +69,8 @@ namespace Match.Models
             ReligionDealBreaker = false;
             Drinking = "";
             DrinkingDealBreaker = false;
-            Marijuana = "";
-            MarijuanaDealBreaker = false;
+            Music = "";
+            MusicDealBreaker = false;
             Diet = "";
             DietDealBreaker = false;
             Pets = "";

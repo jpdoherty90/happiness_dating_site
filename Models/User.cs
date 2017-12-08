@@ -40,7 +40,7 @@ namespace Match.Models
         public bool Widowed { get; set; }
         public string kids { get; set; }
         public string drinking { get; set; }
-        public string marijuana { get; set; }
+        public string music { get; set; }
         public string religion { get; set; }
         public string diet { get; set; }
         public string pets { get; set; }
@@ -61,7 +61,7 @@ namespace Match.Models
             Divorced = false;
             Widowed = false;
             drinking = "";
-            marijuana = "";
+            music = "";
             religion = "";
             diet = "";
             pets = "";

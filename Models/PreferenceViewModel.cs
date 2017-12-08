@@ -57,11 +57,11 @@ namespace Match.Models
         [Display(Name = "Drinking DealBreaker")]
         public bool DrinkingDealBreaker { get; set; }
 
-        [Display(Name = "Marijuana")]
-        public string Marijuana { get; set; }
+        [Display(Name = "Music")]
+        public string Music { get; set; }
 
-        [Display(Name = "Marijuana DealBreaker")]
-        public bool MarijuanaDealBreaker { get; set; }
+        [Display(Name = "Music DealBreaker")]
+        public bool MusicDealBreaker { get; set; }
 
         [Display(Name = "Diet")]
         public string Diet { get; set; }

@@ -15,7 +15,7 @@ $(document).ready(function(){
 
     $("#heightContainer").hide();
     $("#salaryContainer").hide();  
-    $("#weedContainer").hide();      
+    $("#musicContainer").hide();      
     $("#bodyContainer").hide(); 
     $("#petsContainer").hide(); 
     $("#dietContainer").hide();    
@@ -62,10 +62,10 @@ $(document).ready(function(){
 
     $("#goToWeed").click(function(){
         $("#salaryContainer").hide();        
-        $("#weedContainer").show();      
+        $("#musicContainer").show();      
     });
     $("#goToBody").click(function(){
-        $("#weedContainer").hide();      
+        $("#musicContainer").hide();      
         $("#bodyContainer").show();          
     });
     $("#goToPets").click(function(){
@@ -116,7 +116,7 @@ $(document).ready(function(){
     $("#kidsContainerP").hide();
     $("#heightContainerP").hide();
     $("#drinkingContainerP").hide();
-    $("#weedContainerP").hide();
+    $("#musicContainerP").hide();
     $("#dietContainerP").hide();
     $("#petsContainerP").hide();
     $("#finishInterestContainerP").hide();
@@ -178,10 +178,10 @@ $(document).ready(function(){
     });
     $("#goToWeedP").click(function(){
         $("#drinkingContainerP").hide();          
-        $("#weedContainerP").show();          
+        $("#musicContainerP").show();          
     });
     $("#goToDietP").click(function(){
-        $("#weedContainerP").hide();          
+        $("#musicContainerP").hide();          
         $("#dietContainerP").show();          
     });
     $("#goToPetsP").click(function(){
